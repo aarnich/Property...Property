@@ -194,18 +194,11 @@ int normalizeNumByIndex(int num, int index){ //index starts at 0 and is ordered 
 */
 bool isPrime(int num)
 {
-    if(num == 1 || num == 0) // if the given number is neither prime nor composite
-        return false;    
-
     unsigned int flag = 0; // used to track how many times the number has been divided without a remainder
     for (size_t i = 1; i <= num; i++)
         if (num % i == 0)
             flag += 1;
-
-    if(flag == 2) // if the number has been "cleanly" divided exactly only twice, it is a prime
-        return true;
      // check for this condition first as the amount of non-prime integers far outnumbers the primes
-    
-    return false;
+    return (flag == 2);
 }
 

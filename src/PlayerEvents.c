@@ -78,18 +78,14 @@ bool playerOwnsProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned i
     @param strDialogueMsg string of the question displayed
     @returns boolean value that tells you the player's choice
 */
-bool playerDialogue(char* strDialogueMsg){
-    printf("%s Y/N: ",strDialogueMsg);
-    char c;
-    scanf(" %c",&c);
-    getchar();
+bool playerDialogue(char* strDialogueMsg, char* validInputs){
+    printf(strDialogueMsg);
+    char c = handleInput(validInputs, strlen(validInputs));
     switch(c){
-        case 'y':
-        case 'Y':
+        case 'B':
             return true;
             break;
-        case 'n':
-        case 'N':
+        case 'E':
             return false;
             break;
         default:

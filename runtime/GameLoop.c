@@ -245,7 +245,7 @@ struct gamepkg updateGame(struct gamepkg game){
             if((propIndex == 0) && pendingPlayerBalance >= propertyCost)
             {
                 printf("\nPROPERTY COST: [%.2f 💰]",propertyCost);
-                if(playerDialogue("\nBuy property")){ // if the player buys the property
+                if(playerDialogue("\n[B]uy property\n[E]nd turn\nInput:","BE")){ // if the player buys the property
                    pendingPlayerBalance -= propertyCost; // subtract from balance
                     containedState.STATEKEY = mutateStatekeyAtIndex(
                         containedState.STATEKEY, pos,
@@ -272,7 +272,7 @@ struct gamepkg updateGame(struct gamepkg game){
                 if(pendingPlayerBalance >= renovationCost) // check if the player has enough capital to renovate the property
                 {
                     printf("\nRENOVATION COST: [%.2f 💸]\n",renovationCost); 
-                    if(playerDialogue("\nRenovate property")) // ask if the player would like to renovate the property
+                    if(playerDialogue("\n[R]enovate Property\n[E]nd Turn\nInput:","RE")) // ask if the player would like to renovate the property
                     {
                         pendingPlayerBalance -= renovationCost; // player pays the renovation cost
                         containedState.STATEKEY = mutateStatekeyAtIndex( 

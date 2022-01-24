@@ -134,19 +134,14 @@ struct settings settingsPrompt(struct settings initsettings){
                 initsettings.winsettings = winconditionsMenu(initsettings.winsettings);
                 break;
             case '2':
-                float tmpRenovation = 0;
-                changeFloatParam(&tmpRenovation, "Enter renovation cost: ");
-                initsettings.renovationCost = tmpRenovation;
+                changeFloatParam(&initsettings.renovationCost, "Enter renovation cost: ");
                 break;
             case '3':
-                float tmpRail = 0;
-                changeFloatParam(&tmpRail, "Enter railroad rent: ");
+                changeFloatParam(&initsettings.railRent, "Enter railroad rent: ");
                 initsettings.railRent = tmpRail;
                 break;
             case '4':
-                float tmpMultiplier = 0;
-                changeFloatParam(&tmpMultiplier, "Enter electric co. multiplier: ");
-                initsettings.railRent = tmpMultiplier;
+                changeFloatParam(&initsettings.electricMulti, "Enter electric co. multiplier: ");
                 break;
             case '5':
                 feelingLuckySubMenu(
