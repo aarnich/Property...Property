@@ -3,6 +3,7 @@
     Author: Aaron Nicholas Lizardo Gumapac
 */
 #include "../libdefs/GameEvents.h"
+
 /*
     Dynamically calculates the cost necessary to pay rent when the player lands on a property owned by the opponent
     Preconditions: the property being checked is owned by the opponent
@@ -55,13 +56,6 @@ int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned in
 
     return mutatedStateKey;
 }
-
-/*
-    This function returns the name of the property given its place on the board
-    Precondtions: propIndex is an integer that describes only properties, not special locations on the board
-    @param propIndex the place of the property on the board
-    @returns the name of the property given at the index
-*/
 
 /*
     This function returns the value of the statekey at the given index

@@ -9,6 +9,7 @@ Player initializePlayer(){
     initPlayer.balance = DEFAULT_STARTINGBALANCE;
     initPlayer.jailedCounter = 0;
     initPlayer.name = malloc (256);
+    initPlayer.name = "Harambe";
     initPlayer.isBankrupt = false;
     initPlayer.isJailed = false;
     return initPlayer;
@@ -93,15 +94,6 @@ struct gamepkg saveGame(Player currentPlayer, int currentPlayerKey, Player oppos
 }
 
 /*
-    A simple method that helps with code readability. Asks the user to press enter in order to continue with game events
-*/
-void continuePrompt(){
-    sleep_ms(500);
-    fflush(stdout);
-    printf("\nPress ENTER to continue:");
-    getchar();
-}
-/*
     Updates game data depending on player actions 
     @param game game package containing all game data
     @returns updated game after 1 game turn
@@ -134,7 +126,7 @@ struct gamepkg updateGame(struct gamepkg game){
     printf("\n[Press ENTER to roll the dice!]\n");
     getchar();
     char strFlair1[] = ".....";
-    print1d(strFlair1, strlen(strFlair1));
+    print1d(strFlair1, strlen(strFlair1), 150,170);
     sleep_ms(800);
     unsigned int roll = rollDice(lDiceRange);
     printf("\nThe dice face says: %d!\n", roll);
@@ -161,7 +153,6 @@ struct gamepkg updateGame(struct gamepkg game){
         case 0: 
         {
             char* goMsg = "\n🏁 Go Go Go!' The bank handed you 200 for an extra boost!\n";
-            print1d(goMsg,strlen(goMsg));
             sleep_ms(600);
             pendingPlayerBalance += 200;
             break;
@@ -173,10 +164,10 @@ struct gamepkg updateGame(struct gamepkg game){
             clear
             char* jailMsg = malloc (256);
             // int spaces = 44;
-            print1d(currentPlayer.name, strlen(currentPlayer.name));
-            print1d(" just got CAUGHT BY THE POPO'S for TAX EVASION ♀️\n", strlen(" just got CAUGHT BY THE POPO'S for TAX EVASION ♀️\n"));
+            print1d(currentPlayer.name, strlen(currentPlayer.name), 170,190);
+            print1d(" just got CAUGHT BY THE POPO'S for TAX EVASION ♀️\n", strlen(" just got CAUGHT BY THE POPO'S for TAX EVASION ♀️\n"),170,190);
             // printf("%*s",spaces," ");
-            print1d("\nDon't drop the soap buddy\n",strlen("\nDon't drop the soap buddy 💀\n"));
+            print1d("\nDon't drop the soap buddy\n",strlen("\nDon't drop the soap buddy 💀\n",220,230));
             currentPlayer.jailedCounter += 1;
             currentPlayer.isJailed = true;
             break;  
@@ -187,7 +178,7 @@ struct gamepkg updateGame(struct gamepkg game){
             char* jailMsg = malloc (256);
             // int spaces = 44;
             // printf("%*s",spaces," ");
-            print1d("You feelin' lucky?🧙‍️\n",strlen("You feelin' lucky?🧙‍️\n"));
+            print1d("You feelin' lucky?🧙‍️\n",strlen("You feelin' lucky?🧙‍️\n"),230,250);
             printf("\n[PRESS ENTER to roll the dice]\n");
             getchar();
             clear

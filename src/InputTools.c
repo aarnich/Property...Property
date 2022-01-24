@@ -3,6 +3,7 @@
     Author: Aaron Nicholas Lizardo Gumapac
 */
 #include "../libdefs/InputTools.h"
+
 /*
     This function returns a valid input given a set of desired inputs and their number
     Preconditions: validInputs[] is an array of length > 0 and elements is > 0

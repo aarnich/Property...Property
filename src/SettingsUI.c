@@ -101,6 +101,7 @@ void displayWinconditionsMenu(struct winconditions wincond)
         buttons[2] = "Enable";
     if(isMulti)
         printf("[E] %s multi-condition win\n",buttons[2]);
+
     printf("[S] Save and exit\n");
 }
 

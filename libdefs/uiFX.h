@@ -28,7 +28,7 @@ void print2d(char* img[], size_t img_height);
 
 // prints a string sequentially
 
-void print1d(char str[], int strLength);
+void print1d(char str[], int strLength, int paceFloor, int paceCeil);
 
 // returns a divider
 
@@ -53,9 +53,16 @@ void showBalanceUpdate(
                     char* p2Name
                     );
                 
+// shows a short balance update
+
 void showPersonalBalanceUpdate(float currentBalance, float newBalance);
 
 // contextual ending screen that cognratulates the winner(s) according to their win conditions
+
 void displayEndingScreen(struct winstate win, char* p1Name, char* p2Name);
+
+// asks the user to press enter in order to continue with the program
+
+void continuePrompt();
 
 #endif

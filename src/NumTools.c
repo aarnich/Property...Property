@@ -194,7 +194,7 @@ int normalizeNumByIndex(int num, int index){ //index starts at 0 and is ordered 
 */
 bool isPrime(int num)
 {
-    if(num == 1 || num == 2 || num == 0) // if the given number is neither prime nor composite
+    if(num == 1 || num == 0) // if the given number is neither prime nor composite
         return false;    
 
     unsigned int flag = 0; // used to track how many times the number has been divided without a remainder

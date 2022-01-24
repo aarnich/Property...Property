@@ -36,5 +36,6 @@
         "gameevents.h": "c",
         "time.h": "c"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "typewriterScrollMode.enable": true
 }

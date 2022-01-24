@@ -75,7 +75,7 @@ bool playerOwnsProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned i
 
 /*
     Asks the player a yes or no question supplied by strDialogueMsg and prompts for an answer
-    @params strDialogueMsg string of the question displayed
+    @param strDialogueMsg string of the question displayed
     @returns boolean value that tells you the player's choice
 */
 bool playerDialogue(char* strDialogueMsg){
@@ -101,8 +101,8 @@ bool playerDialogue(char* strDialogueMsg){
 
 /*
     Tells the game whether the player described in playerID owns the current property
-    @params playerID which player is being checked (player 1 or player 2)
-    @params propIndicator the value of the property as described by the statekey
+    @param playerID which player is being checked (player 1 or player 2)
+    @param propIndicator the value of the property as described by the statekey
     @returns boolean value that depends on the player's ownership of the property
 */
 bool playerOwns(unsigned int playerID, int propIndicator){
@@ -117,9 +117,9 @@ bool playerOwns(unsigned int playerID, int propIndicator){
 
 /*
     displays the winning player's stats after the game has finished
-    @params PLAYER the structure containing all of the winning player's information
-    @params STATEKEY 9 digit integer holding all information regarding the positions on the board
-    @params playerID integer value used to parse the statekey in order to get all of the winning player's properties
+    @param PLAYER the structure containing all of the winning player's information
+    @param STATEKEY 9 digit integer holding all information regarding the positions on the board
+    @param playerID integer value used to parse the statekey in order to get all of the winning player's properties
 */
 void displayPlayerEndingStats(Player PLAYER, unsigned playerID, unsigned int STATEKEY){
     printf("\n[%s's STATS]\n",PLAYER.name);
@@ -130,8 +130,8 @@ void displayPlayerEndingStats(Player PLAYER, unsigned playerID, unsigned int STA
 
 /*
     returns a valid sell choice given the statekey and the current player's ID
-    @params playerID integer value of the current player's ID (1 or 2)
-    @params STATEKEY 9 digit integer holding ownership statuses
+    @param playerID integer value of the current player's ID (1 or 2)
+    @param STATEKEY 9 digit integer holding ownership statuses
     @returns which property the player would like to sell
 */
 int getPlayerSellChoice(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID){
