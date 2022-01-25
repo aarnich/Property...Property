@@ -109,7 +109,7 @@ void freePtr(void** ptr){
 */
 void changeIntParam(int* parameterPtr, char* strMsg){
     setGreen
-    printf("\n[CURRENT VALUE: %.2f]\n",*parameterPtr);
+    printf("\n[CURRENT VALUE: %d]\n",*parameterPtr);
     resetColor
     float tmp;
     printf("%s", strMsg);

@@ -15,10 +15,11 @@ struct settings settingsPrompt(struct settings initsettings){
         printf("[7] Edit feeling lucky range\n");
         printf("[8] Edit dice faces\n");
         printf("[9] Edit Go! bonus amount\n");
+        newL
         printf("[D] Reset settings\n");
         printf("[G] Start game \n\n");
-        char validSettingsInput[7] = {'1','2','3','4','5','D','G'};
-        cSettingsSelect = handleInput(validSettingsInput,7); 
+        char validSettingsInput[11] = "123456789DG";
+        cSettingsSelect = handleInput(validSettingsInput,11); 
         switch(cSettingsSelect){
             case '1':
                 initsettings.winsettings = winconditionsMenu(initsettings.winsettings);

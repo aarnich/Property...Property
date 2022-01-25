@@ -48,6 +48,7 @@ struct settings initializeSettings(){
     initsettings.electricMulti = DEFAULT_ELECTRIC_MULTI;
     initsettings.electricCost = DEFAULT_ELECTRIC_COST;
     initsettings.railRent = DEFAULT_RAILROAD_RENT;
+    initsettings.railCost = DEFAULT_RAILROAD_COST;
     initsettings.winsettings = initializeWinconditions();
     initsettings.dicerange.max = DEFAULT_DICE_MAX;
     initsettings.dicerange.min = DEFAULT_DICE_MIN; 
@@ -126,7 +127,9 @@ struct settings settingsPrompt(struct settings initsettings){
         printf("[3] Edit railroad rent\n");
         printf("[4] Edit the electric company's multiplier\n");
         printf("[5] Edit feeling lucky range\n");
+        newL
         printf("[D] Reset settings\n");
+        newL
         printf("[G] Start game \n\n");
         char validSettingsInput[7] = {'1','2','3','4','5','D','G'};
         cSettingsSelect = handleInput(validSettingsInput,7); 
@@ -139,7 +142,6 @@ struct settings settingsPrompt(struct settings initsettings){
                 break;
             case '3':
                 changeFloatParam(&initsettings.railRent, "Enter railroad rent: ");
-                initsettings.railRent = tmpRail;
                 break;
             case '4':
                 changeFloatParam(&initsettings.electricMulti, "Enter electric co. multiplier: ");

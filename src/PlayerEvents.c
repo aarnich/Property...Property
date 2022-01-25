@@ -16,48 +16,61 @@
 int rollDice(range diceRange)
 {
     printf("\nTHE DICE SPINS IN THE AIR!🎲\n");
-    char* diceImages[][] = malloc (512);
-    diceImages[0] = { // set of chars that make up an image of the dice 
-        "   _______",
-        "  /\\ o o o\\",
-        " /o \\ o o o\\_______",
-        "<    >------>   o /|",
-        " \\ o/  o   /_____/o|",
-        "  \\/______/     |oo|",
-        "        |   o   |o/",
-        "        |_______|/"
-    };
-    diceImages[1] = {
-
-        "    _______            ",
-        "  /\\       \\           ",
-        " /()\\   ()  \\          ",
-        "/    \\_______\\         ",
-        "\\    /()     /         ",
-        " \\()/   ()  /          ",
-        "  \\/_____()/"
-
-    };
-    diceImages[2] = {
-        "              _______.",
-        "   ______    | .   . |\\",
-        "  /     /\\   |   .   |.\\",
-        " /  '  /  \\  | .   . |.'|",
-        "/_____/. . \\ |_______|.'|",
-        "\\ . . \\    /  \\ ' .   \\'|",
-        " \\ . . \\  /    \\____'__\\|",
-        "  \\_____\\/"
-    };
-    diceImages[3] = {
-        " /\\' .\\    _____",
-        "/: \\___\\  / .  /\\",
-        "\\' / . / /____/..\\",
-        " \\/___/  \\'  '\\  /",
-        "          \\'__'\\/"
+    int img = getRandNum(1,4);
+    if(img == 1){
+        char* diceImg[] = { // set of chars that make up an image of the dice 
+            "   _______",
+            "  /\\ o o o\\",
+            " /o \\ o o o\\_______",
+            "<    >------>   o /|",
+            " \\ o/  o   /_____/o|",
+            "  \\/______/     |oo|",
+            "        |   o   |o/",
+            "        |_______|/"
+        };
+        int rows = sizeof diceImg / sizeof diceImg[0];
+        print2d(diceImg, rows);
     }
-    int dicePrint = getRandNum(0,4);
-    int rows = sizeof diceImages[dicePrint][0] / sizeof diceImg[dicePrint];
-    print2d(diceImages[dicePrint],rows,20,20); // print dice
+    else if(img == 2){
+        char* diceImg[] = {
+
+            "    _______            ",
+            "  /\\       \\           ",
+            " /()\\   ()  \\          ",
+            "/    \\_______\\         ",
+            "\\    /()     /         ",
+            " \\()/   ()  /          ",
+            "  \\/_____()/"
+        };
+        int rows = sizeof diceImg / sizeof diceImg[0];
+        print2d(diceImg, rows);
+    }
+    else if(img == 3){
+
+        char* diceImg[] = {
+            "              _______.",
+            "   ______    | .   . |\\",
+            "  /     /\\   |   .   |.\\",
+            " /  '  /  \\  | .   . |.'|",
+            "/_____/. . \\ |_______|.'|",
+            "\\ . . \\    /  \\ ' .   \\'|",
+            " \\ . . \\  /    \\____'__\\|",
+            "  \\_____\\/"
+        };
+        int rows = sizeof diceImg / sizeof diceImg[0];
+        print2d(diceImg, rows);
+    }
+    else if(img == 4){
+        char* diceImg[] = {
+            " /\\' .\\    _____",
+            "/: \\___\\  / .  /\\",
+            "\\' / . / /____/..\\",
+            " \\/___/  \\'  '\\  /",
+            "          \\'__'\\/"
+        };
+        int rows = sizeof diceImg / sizeof diceImg[0];
+        print2d(diceImg, rows);
+    }
     return getRandNum(diceRange.min, diceRange.max);
 }
 
@@ -112,17 +125,12 @@ bool playerOwnsProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned i
 bool playerDialogue(char* strDialogueMsg, char* validInputs){
     printf(strDialogueMsg);
     char c = handleInput(validInputs, strlen(validInputs));
-    switch(c){
-        case validInputs[0]: // the first button prompt is an affirmation
-            return true;
-            break;
-        case 'E': // the second button prompt that ends turn
-            return false;
-            break;
-        default: // player input is invalid
-            printf("\ninvalid input");
-            return playerDialogue("\n");
-    }
+    if(c == validInputs[0])
+        return true;
+    else if(c == validInputs[1])
+        return false;
+    printf("\nInvalid input");
+    return playerDialogue("\n",validInputs);
 }
 
 
@@ -195,5 +203,5 @@ void fetchPlayerName(char** ptrPlayerName){
         return fetchPlayerName(ptrPlayerName);
     }
     strcpy(*ptrPlayerName,initName);
-    free(initName); // dispose of unused variable
+    freePtr(initName);
 }

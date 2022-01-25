@@ -237,12 +237,12 @@ void displayContextFlair(enum winContext context, enum winner winningPlayer, cha
         sleep_ms(1000);
         print1d(strLoser, strlen(strLoser),200,200); // animated print for loser name
         sleep_ms(800);
-        print1d(strArticle, strlen(strArticle)200,200); // animated print for the article
+        print1d(strArticle, strlen(strArticle),200,200); // animated print for the article
         char strFlair1[] = " constricted by the forces of capitalism..."; // animated print for message flair
         print1d(strFlair1, strlen(strFlair1),200,200);
         sleep_ms(1000);
         char strFlair2[] = " so tightly that you could not maintain a balance above the losing balance"; // animated print for losing balance flair
-        print1d(strFlair1, strlen(strFlair2)180,190); 
+        print1d(strFlair1, strlen(strFlair2),180,190); 
     }
     if(context == REACHED_WINNING_BALANCE){
         sleep_ms(1000);
@@ -254,7 +254,7 @@ void displayContextFlair(enum winContext context, enum winner winningPlayer, cha
         print1d(strFlair1, strlen(strFlair2),190,200); // animated print for winning balance flair
         sleep_ms(1000);
         char strFlair3[] = " I could not find a better capitalist dog if I tried!";
-        print1d(strFlair3, strlen(strFlair3)200,210); // animated print for winning balance flair
+        print1d(strFlair3, strlen(strFlair3),200,210); // animated print for winning balance flair
     }
 }
 
@@ -276,23 +276,24 @@ void showEndingStats(Player player){
     setRed
     printf("%d",player.rentCounter);
     resetColor
-    print1d(" occassions", strlen(" occassion"));
+    print1d(" occassions", strlen(" occassion"),200,210);
     newL
-    char* strRent = "You got lucky (or unlucky) and met the witch a grand total of: ";
-    print1d(strRent, strlen(strRent), 200, 210);
+    char* strWitch = "You got lucky (or unlucky) and met the witch a grand total of: ";
+    print1d(strWitch, strlen(strWitch), 200, 210);
     setRed
     printf("%d",player.luckyCounter);
     resetColor
-    printf(" times",strlen(" times", 200, 210));
+    print1d(" times",strlen(" times"), 200, 210);
     newL
     char* strBalance = "How much money you had left: ";
-    print1d(, strlen(strBalance), 200, 210);
+    print1d(strBalance, strlen(strBalance), 200, 210);
     setRed
-    printf("%d",player.balance);
+    printf("%.2f",player.balance);
     resetColor
     newL
-    char* bonusMsg = "The thing you spent the most money on: "
-    char* bonusRand[][] = {
+    char* bonusMsg = "The thing you spent the most money on: ";
+    print1d(bonusMsg, strlen(bonusMsg), 200,220);
+    char* bonusRand[] = {
     "a replacement for Duterte",
     "your dog", "knowledge", "suspicious underwear",
     "some white powdered stuff", "your ego", "Donald Trump"
@@ -623,7 +624,7 @@ void displayPos(int pos){
 "            ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░▒",
 "      ░░░░██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░  ▒"
         };
-        int rows = sizeof dragon / sizeof dragon[0];
+        rows = sizeof dragon / sizeof dragon[0];
         print2d(dragon, rows);
         char* dragonMsg2 = "HURRY UP AND GET INSIDE!\n\nYou are currently in: The Castle";
         print1d(dragonMsg2,strlen(dragonMsg2),240,250);
@@ -671,7 +672,7 @@ void displayPos(int pos){
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);
         char* iceMsg = "BRRRR 😰 who turned all the ACs on?\n You have landed squarely in the arctic! Good luck surviving out here bruh.\n Oh look, an Igloo!\n\nYou are currently in: The Igloo";
-        print1d(iceMsg, strlen(iceMsg));
+        print1d(iceMsg, strlen(iceMsg),170,180);
     }
     else if(pos == 9){
         char* display[] = {

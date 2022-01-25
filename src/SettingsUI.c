@@ -22,11 +22,15 @@ void displayCurrentConfig(struct settings settingsParam){
     printf("\n[CONFIG SETTINGS]\n");
     printf("Renovation cost: %.2f\n",settingsParam.renovationCost);
     printf("Railroad rent: %.2f\n",settingsParam.railRent);
+    printf("Railroad purchase cost: %.2f\n",settingsParam.railCost);
     printf("Electric company multiplier: %.1f\n",settingsParam.electricMulti);
+    printf("Electric company purchase cost: %.1f\n",settingsParam.electricCost);
     printf("Feelin' lucky range: bonus: [%d , %d] | penalty: [%d , %d]\n",
     settingsParam.bonusrange.min, settingsParam.bonusrange.max,
     settingsParam.penaltyrange.min, settingsParam.penaltyrange.max
     );
+    printf("Dice faces: %d\n",settingsParam.dicerange.max);
+    printf("Go! bonus: %.2f\n",settingsParam.goBonus);
 
    printf("\n\n");
 }

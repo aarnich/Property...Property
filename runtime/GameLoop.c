@@ -11,7 +11,6 @@ Player initializePlayer(){
     initPlayer.luckyCounter = 0;
     initPlayer.rentCounter = 0;
     initPlayer.name = malloc (256);
-    initPlayer.name = "Harambe";
     initPlayer.isBankrupt = false;
     initPlayer.isJailed = false;
     return initPlayer;
@@ -137,7 +136,7 @@ struct gamepkg updateGame(struct gamepkg game){
     // update player positiion
     currentPlayer.pos += roll;
     if(currentPlayer.pos > 9 && currentPlayer.pos % 10 != 0){
-        printf("\nYOU JUST PASSED BY GO! HERE'S %d\n", containedState.SETTINGS.goBonus);
+        printf("\nYOU JUST PASSED BY GO! HERE'S %.2f\n", containedState.SETTINGS.goBonus);
         pendingPlayerBalance += 200;
     }
     currentPlayer.pos %= 10;
@@ -171,11 +170,11 @@ struct gamepkg updateGame(struct gamepkg game){
             currentPlayer.isJailed = true;
             break;  
         }
+
         // player lands on feelin' lucky plot
         case 6:
         {
             currentPlayer.luckyCounter += 1;
-            char* jailMsg = malloc (256);
             printf("\n[PRESS ENTER to roll the dice]\n");
             getchar();
             clear
@@ -390,7 +389,7 @@ struct gamepkg updateGame(struct gamepkg game){
                     }
                 }
                 sleep_ms(700);
-                currentPlayer.rentCounter += 1
+                currentPlayer.rentCounter += 1;
                 pendingPlayerBalance -= fRent;
                 pendingOpponentBalance += fRent;
             }

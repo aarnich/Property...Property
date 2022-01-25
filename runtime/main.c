@@ -31,9 +31,10 @@ struct gamepkg playGame(struct gamepkg game){
 
     clearbuff; // clearbuffer to ensure no inputs remain in the buffer 
 
-    while(continueGame(lgame.state.SETTINGS.winsettings.winstate.winner == NONE))// check if the game should continue
-    { 
-        lgame = updateGame(lgame); // pass localized game onto updategame and receive an updated package that has ran all player events
+    while(continueGame(lgame.state.SETTINGS.winsettings.winstate.winner))// check if the game should continue
+    {  
+        // pass localized game onto updategame and receive an updated package that has ran all player events
+        lgame = updateGame(lgame);
 
         // update player values and change active player to the next
         updatePlayer(&lgame.state.activePlayer, &lgame.arrPlayerContainer[0].isJailed, &lgame.arrPlayerContainer[1].isJailed); 
@@ -72,11 +73,11 @@ int main()
     printf("WELCOME TO MONOPOLY!\n");  // show opening message
     sleep_ms(1000); // sleep for ui flair
     // slow print that prints a character every 300-320 milliseconds
-    print1d("oh wait.......",strlen("oh wait......."), 300,320); 
+    print1d("oh wait.......",strlen("oh wait......."), 300,300); 
     sleep_ms(1500); // sleep for ui flair
     clear
     // slow print that prints a character every 200-210 milliseconds
-    print1d("\nWELCOME TO PROPERTY",strlen("\nWELCOME TO PROPERTY"),200,210); 
+    print1d("WELCOME TO PROPERTY",strlen("\nWELCOME TO PROPERTY"),200,210); 
     // slow print that prints a character every 230-240 milliseconds
     print1d("...PROPERTY!",strlen("...PROPERTY!"), 230,240); 
     // slow print that prints a character every 300-320 milliseconds
@@ -91,14 +92,16 @@ int main()
     printf("\n[E] Exit\n");
 
     char startingInputs[3] = "GSE";
+    setGreen
+    printf("\nInput: ");
     choice = handleInput(startingInputs,strlen(startingInputs));
+    resetColor
 
     switch(choice){
         case 'E': // the player exits the game
             break;
         case 'S':
-            struct settings config = settingsPrompt();
-            game.state.SETTINGS = config;
+            game.state.SETTINGS = settingsPrompt(initializeSettings());
         case 'G':
             do{
                 // create pointer for player 1 name as strings are not mutable without more complex functions

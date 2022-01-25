@@ -25,7 +25,7 @@
 #define setRed printf("\033[0;31m"); // sets text color to red
 #define setGreen printf("\033[0;32m"); // sets text color to green
 #define setPurple printf("\033[0;35m"); // sets text color to purple
-#define setYellow printf("\033[0;33m"): // sets text color to yellow
+#define setYellow printf("\033[0;33m"); // sets text color to yellow
 
 // performs a pauses the system by millliseconds
 

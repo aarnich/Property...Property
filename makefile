@@ -28,7 +28,7 @@ runtime/runtime_obj/Settings.o: runtime/Settings.c runtime/runtime_headers/Setti
 # 	uiFX
 # 	InputTools
 
-libs/libEvents.so: src/*Events.c libdefs/*Events.h
+libs/libEvents.so: src/PlayerEvents.c libdefs/PlayerEvents.h src/SettingsEvents.c libdefs/SettingsEvents.h
 	touch libs/libEvents.so
 	chmod 7705 libs/libEvents.so
 	gcc -Wall -fPIC -c -g src/*Events.c
@@ -36,7 +36,7 @@ libs/libEvents.so: src/*Events.c libdefs/*Events.h
 	mv *.o obj/
 	nm -D libs/libEvents.so
 
-libs/libUI.so: src/ui*.c src/*UI.c libdefs/ui*.h libdefs/*UI.h
+libs/libUI.so: src/uiFX.c src/SettingsUI.c libdefs/uiFX.h libdefs/SettingsUI.h
 	touch libs/libUI.so
 	chmod 7705 libs/libUI.so
 	gcc -Wall -fPIC -c -g src/*UI.c src/ui*.c

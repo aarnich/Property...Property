@@ -44,4 +44,5 @@ int getPlayerSellChoice(unsigned int STATEKEY, unsigned int OFFSET, unsigned int
 // changes playername variable
 
 void fetchPlayerName(char** ptrPlayerName);
+
 #endif
