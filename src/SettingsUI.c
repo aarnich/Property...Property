@@ -102,6 +102,8 @@ void displayWinconditionsMenu(struct winconditions wincond)
     if(isMulti)
         printf("[E] %s multi-condition win\n",buttons[2]);
 
+    setGreen
     printf("[S] Save and exit\n");
+    resetColor
 }
 

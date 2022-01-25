@@ -3,6 +3,7 @@
 #ifndef INPUTTOOLS_H
 #define INPUTTOOLS_H
 
+#include "../libdefs/uiFX.h"
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>

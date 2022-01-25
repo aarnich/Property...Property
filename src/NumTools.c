@@ -75,7 +75,9 @@ int getValidInteger(char* strMsg){
     do{
         cont = 0;
         if(scanf(" %d",&initInteger)!= 1){
+            setRed
             printf("\nInvalid entry, try again\n");
+            resetColor
             cont = 1;
         }
         clearbuff
@@ -106,7 +108,9 @@ void freePtr(void** ptr){
     @param strMsg the message to be displayed to the user during the prompt
 */
 void changeIntParam(int* parameterPtr, char* strMsg){
+    setGreen
     printf("\n[CURRENT VALUE: %.2f]\n",*parameterPtr);
+    resetColor
     float tmp;
     printf("%s", strMsg);
     bool cont;
@@ -114,7 +118,9 @@ void changeIntParam(int* parameterPtr, char* strMsg){
     {
         cont = 0;
         if(scanf("%f",&tmp) != 1){ // if user input is an invalid float, employ an infinite loop
+            setRed
             printf("\nInvalid input, try again\n");
+            resetColor
             cont = 1;
         }
     } while (cont == 1);
@@ -130,7 +136,9 @@ void changeIntParam(int* parameterPtr, char* strMsg){
     @param strMsg the message to be displayed to the user during the prompt
 */
 void changeFloatParam(float* parameterPtr, char* strMsg){
+    setGreen
     printf("\n[CURRENT VALUE: %.2f]\n",*parameterPtr);
+    resetColor
     float tmp;
     printf("%s", strMsg);
     bool cont;

@@ -25,6 +25,8 @@ char handleInput(char validInputs[], int elements){
         else
             return cInitInput; // if input is a member of valid inputs, return the input
     }
+    setRed
     printf("\ninvalid input, try again\n"); // if input is not a member of valid inputs, prompt a retry
+    resetColor
     return handleInput(validInputs,elements); // recurse 
 }
