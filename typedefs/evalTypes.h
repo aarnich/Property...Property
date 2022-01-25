@@ -2,6 +2,7 @@
 #ifndef EVALTYPES_H
 #define EVALTYPES_H
 #include <stdbool.h>
+
 // handy syntax-sugar for customizing win conditions in the settings screen
 enum wintoggles{ WINNING_BALANCE_REACHED, LOSING_BALANCE_REACHED, DISABLED };
 

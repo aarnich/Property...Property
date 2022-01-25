@@ -37,7 +37,6 @@ struct winconditions initializeWinconditions(){
 
 /*
     This function returns initial values for struct settings
-    Preconditions: none
     @return the initial values for settings (initsettings)
 */
 struct settings initializeSettings(){
@@ -47,11 +46,13 @@ struct settings initializeSettings(){
     initsettings.penaltyrange.max = DEFAULT_PENALTY_MAX;
     initsettings.penaltyrange.min = DEFAULT_PENALTY_MIN;
     initsettings.electricMulti = DEFAULT_ELECTRIC_MULTI;
+    initsettings.electricCost = DEFAULT_ELECTRIC_COST;
     initsettings.railRent = DEFAULT_RAILROAD_RENT;
     initsettings.winsettings = initializeWinconditions();
     initsettings.dicerange.max = DEFAULT_DICE_MAX;
     initsettings.dicerange.min = DEFAULT_DICE_MIN; 
     initsettings.renovationCost = DEFAULT_RENOVATION_COST;
+    initsettings.goBonus = DEFAULT_GO_BONUS;
     return initsettings;
 }
 

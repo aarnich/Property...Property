@@ -8,6 +8,8 @@ Player initializePlayer(){
     initPlayer.pos = DEFAULT_STARTINGPOS;
     initPlayer.balance = DEFAULT_STARTINGBALANCE;
     initPlayer.jailedCounter = 0;
+    initPlayer.luckyCounter = 0;
+    initPlayer.rentCounter = 0;
     initPlayer.name = malloc (256);
     initPlayer.name = "Harambe";
     initPlayer.isBankrupt = false;
@@ -18,7 +20,6 @@ Player initializePlayer(){
 /*
     initializes gamestate with default values 
     @returns initial gamestate
-
 */
 struct gamestate initializeGamestate()
 {
@@ -122,6 +123,7 @@ struct gamepkg updateGame(struct gamepkg game){
     float pendingOpponentBalance = opposingPlayer.balance; // player 2 balnace to be sent after updateGame() events
 
     range lDiceRange = containedState.SETTINGS.dicerange; // localized dice range
+
     // Evaluate Player Position
     printf("\n[Press ENTER to roll the dice!]\n");
     getchar();
@@ -134,15 +136,22 @@ struct gamepkg updateGame(struct gamepkg game){
 
     // update player positiion
     currentPlayer.pos += roll;
-    currentPlayer.pos %= 9;
+    if(currentPlayer.pos > 9 && currentPlayer.pos % 10 != 0){
+        printf("\nYOU JUST PASSED BY GO! HERE'S %d\n", containedState.SETTINGS.goBonus);
+        pendingPlayerBalance += 200;
+    }
+    currentPlayer.pos %= 10;
 
     unsigned int pos = currentPlayer.pos;
     updatedGame.arrPlayerContainer[currentPlayerKey] = currentPlayer;
+
     clear
+
     showGameStatus(updatedGame);
+
     bool isHouse = true; // default property type
+
     // Show position prompt
-    pos = 4;
     displayPos(pos);
     sleep_ms(600);
     switch(pos)
@@ -152,22 +161,12 @@ struct gamepkg updateGame(struct gamepkg game){
         // player lands on Go!
         case 0: 
         {
-            char* goMsg = "\n🏁 Go Go Go!' The bank handed you 200 for an extra boost!\n";
-            sleep_ms(600);
-            pendingPlayerBalance += 200;
+            pendingPlayerBalance += containedState.SETTINGS.goBonus;
             break;
         }
         // player is Jailed :(
         case 4:
         {
-            sleep_ms(500);
-            clear
-            char* jailMsg = malloc (256);
-            // int spaces = 44;
-            print1d(currentPlayer.name, strlen(currentPlayer.name), 170,190);
-            print1d(" just got CAUGHT BY THE POPO'S for TAX EVASION ♀️\n", strlen(" just got CAUGHT BY THE POPO'S for TAX EVASION ♀️\n"),170,190);
-            // printf("%*s",spaces," ");
-            print1d("\nDon't drop the soap buddy\n",strlen("\nDon't drop the soap buddy 💀\n",220,230));
             currentPlayer.jailedCounter += 1;
             currentPlayer.isJailed = true;
             break;  
@@ -175,10 +174,8 @@ struct gamepkg updateGame(struct gamepkg game){
         // player lands on feelin' lucky plot
         case 6:
         {
+            currentPlayer.luckyCounter += 1;
             char* jailMsg = malloc (256);
-            // int spaces = 44;
-            // printf("%*s",spaces," ");
-            print1d("You feelin' lucky?🧙‍️\n",strlen("You feelin' lucky?🧙‍️\n"),230,250);
             printf("\n[PRESS ENTER to roll the dice]\n");
             getchar();
             clear
@@ -188,7 +185,13 @@ struct gamepkg updateGame(struct gamepkg game){
             int num = rollDice(lDiceRange);
             sleep_ms(500);
             clear
-            if(isPrime(num))
+            if(num == 1){
+                char* witchJailMsg = "\nI'm teleporting you to prison for rolling such an awful number!\n";
+                print1d(witchJailMsg, strlen(witchJailMsg), 200, 210);
+                currentPlayer.isJailed = true;
+                currentPlayer.pos = 4;
+            }
+            else if(isPrime(num))
             {
                 printf("\n🤯You rolled a LUCKY %d!\n",num);
                 int luckyNum = getRandNum(
@@ -244,26 +247,34 @@ struct gamepkg updateGame(struct gamepkg game){
             // if the property is owned the bank and the player has enough capital, give the player the choice to purchase the property
             if((propIndex == 0) && pendingPlayerBalance >= propertyCost)
             {
+                setYellow
                 printf("\nPROPERTY COST: [%.2f 💰]",propertyCost);
+                resetColor
                 if(playerDialogue("\n[B]uy property\n[E]nd turn\nInput:","BE")){ // if the player buys the property
-                   pendingPlayerBalance -= propertyCost; // subtract from balance
+                    pendingPlayerBalance -= propertyCost; // subtract from balance
                     containedState.STATEKEY = mutateStatekeyAtIndex(
                         containedState.STATEKEY, pos,
                         currentPlayerKey, STATEKEY_OFFSET
                         ); // update statekey to reflect property purchase
+                    setGreen
                     printf("\nYou have successfully bought the %s\n",getPropertyName(pos));
+                    resetColor
                     showPersonalBalanceUpdate((pendingPlayerBalance + propertyCost), pendingPlayerBalance);
                 }
             }
             // property is owned by the bank but the player doesn't have enough money
             else if((propIndex == 0) && pendingPlayerBalance < propertyCost)
             {
+                setRed
                 printf("\nYou do not have enough money to purchase this property❗");
+                resetColor
             }
             // The player has already renovated this property
             else if(isOwnedByPlayer && isRenovated)
             {
+                setGreen
                 printf("\nYou own this property and have already renovated it 👍");
+                resetColor
             }
             // The player owns and has yet to renovate this property
             else if(isOwnedByPlayer && !isRenovated && isHouse) 
@@ -271,7 +282,9 @@ struct gamepkg updateGame(struct gamepkg game){
                 float renovationCost = game.state.SETTINGS.renovationCost; // get the renovation cost from settings
                 if(pendingPlayerBalance >= renovationCost) // check if the player has enough capital to renovate the property
                 {
+                    setYellow
                     printf("\nRENOVATION COST: [%.2f 💸]\n",renovationCost); 
+                    resetColor
                     if(playerDialogue("\n[R]enovate Property\n[E]nd Turn\nInput:","RE")) // ask if the player would like to renovate the property
                     {
                         pendingPlayerBalance -= renovationCost; // player pays the renovation cost
@@ -279,18 +292,24 @@ struct gamepkg updateGame(struct gamepkg game){
                             containedState.STATEKEY, pos,
                             currentPlayerKey+2, STATEKEY_OFFSET // + 2 means the property is renovated
                         ); // update the state key
+                        setGreen
                         printf("\nYou have successfully renovated the %s\n",getPropertyName(pos));
+                        resetColor
                         showPersonalBalanceUpdate((pendingPlayerBalance - renovationCost), pendingPlayerBalance);
                     }
                 }
                 else // The player does not have enough capital to renovate the property
                 {
+                    setRed
                     printf("\nYou do not have enough capital to renovate this property ❗");
+                    resetColor
                 }
             }
             if(isOwnedByOpponent) // if the property belongs to the opposing player
             {
+                setRed
                 printf("\nYou have landed on a property that is owned by %s! Time to pay rent fool!\n",opposingPlayer.name);
+                resetColor
                 printf("\n[PRESS ENTER TO PAY RENT!]\n");
                 getchar();
 
@@ -299,7 +318,9 @@ struct gamepkg updateGame(struct gamepkg game){
                                     containedState.SETTINGS.railRent);
 
                 fRent = isRenovated ? fRent * 2 + 1 : fRent; // if the property is renovated rent is *2 + 1
+                setGreen
                 printf("\nRENT: [%.2f 🤑]\n",fRent);
+                resetColor
 
                 // check if the player has enough capital to pay rent
                 if(pendingPlayerBalance < fRent) 
@@ -307,7 +328,9 @@ struct gamepkg updateGame(struct gamepkg game){
                     currentPlayer.isBankrupt = true; // for all intents and purposes, you are BANKRUPT!!... until further notice
                     printf("\n...\n");
                     sleep_ms(500);
+                    setRed
                     printf("\nUh oh.. It seems as though you don't have enough money to pay rent\n");
+                    resetColor
                     sleep_ms(500);
                     while(currentPlayer.isBankrupt) // continue displaying the prompt while the player does not have enough money to pay rent
                     {
@@ -335,7 +358,9 @@ struct gamepkg updateGame(struct gamepkg game){
 
                             float sellPrice = getPropertyCost(toBeSold,DEFAULT_ELECTRIC_COST,DEFAULT_RAILROAD_COST) * 0.5f; // get the cost of the property
 
+                            setGreen
                             printf("\n%s SOLD FOR: %.2f\n",getPropertyName(toBeSold),sellPrice);
+                            resetColor
 
                             showPersonalBalanceUpdate(pendingPlayerBalance, (pendingPlayerBalance + sellPrice));
                             pendingPlayerBalance += sellPrice; // reimburse the player
@@ -344,13 +369,17 @@ struct gamepkg updateGame(struct gamepkg game){
                         {
                             currentPlayer.isBankrupt = false;
                             clearbuff
+                            setGreen
                             printf("\nYou now have enough capital to pay rent!\n");
+                            resetColor
                             printf("\n[PRESS ENTER TO PAY RENT!]\n");
                             getchar();
                         }
                         else if(!playerCanSell) // if the player is still bankrupt and can no longer sell any properties, the player loses
                         {
+                            setRed
                             printf("\nThere's nothing you can do to pay rent!\n");
+                            resetColor
                             updatedGame = saveGame(currentPlayer, currentPlayerKey, 
                                                     opposingPlayer, enemyPlayerKey,
                                                     containedState);
@@ -361,6 +390,7 @@ struct gamepkg updateGame(struct gamepkg game){
                     }
                 }
                 sleep_ms(700);
+                currentPlayer.rentCounter += 1
                 pendingPlayerBalance -= fRent;
                 pendingOpponentBalance += fRent;
             }
@@ -491,6 +521,7 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
             populateContext(localWinstate.winRationale, ENEMY_LOSING_BALANCE);
         }
     }
+    
     if(checkWinningBalance)
     {
         if(p1.balance >= ceil)
@@ -516,6 +547,5 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
         else
             localWinstate.winner = TIE;
     }
-
     return localWinstate;
 }

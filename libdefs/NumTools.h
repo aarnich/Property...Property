@@ -21,9 +21,13 @@ range editRange(range varRange, char* type);
  
 int getValidInteger(char* strMsg);
 
-// changes a float parameter without returning a new float 
+// changes a float parameter 
 
 void changeFloatParam(float* parameterPtr, char* strMsg);
+
+// changes an int parameter 
+
+void changeIntParam(int* parameterPtr, char* strMsg);
 
 // raises base to a power
 

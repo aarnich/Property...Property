@@ -25,9 +25,9 @@ char* getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigne
 
 bool playerOwnsProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID);
 
-// a dialogue prompt that asks a question that is answered by yes or no
+// a dialogue prompt that decides end turn
 
-bool playerDialogue(char* strDialogueMsg);
+bool playerDialogue(char* strDialogueMsg, char* validInputs);
 
 // checks whether the player owns the current property or not
 

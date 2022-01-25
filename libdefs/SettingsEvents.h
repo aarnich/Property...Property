@@ -15,10 +15,11 @@
 #define DEFAULT_BONUS_MIN 100
 #define DEFAULT_PENALTY_MIN 50
 #define DEFAULT_PENALTY_MAX 150
-#define DEFAULT_WINNING_BALANCE 5000
+#define DEFAULT_WINNING_BALANCE 2000
 #define DEFAULT_DICE_MIN 1
 #define DEFAULT_DICE_MAX 6
 #define DEFAULT_LOSING_BALANCE 0
+#define DEFAULT_GO_BONUS 200
 
 // predefined macro that is used to clear the buffer in order to avoid unwanted infinite loops with input processing
 #define clearbuff while((getchar()) != '\n');

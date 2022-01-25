@@ -8,14 +8,16 @@
 // player roll dice event
 
 /*
-    This function rolls the dice for the player and returns the corresponding value
+    This function rolls the dice with a random visual indicator for the player and returns the corresponding value. 
+    There are 4 different dice ascii art pieces to be printed. Choosing is randomized.
     @param diceRange describes the minimum and maximum dice value
     @returns value of the dice roll
 */
 int rollDice(range diceRange)
 {
     printf("\nTHE DICE SPINS IN THE AIR!🎲\n");
-    char* diceImg[8] = { // set of chars that make up an image of the dice 
+    char* diceImages[][] = malloc (512);
+    diceImages[0] = { // set of chars that make up an image of the dice 
         "   _______",
         "  /\\ o o o\\",
         " /o \\ o o o\\_______",
@@ -25,7 +27,37 @@ int rollDice(range diceRange)
         "        |   o   |o/",
         "        |_______|/"
     };
-    print2d(diceImg,8); // print dice
+    diceImages[1] = {
+
+        "    _______            ",
+        "  /\\       \\           ",
+        " /()\\   ()  \\          ",
+        "/    \\_______\\         ",
+        "\\    /()     /         ",
+        " \\()/   ()  /          ",
+        "  \\/_____()/"
+
+    };
+    diceImages[2] = {
+        "              _______.",
+        "   ______    | .   . |\\",
+        "  /     /\\   |   .   |.\\",
+        " /  '  /  \\  | .   . |.'|",
+        "/_____/. . \\ |_______|.'|",
+        "\\ . . \\    /  \\ ' .   \\'|",
+        " \\ . . \\  /    \\____'__\\|",
+        "  \\_____\\/"
+    };
+    diceImages[3] = {
+        " /\\' .\\    _____",
+        "/: \\___\\  / .  /\\",
+        "\\' / . / /____/..\\",
+        " \\/___/  \\'  '\\  /",
+        "          \\'__'\\/"
+    }
+    int dicePrint = getRandNum(0,4);
+    int rows = sizeof diceImages[dicePrint][0] / sizeof diceImg[dicePrint];
+    print2d(diceImages[dicePrint],rows,20,20); // print dice
     return getRandNum(diceRange.min, diceRange.max);
 }
 
@@ -54,7 +86,7 @@ char* getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigne
 
 
 /*
-    Tells the game whether the player owns any properties at all. It checks every digit in the statekey
+    Tells the game whether the player owns any properties at all. It checks every digit in the statekey 
     and runs a simple boolean function.
     @param STATEKEY the 9 digit integer that tracks all properties on the board
     @param OFFSET the OFFSET used to decrypt the statekey
@@ -71,24 +103,23 @@ bool playerOwnsProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned i
     return false;
 }
 
-// a dialogue prompt that asks a question that is answered by yes or no
 
 /*
-    Asks the player a yes or no question supplied by strDialogueMsg and prompts for an answer
+    Prompts user for input in property events supplied by strDialogueMsg and prompts for an answer
     @param strDialogueMsg string of the question displayed
-    @returns boolean value that tells you the player's choice
+    @returns boolean value that tells you whether the player proceeded with the game event
 */
 bool playerDialogue(char* strDialogueMsg, char* validInputs){
     printf(strDialogueMsg);
     char c = handleInput(validInputs, strlen(validInputs));
     switch(c){
-        case 'B':
+        case validInputs[0]: // the first button prompt is an affirmation
             return true;
             break;
-        case 'E':
+        case 'E': // the second button prompt that ends turn
             return false;
             break;
-        default:
+        default: // player input is invalid
             printf("\ninvalid input");
             return playerDialogue("\n");
     }
@@ -164,5 +195,5 @@ void fetchPlayerName(char** ptrPlayerName){
         return fetchPlayerName(ptrPlayerName);
     }
     strcpy(*ptrPlayerName,initName);
-    free(initName);
+    free(initName); // dispose of unused variable
 }

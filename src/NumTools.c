@@ -93,9 +93,33 @@ int getValidInteger(char* strMsg){
     @param ptr the pointer to be nullified
 */
 void freePtr(void** ptr){
-    // free(*ptr);
-    // *ptr = NULL; // dereference the double pointer in order to set the pointer it points to to null
+    free(*ptr);
+    *ptr = NULL; // dereference the double pointer in order to set the pointer it points to to null
 } 
+
+/*
+    This method changes a the value of a float variable given its parameter 
+    Preconditions:
+        parameterPtr points to a valid float variable 
+        strMsg is an array of chars with length > 0;
+    @param parameterPtr the pointer of the variable to be changed
+    @param strMsg the message to be displayed to the user during the prompt
+*/
+void changeIntParam(int* parameterPtr, char* strMsg){
+    printf("\n[CURRENT VALUE: %.2f]\n",*parameterPtr);
+    float tmp;
+    printf("%s", strMsg);
+    bool cont;
+    do
+    {
+        cont = 0;
+        if(scanf("%f",&tmp) != 1){ // if user input is an invalid float, employ an infinite loop
+            printf("\nInvalid input, try again\n");
+            cont = 1;
+        }
+    } while (cont == 1);
+    *parameterPtr = tmp;
+}
 
 /*
     This method changes a the value of a float variable given its parameter 
@@ -119,7 +143,6 @@ void changeFloatParam(float* parameterPtr, char* strMsg){
         }
     } while (cont == 1);
     *parameterPtr = tmp;
-    freePtr((void*)&parameterPtr);
 }
 
 /*

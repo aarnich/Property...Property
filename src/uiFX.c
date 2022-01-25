@@ -68,7 +68,7 @@ void continuePrompt(){
 }
 
 /*
-    Prints a string by printing each individual character sequentially within a randomized time interval
+    Prints a string by printing each individual character sequentially within a randomized time interval 
     in order to mimic human typing
     @param str[] the string to be printed
     @param strLength the length of the string being passed
@@ -151,21 +151,21 @@ void showBalanceUpdate(
     char* p1Indicator = malloc(128);
     char* p2Indicator = malloc(128);
 
-    if(p1CurrentBalance < p1NewBalance)
-        p1Indicator = "🔺";
-    else if(p1CurrentBalance > p1NewBalance)
-        p1Indicator = "🔻";
-    else
-        p1Indicator = " ✒ ";
 
-    if(p2CurrentBalance < p2NewBalance)
-        p2Indicator = "🔺";
-    else if(p2CurrentBalance > p2NewBalance)
-        p2Indicator = "🔻";
-    else
-        p2Indicator = " ✒ ";
     
     printf("\n%s[ BALANCE  UPDATE 🏦 ]%s\n",DIVIDER,DIVIDER);
+    if(p1CurrentBalance < p1NewBalance){
+        p1Indicator = "🔺";
+        setGreen;
+    }
+    else if(p1CurrentBalance > p1NewBalance){
+        p1Indicator = "🔻";
+        setRed
+    }
+    else{
+        p1Indicator = " ✒ ";
+        setYellow 
+    } 
     sleep_ms(1000);
     printf("\n%s %s's balance: \n%.2f ➡️ %.2f\n\n",
                     p1Indicator,
@@ -173,6 +173,20 @@ void showBalanceUpdate(
                     p1CurrentBalance,
                     p1NewBalance
     );
+    resetColor
+    if(p2CurrentBalance < p2NewBalance){
+        p2Indicator = "🔺";
+        setGreen
+    }
+    else if(p2CurrentBalance > p2NewBalance){
+        p2Indicator = "🔻";
+        setRed
+    }  
+    else{
+        p2Indicator = " ✒ ";
+        setYellow
+    }
+    resetColor
     printf("\n%s %s's balance: \n%.2f ➡️ %.2f\n",
                     p2Indicator,
                     p2Name,
@@ -211,69 +225,138 @@ void displayContextFlair(enum winContext context, enum winner winningPlayer, cha
         sleep_ms(1000);
         print1d(strLoser, strlen(strLoser)); // animated print for loser name 
         sleep_ms(800);
-        print1d(strArticle, strlen(strArticle));
+        print1d(strArticle, strlen(strArticle),200,220);
         char strFlair1[] = " pushed to the annals of BANKRUPTCY!";
-        print1d(strFlair1, strlen(strFlair1)); // animated print for the bankruptcy flair
+        print1d(strFlair1, strlen(strFlair1),200,220); // animated print for the bankruptcy flair
     }
     if(context == ENEMY_LOSING_BALANCE)
     {
         sleep_ms(1000);
-        print1d(strLoser, strlen(strLoser)); // animated print for loser name
+        print1d(strLoser, strlen(strLoser),200,200); // animated print for loser name
         sleep_ms(800);
-        print1d(strArticle, strlen(strArticle)); // animated print for the article
+        print1d(strArticle, strlen(strArticle)200,200); // animated print for the article
         char strFlair1[] = " constricted by the forces of capitalism..."; // animated print for message flair
-        print1d(strFlair1, strlen(strFlair1));
+        print1d(strFlair1, strlen(strFlair1),200,200);
         sleep_ms(1000);
         char strFlair2[] = " so tightly that you could not maintain a balance above the losing balance"; // animated print for losing balance flair
-        print1d(strFlair1, strlen(strFlair2)); 
+        print1d(strFlair1, strlen(strFlair2)180,190); 
     }
     if(context == REACHED_WINNING_BALANCE){
         sleep_ms(1000);
-        print1d(strWinner, strlen(strWinner)); // animated print for winner name
+        print1d(strWinner, strlen(strWinner),190,200); // animated print for winner name
         char strFlair1[] = " THRIVED IN THIS NEOCLASSICIST HELLSCAPE...";
-        print1d(strFlair1, strlen(strFlair1)); // animated print for winning balance flair
+        print1d(strFlair1, strlen(strFlair1),190,200); // animated print for winning balance flair
         sleep_ms(1000);
         char strFlair2[] = " and reached the winning balance!\n";
-        print1d(strFlair1, strlen(strFlair2)); // animated print for winning balance flair
+        print1d(strFlair1, strlen(strFlair2),190,200); // animated print for winning balance flair
         sleep_ms(1000);
         char strFlair3[] = " I could not find a better capitalist dog if I tried!";
-        print1d(strFlair3, strlen(strFlair3)); // animated print for winning balance flair
+        print1d(strFlair3, strlen(strFlair3)200,210); // animated print for winning balance flair
     }
 }
+
+/*
+    UI flair for displaying player statistics. Includes how many times they were jailed/able to meet with the witch/paid rent
+*/
+void showEndingStats(Player player){
+    char* DIVIDER = createDivider('=',18);
+    printf("%s[ %s's Ending Stats ]%s",DIVIDER,player.name,DIVIDER);
+    newL
+    char* strJail = "Times you were caught by police for not paying taxes: ";
+    print1d(strJail, strlen(strJail), 200, 210);
+    setRed
+    printf("%d",player.jailedCounter);
+    resetColor
+    newL
+    char* strRent = "You ceded money over to your enemy on: ";
+    print1d(strRent, strlen(strRent), 200, 210);
+    setRed
+    printf("%d",player.rentCounter);
+    resetColor
+    print1d(" occassions", strlen(" occassion"));
+    newL
+    char* strRent = "You got lucky (or unlucky) and met the witch a grand total of: ";
+    print1d(strRent, strlen(strRent), 200, 210);
+    setRed
+    printf("%d",player.luckyCounter);
+    resetColor
+    printf(" times",strlen(" times", 200, 210));
+    newL
+    char* strBalance = "How much money you had left: ";
+    print1d(, strlen(strBalance), 200, 210);
+    setRed
+    printf("%d",player.balance);
+    resetColor
+    newL
+    char* bonusMsg = "The thing you spent the most money on: "
+    char* bonusRand[][] = {
+    "a replacement for Duterte",
+    "your dog", "knowledge", "suspicious underwear",
+    "some white powdered stuff", "your ego", "Donald Trump"
+    };
+    int size = sizeof bonusRand / sizeof bonusRand[0];
+    char* randMsg = bonusRand[getRandNum(0,size-1)];
+    setPurple
+    print1d(randMsg, strlen(randMsg));
+    resetColor
+}
+
+/* 
+    Draws the monopoly moustache to add a ui flair for the ending screen
+*/
+void showMonopolyMoustache(){
+    char* moustache[] = {
+"                        ████████░░      ██████████                ██                ",
+"    ██                ██████████████  ██████████████░░            ░░██              ",
+"  ██▒▒            ▒▒██████████████████████████████████▒▒            ████            ",
+"  ██            ████████████████████████████████████████▒▒          ████            ",
+"░░██          ██████████████████████████████████████████████        ████            ",
+"  ██▒▒    ▒▒██████████████████████████████████████████████████      ████            ",
+"  ██████████████████████████████████████████████████████████████████████            ",
+"  ██████████████████████████████████░░██████████████████████████████████            ",
+"  ████████████████████████████████    ░░██████████████████████████████▒▒            ",
+"  ░░████████████████████████████          ████████████████████████████              ",
+"    ░░██████████████████████                ▒▒██████████████████████                ",
+"        ████████████████                          ██████████████                    "
+    };
+    int rows = sizeof moustache / sizeof moustache[0];
+    print2d(moustache, rows);
+}
+
 /*
     contextual ending screen that cognratulates the winner(s) according to their win conditions
     @param win describes how the winner(s) won
-    @param p1Name player 1's name
-    @param p2Name player 2's name
+    @param p1 player 1's values
+    @param p2 player 2's values
 */
-void displayEndingScreen(struct winstate win, char* p1Name, char* p2Name){
-    // show monopoly man pointing his finger
-    printf("\nA WINNER HAS BEEN DECIDED\n");
+void displayEndingScreen(struct winstate win, Player p1, Player p2){
+    showMonopolyMoustache();
+    char* winnerMsg = "\nA winner has been decided.\n";
+    print1d(winnerMsg, strlen(winnerMsg), 250, 270);
     sleep_ms(2000);
     clear;
-    if(win.winner == TIE){
-        printf("\n🙆‍By some freak accident\n");
-        sleep_ms(1000);
-        printf(".");
-        sleep_ms(1000);
-        printf(".");
-        sleep_ms(1000);
-        printf(".");
-        printf("both players won...");
-        sleep_ms(1500);
-        printf(" or lost?\n");
+    if(win.winner == TIE){ // the players tie
+    // show UI flair for tie
+        char* tieMsg1 = "\nBy some freak accident";
+        char* dots = "...";
+        char* tieMsg2 = "both players won... or lost?\n";
+        print1d(tieMsg1, strlen(tieMsg1), 250,270);
+        print1d(dots, strlen(dots), 350,360);
+        print1d(tieMsg2, strlen(tieMsg2), 250,270);
     }
         char* strMulti = (win.winRationale[0] != NOCONTEXT && win.winRationale[1] != NOCONTEXT) ? "\nfurthermore...\n" : " ";
-
+        // additional UI prompt for when multiple winconditions are satisfied
         for (size_t i = 0; i < 2; i++)
         {
             if(win.winRationale[i] != NOCONTEXT)
             {
-                displayContextFlair(win.winRationale[i], win.winner, p1Name, p2Name);
+                displayContextFlair(win.winRationale[i], win.winner, p1.name, p2.name); // display ui flair for the specific wincondition
                 sleep_ms(700);
-                print1d(strMulti, strlen(strMulti)); 
+                print1d(strMulti, strlen(strMulti), 200, 210);  // if multiple conditions are satisfied, print flair statement, otherwise print a space
             }
         }
+    showEndingStats(p1);
+    showEndingStats(p2);
 }
 /*
     Draws an image of where the player is given current position
@@ -316,6 +399,13 @@ void displayPos(int pos){
         };
     int rows = sizeof(display) / sizeof(display[0]);
     print2d(display,rows);
+    sleep_ms(500);
+    char* jailMsg1 = "\nYOU just got caught by the police for TAX EVASION 🥶\n";
+    // int spaces = 44;
+    print1d(jailMsg1,strlen(jailMsg1), 180,190);
+    // printf("%*s",spaces," ");
+    char* jailMsg2 = "Don't drop the soap buddy 💀\n";
+    print1d(jailMsg2,strlen(jailMsg2), 220,230);
     }
     else if(pos == 1){
         char* display[] = {
@@ -351,35 +441,38 @@ void displayPos(int pos){
         };
         int rows = sizeof(display) / sizeof(display[0]);
         print2d(display,rows);
+        char* treeMsg = "🐒 WOAH THERE, don't conflate the monkey for your reflection buddy, you're not THAT ugly.\nBananas surround you in a mosaic of shades of yellow as if to remind you of your primal ancestry\n\nYou are in: The Tree House";
+        print1d(treeMsg, strlen(treeMsg), 170, 180);
     }
     else if(pos == 2){
         char* display[] = {
                                                                                 
                                                                                         
-"                                   ░░░░░░░░░░░░                                      ",
-"                               ░░░░            ░░░░                                  ",
-"                             ░░          ██        ░░                                ",
-"                           ░░          ████          ░░                              ",
-"                           ░░        ████            ░░                              ",
-"                          ░░        ██████              ░░                           ",
-"                         ░░      ██████                ░░                            ",
-"                         ░░    ██████████████████      ░░                            ",
-"                         ░░    ████████████████        ░░                            ",
-"                         ░░            ██████          ░░                            ",
-"                         ░░          ██████            ░░                            ",
-"                           ░░      ██████            ░░                              ",
-"                           ░░      ████              ░░                              ",
-"                             ░░    ██              ░░                                ",
-"                               ░░░░            ░░░░                                  ",
-"                                   ░░░░░░░░░░░░                                      ",
+"                                ░░░░░░░░░░░░                                      ",
+"                            ░░░░            ░░░░                                  ",
+"                          ░░          ██        ░░                                ",
+"                        ░░          ████          ░░                              ",
+"                        ░░        ████            ░░                              ",
+"                       ░░        ██████              ░░                           ",
+"                      ░░      ██████                ░░                            ",
+"                      ░░    ██████████████████      ░░                            ",
+"                      ░░    ████████████████        ░░                            ",
+"                      ░░            ██████          ░░                            ",
+"                      ░░          ██████            ░░                            ",
+"                        ░░      ██████            ░░                              ",
+"                        ░░      ████              ░░                              ",
+"                          ░░    ██              ░░                                ",
+"                            ░░░░            ░░░░                                  ",
+"                                ░░░░░░░░░░░░                                      ",
                                                                                         
         };
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);
+        char* electricMsg = "💡DAZZLING! You walk inside and sparks fly off left and right!\nYou wonder how humanity was able to tame lightning itself and contain light inside meager bottles\nThis place can not be cheap...\n\nYou are in: The Electric Company";
+        print1d(electricMsg, strlen(electricMsg), 200,210);
     }                                                                       
     else if(pos == 3){                                                                                
         char* display[] = {
-
                                                                                         
 "                          ▓▓████                          ",
 "                            ██▓▓██▓▓▓▓                    ",
@@ -412,6 +505,9 @@ void displayPos(int pos){
         };
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);
+        sleep_ms(600);
+        char* beachMsg = "Seagulls swarm the sky, blocking out the radiance of the sun for a few seconds.\nYou take a whiff of the salt ridden air and think to yourself that life could not get any better\n\nYou are in: The Beach House";
+        print1d(beachMsg, strlen(beachMsg), 200,210);
     }                                                                            
     else if(pos == 5){
         char* display[] = {
@@ -449,8 +545,83 @@ void displayPos(int pos){
 "      ░░      ░░  ██████████████████████████████████████████████████                    "
 
         };
+
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);
+        char* castleMsg = "You walk in streets of ruin and decay\nYou have stumbled upon an ancient stronghold of an old Catholic cult!\n....";
+        print1d(castleMsg, strlen(castleMsg), 180, 190);
+        sleep_ms(700);
+        char* dragonMsg1 = "\nIS THAT A ****ING DRAGON?!?\n";
+        print1d(dragonMsg1, strlen(dragonMsg1), 300,300);
+        char* dragon[] = {
+                                                                                       
+"                                                                                  ▒▒   ",
+"                                                                ▒▒▒▒▒▒                 ",
+"                                                            ▒▒▓▓▓▓▓▓▓▓▓▓               ",
+"                                                          ▒▒▓▓▓▓▓▓▓▓▓▓▓▓░░             ",
+"                                                        ▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░           ",
+"                                                      ░░▓▓▓▓▓▓▓▓▓▓██████▓▓▒▒           ",
+"                                                    ▒▒▓▓▓▓▓▓▓▓████▓▓▓▓▓▓▓▓▓▓           ",
+"                                                  ▓▓▓▓▓▓▓▓▓▓████▓▓▓▓▓▓▓▓██▓▓          ▒",
+"                                                ▒▒▓▓▓▓▓▓▓▓████▓▓▓▓▓▓▓▓██▓▓        ░░   ",
+"                                              ▒▒▓▓▓▓▓▓▓▓████▓▓▓▓▓▓▓▓▓▓▓▓               ",
+"                                            ▒▒▓▓▓▓▓▓▓▓▓▓████▓▓▒▒▓▓▒▒██                ░",
+"                                          ▒▒▓▓▓▓▓▓▓▓▓▓████▓▓▒▒▒▒▒▒▓▓▓▓      ░░        ▒",
+"                                        ▓▓▓▓▓▓▓▓▓▓▓▓▓▓██▓▓▒▒▒▒▒▒▒▒▒▒██            ▒▒▒▒░",
+"                                      ▓▓▓▓▓▓▓▓▓▓▓▓▒▒▓▓██▓▓▒▒▒▒▒▒▒▒██              ▒▒░░░",
+"                                  ░░▓▓▓▓▓▓▓▓▓▓▓▓▒▒▓▓██▓▓▒▒▒▒▒▒▒▒▒▒▒▒            ▒▒░░",
+"                          ░░░░░░░░░░▓▓▓▓▓▓▓▓▓▓▒▒▓▓▓▓██▓▓▒▒░░░░░░▓▓██          ▒▒▒▒  ",
+"                        ░░░░░░░░██▓▓▓▓▓▓▓▓▓▓▒▒▓▓▓▓▓▓██▓▓░░░░  ░░██          ▒▒▒▒▒▒░░",
+"                              ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░        ░░          ▒▒▒▒",
+"                            ░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░░        ░░          ▒▒░░",
+"                        ░░░░░░▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░▓▓▓▓          ░░▓▓          ▒▒░░░░   ",
+"                      ░░░░░░  ░░▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░██▓▓      ░░░░▓▓▓▓          ▒▒",
+"                      ░░░░░░░░░░▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░  ██    ░░░░░░░░▒▒▓▓          ▒▒░░ ",
+"                    ░░░░  ░░░░░░▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░██▓▓▒▒░░░░░░░░░░▓▓▓▓         ",
+"                  ░░░░  ░░░░░░▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░  ████▓▓▒▒▒▒▒▒░░░░██▓▓       ",
+"                ░░░░  ░░░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░  ██▒▒▓▓▓▓▒▒▒▒░░░░▓▓▓▓        ▒",
+"              ░░░░  ░░░░  ▓▓▓▓▓▓▓▓░░░░▓▓▓▓▓▓▒▒░░░░░░░░░░░░  ████▓▓▓▓▓▓▒▒░░▓▓▓▓▓▓       ",
+"            ░░░░  ░░    ▓▓▓▓▓▓▓▓▒▒░░▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░  ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓       ",
+"          ░░░░  ░░      ▓▓▓▓▓▓▒▒░░▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░▒▒░░░░░░░░  ██████▓▓▓▓▓▓██▓▓       ",
+"        ░░░░  ░░          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░▒▒▒▒░░░░░░    ████████▓▓     ",    
+"      ░░░░  ░░                ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░▒▒▒▒          ██████       ",    
+"    ░░░░  ░░                ░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░▒▒▒▒▒▒░░░░▒▒           ",
+"    ░░░░░░                  ░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░  ▒▒                   ",
+"  ░░░░░░                  ░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░  ▒▒                   ",
+"  ░░░░                    ░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░  ▒▒                   ",
+"  ░░                      ░░    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░  ▒▒▒▒                 ",
+"                              ░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░    ▒▒                 ",                                                                             
+"                            ░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░    ▒▒               ",                                                                             
+"                            ░░░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░    ▒▒             ",                                                                             
+"                              ░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░    ░░           ",                                                                             
+"                              ░░    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░  ▒▒░░         ",                                                                             
+"                                  ░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░  ▒▒▒▒       ",                                                                              
+"                                  ░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░░░░░░    ▒▒▒▒     ",                                                                              
+"                                  ░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒▒▒░░░░░░░░░░░░    ▒▒░░░░ ",
+"                                  ░░░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░  ░░▒▒▒▒ ",
+"                                    ░░  ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░░░▒▒▒",
+"                                          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░    ▒",
+"                                      ░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░   ",
+"                                      ░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░ ",
+"                                    ░░░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░ ",
+"                                          ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░",
+"                              ░░░░░░░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░",
+"                      ░░░░        ░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░",
+"                    ░░░░░░░░    ████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░",
+"                        ░░░░▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░",
+"              ░░░░░░    ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░",
+"            ░░░░░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░",
+"                  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░ ",
+"            ░░  ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░ ",
+"      ░░░░░░  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░ ",
+"    ░░░░░░  ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░ ",
+"            ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░░░▒",
+"      ░░░░██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░░░░░  ▒"
+        };
+        int rows = sizeof dragon / sizeof dragon[0];
+        print2d(dragon, rows);
+        char* dragonMsg2 = "HURRY UP AND GET INSIDE!\n\nYou are currently in: The Castle";
+        print1d(dragonMsg2,strlen(dragonMsg2),240,250);
     }
     else if(pos == 8){
         char* display[] = {
@@ -494,6 +665,8 @@ void displayPos(int pos){
         };
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);
+        char* iceMsg = "BRRRR 😰 who turned all the ACs on?\n You have landed squarely in the arctic! Good luck surviving out here bruh.\n Oh look, an Igloo!\n\nYou are currently in: The Igloo";
+        print1d(iceMsg, strlen(iceMsg));
     }
     else if(pos == 9){
         char* display[] = {
@@ -530,6 +703,10 @@ void displayPos(int pos){
         };
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);
+        sleep_ms(600);
+        char* farmMsg = "\n🐄You smell the fresh air and get a distinct stench of cow manure\n You're in the country side! The corn gleans with fresh morning dew\n\nYou are currently in: The Farm house";
+        newL
+        print1d(farmMsg, strlen(farmMsg), 200,210);
     }
     else if(pos == 0){
         char* display[] = {
@@ -599,6 +776,9 @@ void displayPos(int pos){
         };
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);
+        sleep_ms(600);
+        char* goMsg = "\n🏁Go Go Go!' The bank handed you a STIMULUS CHECK!\n\n You are currently at: Go!";
+        print1d(goMsg, strlen(goMsg), 240,250);
     }
     else if(pos == 6){
         char* display[] = {
@@ -655,7 +835,9 @@ void displayPos(int pos){
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);
         sleep_ms(700);
-        print1d("\nYou feelin' lucky, Child? 🦹",strlen("\nYou feelin' lucky, Child? 🦹",));
+        char* luckMsg = "\nYou feelin' lucky, Child? 🦹";
+        newL
+        print1d(luckMsg,strlen(luckMsg), 230,240);
     }
 if(pos == 7){
     char* display[] = {
@@ -684,7 +866,9 @@ if(pos == 7){
         int rows = sizeof display / sizeof display[0];
         print2d(display, rows);                                                                                         
         sleep_ms(700);
-        print1d("\nYou hear the sound of trains and the complex machinations of the industrial era!",strlen("\nYou feelin' lucky, Child? 🦹",));
+        char* railMsg = "\nYou hear the sound of trains and the complex machinations of the industrial era!\n\n You are currently at: The Railroad station";
+        newL
+        print1d(railMsg, strlen(railMsg),170,180);
     }                                                                                                
 
 }                                                                                               

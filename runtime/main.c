@@ -3,8 +3,8 @@
 /*
     Description: Property...Property is a terminal-based take on Monopoly written entirely in C.
     Programmed by: Aaron Nicholas Lizardo Gumapac
-    Last modified: January 19, 2022
-    Version: V3
+    Last modified: January 25, 2022
+    Version: V7
     [Acknowledgements: geekhack.org, computerphile, numberphile]
 */
 
@@ -31,9 +31,10 @@ struct gamepkg playGame(struct gamepkg game){
 
     clearbuff; // clearbuffer to ensure no inputs remain in the buffer 
 
-    while(continueGame(lgame.state.SETTINGS.winsettings.winstate.winner))// check if the game should continue
+    while(continueGame(lgame.state.SETTINGS.winsettings.winstate.winner == NONE))// check if the game should continue
     { 
         lgame = updateGame(lgame); // pass localized game onto updategame and receive an updated package that has ran all player events
+
         // update player values and change active player to the next
         updatePlayer(&lgame.state.activePlayer, &lgame.arrPlayerContainer[0].isJailed, &lgame.arrPlayerContainer[1].isJailed); 
     }
@@ -96,7 +97,7 @@ int main()
         case 'E': // the player exits the game
             break;
         case 'S':
-            settings config = settingsPrompt();
+            struct settings config = settingsPrompt();
             game.state.SETTINGS = config;
         case 'G':
             do{
@@ -104,15 +105,14 @@ int main()
                 char** ptrP1Name = &game.arrPlayerContainer[0].name;
                 fetchPlayerName(ptrP1Name);
                 // create pointer for player 1 name as strings are not mutable without more complex functions
-                char** ptrP1Name = &game.arrPlayerContainer[1].name;
+                char** ptrP2Name = &game.arrPlayerContainer[1].name;
                 fetchPlayerName(ptrP2Name);
-                game = playGame();
+                game = playGame(game);
                 // display the ending scree
-                displayEndingScreen(game.state.SETTINGS.winsettings.winstate, 
-                game.arrPlayerContainer[0].name, game.arrPlayerContainer[1].name);
-
                 clear
-
+                displayEndingScreen(game.state.SETTINGS.winsettings.winstate, 
+                game.arrPlayerContainer[0], game.arrPlayerContainer[1]);
+                continuePrompt();
                 // prompt for a replay
                 printf("Press [G] to play again\n");
                 printf("Press [E] to exit\n");
@@ -122,6 +122,6 @@ int main()
             
     }
     char exitMsg[] = "\nNext time come back with better players!\n";
-    print1d(exitMsg, strlen(exitMsg));
+    print1d(exitMsg, strlen(exitMsg), 200, 200);
     return 0;
 }

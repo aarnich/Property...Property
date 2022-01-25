@@ -22,7 +22,10 @@ typedef struct settings {
     struct winconditions winsettings;
     float electricMulti;
     float railRent;
+    float railCost;
+    float electricCost;
     float renovationCost;
+    float goBonus;
     range penaltyrange;
     range bonusrange; 
     range dicerange; 
