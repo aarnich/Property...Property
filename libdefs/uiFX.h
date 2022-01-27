@@ -26,6 +26,8 @@
 #define setGreen printf("\033[0;32m"); // sets text color to green
 #define setPurple printf("\033[0;35m"); // sets text color to purple
 #define setYellow printf("\033[0;33m"); // sets text color to yellow
+#define setCyan printf("\033[0;36m"); // sets the text color to cyan
+#define setWhite printf("\033[0;37m"); // sets the text color to white
 
 // performs a pauses the system by millliseconds
 
@@ -73,5 +75,9 @@ void displayEndingScreen(struct winstate win, Player p1, Player p2);
 // asks the user to press enter in order to continue with the program
 
 void continuePrompt();
+
+// show intro scene
+
+void introScene(int scene);
 
 #endif

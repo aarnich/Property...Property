@@ -64,71 +64,77 @@ struct gamepkg initializeGame(){
     return game;
 }
 
+void displayManual(){
+    newL
+    printf("At the start of the game, players do not own any property. All properties on the board are owned by the Bank.\nAll properties owned by the Bank are up for sale and are not renovated.\nThe Bank has unlimited cash. The smallest denomination in this game is 1.");
+    newL
+    newL
+    printf("Players take turn in rolling the dice to move clockwise around the board.\nAt each turn, the player rolls a dice to determine the number of spaces he moves on the board.\n The player may land on \nGo (position 0),\non Jail Time (position 4), \non Feelin’ Lucky (position 6), or \non a property\n (house properties at positions 1, 3, 5, 8, 9, electric company at position 2, and railroad at position 7). \nBased on the space where the player lands on, different actions may take place.");
+}
+
 /*
     Displays a short skit that acts as the first introduction to the game
 */
-void introScene(){
-    printf("WELCOME TO MONOPOLY!\n");  // show opening message
-    sleep_ms(1000); // sleep for ui flair
-    // slow print that prints a character every 300-320 milliseconds
-    print1d("oh wait...",strlen("oh wait..."), 300,300); 
-    sleep_ms(1500); // sleep for ui flair
-    clear
-    // slow print that prints a character every 200-210 milliseconds
-    print1d("WELCOME TO PROPERTY",strlen("\nWELCOME TO PROPERTY"),200,210); 
-    // slow print that prints a character every 230-240 milliseconds
-    print1d("...PROPERTY!",strlen("...PROPERTY!"), 230,240); 
-    // slow print that prints a character every 300-320 milliseconds
-    print1d("\nyup...",strlen("\nyup..."),300,300);
-}
 int main()
 {
     srand( (unsigned)time( NULL ) ) ;
 
     char choice;
     clear // clear the screen 
-    introScene();
+    introScene(getRandNum(1,2));
 
     continuePrompt(); // ask the user to press enter to continue with the program
 
     struct gamepkg game = initializeGame();
 
-    printf("\n[G] Start\n");
-    printf("[S] Settings\n");
-    printf("[E] Exit\n");
 
-    char startingInputs[3] = "GSE";
-    choice = handleInput(startingInputs,strlen(startingInputs));
+    do
+    {
+        printf("\n[G] Start\n");
+        printf("[S] Settings\n");
+        printf("[I] Manual\n");
+        printf("[E] Exit\n");
 
-    switch(choice){
-        case 'E': // the player exits the game
-            break;
-        case 'S':
-            game.state.SETTINGS = settingsPrompt(initializeSettings());
-        case 'G':
-            do{
-                // create pointer for player 1 name as strings are not mutable without more complex functions
-                char** ptrP1Name = &game.arrPlayerContainer[0].name;
-                fetchPlayerName(ptrP1Name);
-                // freePtr((void*)&ptrP1Name);
-                // create pointer for player 1 name as strings are not mutable without more complex functions
-                char** ptrP2Name = &game.arrPlayerContainer[1].name;
-                fetchPlayerName(ptrP2Name);
-                // freePtr((void*)&ptrP2Name);
-                game = playGame(game);
-                // display the ending scree
-                clear
-                displayEndingScreen(game.state.SETTINGS.winsettings.winstate, 
-                game.arrPlayerContainer[0], game.arrPlayerContainer[1]);
+        char startingInputs[4] = "GSIE";
+        choice = handleInput(startingInputs,strlen(startingInputs));
+        switch (choice)
+        {
+            case 'E': // the player exits the game
+                break;
+            case 'S':
+                game.state.SETTINGS = settingsPrompt(initializeSettings());
+                break;
+            case 'G':
+                do{
+                    // create pointer for player 1 name as strings are not mutable without more complex functions
+                    char** ptrP1Name = &game.arrPlayerContainer[0].name;
+                    fetchPlayerName(ptrP1Name);
+                    // freePtr((void*)&ptrP1Name);
+                    // create pointer for player 1 name as strings are not mutable without more complex functions
+                    char** ptrP2Name = &game.arrPlayerContainer[1].name;
+                    fetchPlayerName(ptrP2Name);
+                    // freePtr((void*)&ptrP2Name);
+                    game = playGame(game);
+                    // display the ending scree
+                    clear
+                    displayEndingScreen(game.state.SETTINGS.winsettings.winstate, 
+                    game.arrPlayerContainer[0], game.arrPlayerContainer[1]);
+                    continuePrompt();
+                    // prompt for a replay
+                    printf("Press [G] to play again\n");
+                    printf("Press [E] to exit\n");
+                    char exitInputs[2] = "GE";
+                    choice = handleInput(exitInputs, strlen(exitInputs));
+                } while (choice == 'G');
+                break;
+            case 'I':
+                displayManual();
                 continuePrompt();
-                // prompt for a replay
-                printf("Press [G] to play again\n");
-                printf("Press [E] to exit\n");
-                char exitInputs[2] = "GE";
-                choice = handleInput(exitInputs, strlen(exitInputs));
-             } while (choice == 'G');
-            
-    }
+                newL
+                break;
+        }
+    } while (choice != 'E');
+    
     char exitMsg[] = "\nNext time come back with better players!\n";
     print1d(exitMsg, strlen(exitMsg), 200, 200);
     return 0;

@@ -16,8 +16,12 @@ struct settings settingsPrompt(struct settings initsettings){
         printf("[8] Edit dice faces\n");
         printf("[9] Edit Go! bonus amount\n");
         newL
+        setRed
         printf("[D] Reset settings\n");
-        printf("[G] Start game \n\n");
+        resetColor
+        setGreen
+        printf("[S] Save and Exit \n\n");
+        resetColor
         char validSettingsInput[11] = "123456789DG";
         cSettingsSelect = handleInput(validSettingsInput,11); 
         switch(cSettingsSelect){
