@@ -159,7 +159,6 @@ struct gamepkg updateGame(struct gamepkg game){
     showGameStatus(updatedGame);
     bool isHouse = true; // default property type
     // Show position prompt
-    pos = 4;
     displayPos(pos);
     sleep_ms(600);
     switch(pos)

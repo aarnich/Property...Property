@@ -496,8 +496,8 @@ void displayPos(int pos){
     print2d(theJail, rows);
     resetColor
     sleep_ms(500);
-    char* jailMsg1 = "\nTHE JUDGE: You got caught by the police for TAX EVASION\nWhat do you have to say for yourself, filthy scum?\n\n";
-    print1d(jailMsg1,strlen(jailMsg1), 180,190);
+    char* jailMsg1 = "\nTHE JUDGE: You got caught by the police for TAX EVASION\nWhat do you have to say for yourself, criminal scum?\n\n";
+    print1d(jailMsg1,strlen(jailMsg1), 180,180);
     char* jailMsg2 = "😏DIRTY INMATE: Don't drop the soap buddy\n";
     print1d(jailMsg2,strlen(jailMsg2), 200,200);
     char* jailMsg3 = "👤FORMER PRESIDENT RODRIGO ROA DUTERTE: Welcome";
