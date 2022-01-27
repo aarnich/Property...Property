@@ -498,7 +498,7 @@ void displayPos(int pos){
     sleep_ms(500);
     char* jailMsg1 = "\nTHE JUDGE: You got caught by the police for TAX EVASION\nWhat do you have to say for yourself, criminal scum?\n\n";
     print1d(jailMsg1,strlen(jailMsg1), 180,180);
-    char* jailMsg2 = "😏DIRTY INMATE: Don't drop the soap buddy\n";
+    char* jailMsg2 = "😏DIRTY INMATE: Don't drop the soap buddy\n\n";
     print1d(jailMsg2,strlen(jailMsg2), 200,200);
     char* jailMsg3 = "👤FORMER PRESIDENT RODRIGO ROA DUTERTE: Welcome";
     print1d(jailMsg3, strlen(jailMsg3), 200, 200);
