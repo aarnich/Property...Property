@@ -13,6 +13,9 @@
 char handleInput(char validInputs[], int elements){
     //This function returns a validInput given any user input
     char cInitInput = ' ';
+    setGreen
+    printf("\nInput: ");
+    resetColor
     scanf(" %c",&cInitInput);
     while ((getchar()) != '\n');
     if(isalpha(cInitInput)){ // check if input requires capitalization

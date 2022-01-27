@@ -64,16 +64,14 @@ struct gamepkg initializeGame(){
     return game;
 }
 
-int main()
-{
-    srand( (unsigned)time( NULL ) ) ;
-
-    char choice;
-    clear // clear the screen 
+/*
+    Displays a short skit that acts as the first introduction to the game
+*/
+void introScene(){
     printf("WELCOME TO MONOPOLY!\n");  // show opening message
     sleep_ms(1000); // sleep for ui flair
     // slow print that prints a character every 300-320 milliseconds
-    print1d("oh wait.......",strlen("oh wait......."), 300,300); 
+    print1d("oh wait...",strlen("oh wait..."), 300,300); 
     sleep_ms(1500); // sleep for ui flair
     clear
     // slow print that prints a character every 200-210 milliseconds
@@ -81,21 +79,26 @@ int main()
     // slow print that prints a character every 230-240 milliseconds
     print1d("...PROPERTY!",strlen("...PROPERTY!"), 230,240); 
     // slow print that prints a character every 300-320 milliseconds
-    print1d("\nyup...",strlen("\nyup..."),300,320);
+    print1d("\nyup...",strlen("\nyup..."),300,300);
+}
+int main()
+{
+    srand( (unsigned)time( NULL ) ) ;
+
+    char choice;
+    clear // clear the screen 
+    introScene();
 
     continuePrompt(); // ask the user to press enter to continue with the program
 
     struct gamepkg game = initializeGame();
 
     printf("\n[G] Start\n");
-    printf("\n[S] Settings\n");
-    printf("\n[E] Exit\n");
+    printf("[S] Settings\n");
+    printf("[E] Exit\n");
 
     char startingInputs[3] = "GSE";
-    setGreen
-    printf("\nInput: ");
     choice = handleInput(startingInputs,strlen(startingInputs));
-    resetColor
 
     switch(choice){
         case 'E': // the player exits the game
@@ -107,9 +110,11 @@ int main()
                 // create pointer for player 1 name as strings are not mutable without more complex functions
                 char** ptrP1Name = &game.arrPlayerContainer[0].name;
                 fetchPlayerName(ptrP1Name);
+                // freePtr((void*)&ptrP1Name);
                 // create pointer for player 1 name as strings are not mutable without more complex functions
                 char** ptrP2Name = &game.arrPlayerContainer[1].name;
                 fetchPlayerName(ptrP2Name);
+                // freePtr((void*)&ptrP2Name);
                 game = playGame(game);
                 // display the ending scree
                 clear

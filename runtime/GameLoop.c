@@ -134,10 +134,20 @@ struct gamepkg updateGame(struct gamepkg game){
     sleep_ms(1000);
 
     // update player positiion
+    currentPlayer.pos = 9;
     currentPlayer.pos += roll;
     if(currentPlayer.pos > 9 && currentPlayer.pos % 10 != 0){
-        printf("\nYOU JUST PASSED BY GO! HERE'S %.2f\n", containedState.SETTINGS.goBonus);
-        pendingPlayerBalance += 200;
+        printf("\nYOU JUST PASSED BY GO! HERE'S ");
+        sleep_ms(1000);
+        fflush(stdout);
+        setGreen
+        printf("%.2f\n", containedState.SETTINGS.goBonus);
+        sleep_ms(1000);
+        resetColor
+        showPersonalBalanceUpdate(currentPlayer.balance, currentPlayer.balance + containedState.SETTINGS.goBonus);
+        currentPlayer.balance += containedState.SETTINGS.goBonus;
+        pendingPlayerBalance = currentPlayer.balance;
+        fflush(stdout);
     }
     currentPlayer.pos %= 10;
 
@@ -249,7 +259,7 @@ struct gamepkg updateGame(struct gamepkg game){
                 setYellow
                 printf("\nPROPERTY COST: [%.2f 💰]",propertyCost);
                 resetColor
-                if(playerDialogue("\n[B]uy property\n[E]nd turn\nInput:","BE")){ // if the player buys the property
+                if(playerDialogue("\n[B]uy property\n[E]nd turn","BE")){ // if the player buys the property
                     pendingPlayerBalance -= propertyCost; // subtract from balance
                     containedState.STATEKEY = mutateStatekeyAtIndex(
                         containedState.STATEKEY, pos,
@@ -257,6 +267,7 @@ struct gamepkg updateGame(struct gamepkg game){
                         ); // update statekey to reflect property purchase
                     setGreen
                     printf("\nYou have successfully bought the %s\n",getPropertyName(pos));
+                    sleep_ms(1000);
                     resetColor
                     showPersonalBalanceUpdate((pendingPlayerBalance + propertyCost), pendingPlayerBalance);
                 }
@@ -284,7 +295,7 @@ struct gamepkg updateGame(struct gamepkg game){
                     setYellow
                     printf("\nRENOVATION COST: [%.2f 💸]\n",renovationCost); 
                     resetColor
-                    if(playerDialogue("\n[R]enovate Property\n[E]nd Turn\nInput:","RE")) // ask if the player would like to renovate the property
+                    if(playerDialogue("\n[R]enovate Property\n[E]nd Turn:","RE")) // ask if the player would like to renovate the property
                     {
                         pendingPlayerBalance -= renovationCost; // player pays the renovation cost
                         containedState.STATEKEY = mutateStatekeyAtIndex( 

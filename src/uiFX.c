@@ -76,6 +76,11 @@ void continuePrompt(){
 */
 void print1d(char str[], int strLength, int paceFloor, int paceCeil)
 {
+    // if the string is long, speed up typing
+    if(strLength > 20){
+        paceFloor /= 2;
+        paceCeil /= 2;
+    }
     for (size_t i = 0; i < strLength; i++)
     {
         int randInterval = getRandNum(paceFloor,paceCeil);

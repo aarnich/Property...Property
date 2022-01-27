@@ -203,5 +203,5 @@ void fetchPlayerName(char** ptrPlayerName){
         return fetchPlayerName(ptrPlayerName);
     }
     strcpy(*ptrPlayerName,initName);
-    freePtr(initName);
+    free(initName);
 }
