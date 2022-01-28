@@ -18,7 +18,7 @@ git clone https://github.com/aarnich/Property...Property.git
 ```
 Run the makefile
 ```
-make
+cd Property...Property/ && make
 ```
 Run the bash script which sets correct environment variables
 ```
