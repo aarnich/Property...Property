@@ -14,7 +14,6 @@
 // PLAYER DEFAULTS
 #define DEFAULT_STARTINGPOS 0
 #define DEFAULT_STARTINGBALANCE 200
-#define DEFAULT_STARTINGPOS 0
 
 // gamepkg is a struct of the game as one package (variable) to be passed around as parameters by functions (higher order/pure) that preserves and monitors the current game being played
 // contains gamestate and the 2 players necessary to play Property...Property

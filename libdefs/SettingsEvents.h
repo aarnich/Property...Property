@@ -8,7 +8,7 @@
 //DEFAULT SETTINGS//
 #define DEFAULT_ELECTRIC_COST 150
 #define DEFAULT_RAILROAD_COST 100
-#define DEFAULT_RAILROAD_RENT 35
+#define DEFAULT_RAILROAD_RENT 4000
 #define DEFAULT_ELECTRIC_MULTI 8
 #define DEFAULT_RENOVATION_COST 50
 #define DEFAULT_BONUS_MAX 200
@@ -20,6 +20,7 @@
 #define DEFAULT_DICE_MAX 6
 #define DEFAULT_LOSING_BALANCE 0
 #define DEFAULT_GO_BONUS 200
+#define DEFAULT_PASSING_GO 200
 
 // predefined macro that is used to clear the buffer in order to avoid unwanted infinite loops with input processing
 #define clearbuff while((getchar()) != '\n');

@@ -20,12 +20,13 @@
 */
 typedef struct settings {
     struct winconditions winsettings;
-    float electricMulti;
-    float railRent;
-    float railCost;
-    float electricCost;
-    float renovationCost;
-    float goBonus;
+    int electricMulti;
+    int railRent;
+    int railCost;
+    int electricCost;
+    int renovationCost;
+    int goBonus;
+    int passingGo;
     range penaltyrange;
     range bonusrange; 
     range dicerange; 

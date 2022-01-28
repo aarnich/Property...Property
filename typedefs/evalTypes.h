@@ -27,8 +27,8 @@ struct winconditions; // forward declaration of wincondition
 typedef struct winconditions {
     enum wintoggles arrWintoggles[2];
     struct winstate winstate;
-    float losingBalance;
-    float winningBalance;
+    int losingBalance;
+    int winningBalance;
     bool isSimul;
 }winconditions;
 

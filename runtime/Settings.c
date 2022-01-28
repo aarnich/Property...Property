@@ -14,7 +14,8 @@ struct settings settingsPrompt(struct settings initsettings){
         printf("[6] Edit the electric company's purchase cost\n");
         printf("[7] Edit feeling lucky range\n");
         printf("[8] Edit dice faces\n");
-        printf("[9] Edit Go! bonus amount\n");
+        printf("[9] Edit Go! tile bonus amount\n");
+        printf("[0] Edit passing Go! bonus amount\n");
         newL
         setRed
         printf("[D] Reset settings\n");
@@ -22,26 +23,26 @@ struct settings settingsPrompt(struct settings initsettings){
         setGreen
         printf("[S] Save and Exit \n\n");
         resetColor
-        char validSettingsInput[11] = "123456789DG";
-        cSettingsSelect = handleInput(validSettingsInput,11); 
+        char validSettingsInput[12] = "123456789DS0";
+        cSettingsSelect = handleInput(validSettingsInput,12); 
         switch(cSettingsSelect){
             case '1':
                 initsettings.winsettings = winconditionsMenu(initsettings.winsettings);
                 break;
             case '2':
-                changeFloatParam(&initsettings.renovationCost, "Enter renovation cost: ");
+                changeIntParam(&initsettings.renovationCost, "Enter renovation cost: ");
                 break;
             case '3':
-                changeFloatParam(&initsettings.railRent, "Enter railroad rent: ");
+                changeIntParam(&initsettings.railRent, "Enter railroad rent: ");
                 break;
             case '4':
-                changeFloatParam(&initsettings.railCost, "Enter railroad purchase cost: ");
+                changeIntParam(&initsettings.railCost, "Enter railroad purchase cost: ");
                 break;
             case '5':
-                changeFloatParam(&initsettings.electricMulti, "Enter electric co. multiplier: ");
+                changeIntParam(&initsettings.electricMulti, "Enter electric co. multiplier: ");
                 break;
             case '6':
-                changeFloatParam(&initsettings.electricCost, "Enter electric co. purchase cost: ");
+                changeIntParam(&initsettings.electricCost, "Enter electric co. purchase cost: ");
                 break;
             case '7':
                 feelingLuckySubMenu(
@@ -53,14 +54,20 @@ struct settings settingsPrompt(struct settings initsettings){
                 changeIntParam(&initsettings.dicerange.max, "How many faces should the dice have (6 default) ?: ");
                 break;
             case '9':
-                changeFloatParam(&initsettings.goBonus, "Enter Go! bonus amount: ");
+                changeIntParam(&initsettings.goBonus, "Enter Go! tile bonus amount: ");
+                break;
+            case '0':
+                changeIntParam(&initsettings.passingGo, "Enter passing Go! bonus amount: ");
                 break;
             case 'D':
                 initsettings = initializeSettings();
             default:
                 break;
             }
-        }while(cSettingsSelect != 'G');
+        }while(cSettingsSelect != 'S');
+        setGreen
+        printf("\nConfig Saved!\n\n");
+        resetColor
 
     return initsettings;
 }

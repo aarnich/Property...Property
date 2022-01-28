@@ -56,17 +56,17 @@ char* getPropertyName(int propIndex);
 // shows the balance update that is shown after every turn
 
 void showBalanceUpdate(
-                    float p1CurrentBalance,
-                    float p1NewBalance,
+                    int p1CurrentBalance,
+                    int p1NewBalance,
                     char* p1Name,
-                    float p2CurrentBalance,
-                    float p2NewBalance,
+                    int p2CurrentBalance,
+                    int p2NewBalance,
                     char* p2Name
                     );
                 
 // shows a short balance update
 
-void showPersonalBalanceUpdate(float currentBalance, float newBalance);
+void showPersonalBalanceUpdate(int currentBalance, int newBalance);
 
 // contextual ending screen that cognratulates the winner(s) according to their win conditions
 
@@ -79,5 +79,9 @@ void continuePrompt();
 // show intro scene
 
 void introScene(int scene);
+
+// display graphics according to pos
+
+void displaySwitch(int pos);
 
 #endif

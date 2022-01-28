@@ -15,7 +15,7 @@ typedef struct Player
     unsigned int rentCounter;
     unsigned int luckyCounter;
     unsigned int pos;
-    float balance;
+    int balance;
     char* name;
     bool isJailed;
     bool isBankrupt;

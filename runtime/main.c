@@ -18,16 +18,17 @@ struct gamepkg playGame(struct gamepkg game){
     struct gamepkg lgame = game; // localize parameter in order to minimize errors
 
     fflush(stdout); // flush stdout to clear buffer
-    printf("\nRandomizing first player!\n");
+    printf("\nRandomizing first player =>> ");
     lgame.state.activePlayer = getRandNum(1,2); // randomize the first player
     sleep_ms(500);
     fflush(stdout); // flush after sleep in order to avoid printf printing slowdowns
 
     char* strFirstPlayer = lgame.arrPlayerContainer[lgame.state.activePlayer - 1].name; // get the opening player's name
 
-    printf("%s WILL GO FIRST!",strFirstPlayer); // print opening player's name
+    sleep_ms(500);
+    printf("%s will go first",strFirstPlayer); // print opening player's name
     fflush(stdout); // flush for printf
-    sleep_ms(1000);
+    continuePrompt();
 
     clearbuff; // clearbuffer to ensure no inputs remain in the buffer 
 
@@ -106,6 +107,8 @@ int main()
                 break;
             case 'G':
                 do{
+                    game.arrPlayerContainer[0] = initializePlayer();
+                    game.arrPlayerContainer[1] = initializePlayer();
                     // create pointer for player 1 name as strings are not mutable without more complex functions
                     char** ptrP1Name = &game.arrPlayerContainer[0].name;
                     fetchPlayerName(ptrP1Name);

@@ -83,7 +83,7 @@ int rollDice(range diceRange)
 */
 char* getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID){
     char* strPlayerProperties = malloc (512);
-    for (size_t i = 1; i <= 9; i++)
+    for (int i = 1; i <= 9; i++)
     {
         int indicator = readStatekeyAtIndex(
             STATEKEY, i,
@@ -91,7 +91,8 @@ char* getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigne
             );
         if(playerOwns(playerID, indicator)){
             strcat(strPlayerProperties," ");
-            strcat(strPlayerProperties, getPropertyName(i));
+            char* propName = getPropertyName(i);
+            strcat(strPlayerProperties, propName); 
         }
     }
     return strPlayerProperties;
@@ -158,7 +159,7 @@ bool playerOwns(unsigned int playerID, int propIndicator){
 */
 void displayPlayerEndingStats(Player PLAYER, unsigned playerID, unsigned int STATEKEY){
     printf("\n[%s's STATS]\n",PLAYER.name);
-    printf("Finishing Balance: %.2f\n", PLAYER.balance);
+    printf("Finishing Balance: %d\n", PLAYER.balance);
     printf("Remaining Properties: %s\n",getAllPlayerProperties(STATEKEY, -4, playerID));
     printf("Times Jailed: %d\n",PLAYER.jailedCounter);
 }

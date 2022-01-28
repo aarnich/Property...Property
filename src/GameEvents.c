@@ -13,7 +13,7 @@
     @param railRent the cost of rent for the railroad
     @returns the cost of rent for the property at the given index
 */
-float getRent(int propIndex, int roll, float electricMulti, float railRent){
+int getRent(int propIndex, int roll, int electricMulti, int railRent){
     if(propIndex == 2)
         return electricMulti * roll;
     if(propIndex == 7)
@@ -29,7 +29,7 @@ float getRent(int propIndex, int roll, float electricMulti, float railRent){
     @param railCost the cost necessary to purchase the railraod, described in struct settings
     @returns the cost of the property at the index
 */
-float getPropertyCost(int propIndex, float electricCost, float railCost){
+int getPropertyCost(int propIndex, int electricCost, int railCost){
     if(propIndex == 2)
         return electricCost;
     if(propIndex == 7)

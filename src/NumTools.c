@@ -111,13 +111,13 @@ void changeIntParam(int* parameterPtr, char* strMsg){
     setGreen
     printf("\n[CURRENT VALUE: %d]\n",*parameterPtr);
     resetColor
-    float tmp;
+    int tmp;
     printf("%s", strMsg);
     bool cont;
     do
     {
         cont = 0;
-        if(scanf("%f",&tmp) != 1){ // if user input is an invalid float, employ an infinite loop
+        if(scanf("%d",&tmp) != 1){ // if user input is an invalid float, employ an infinite loop
             setRed
             printf("\nInvalid input, try again\n");
             resetColor

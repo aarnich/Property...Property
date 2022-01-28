@@ -54,6 +54,7 @@ struct settings initializeSettings(){
     initsettings.dicerange.min = DEFAULT_DICE_MIN; 
     initsettings.renovationCost = DEFAULT_RENOVATION_COST;
     initsettings.goBonus = DEFAULT_GO_BONUS;
+    initsettings.passingGo = DEFAULT_PASSING_GO;
     return initsettings;
 }
 
@@ -84,15 +85,15 @@ struct winconditions winconditionsMenu(winconditions wincond){
             break;
         case '3':
             if(wincond.arrWintoggles[0] != DISABLED){
-                float tmpLosingBal;
-                changeFloatParam(&tmpLosingBal,"Enter losing balance: ");
+                int tmpLosingBal = wincond.losingBalance;
+                changeIntParam(&tmpLosingBal,"Enter losing balance: ");
                 wincond.losingBalance = tmpLosingBal;
             }
             break;
         case '4':
             if(wincond.arrWintoggles[1] != DISABLED){
-                float tmpWinBal;
-                changeFloatParam(&tmpWinBal, "Enter winning balance: ");
+                int tmpWinBal = wincond.winningBalance;
+                changeIntParam(&tmpWinBal, "Enter winning balance: ");
                 wincond.winningBalance = tmpWinBal;
             }
             break;
@@ -138,13 +139,13 @@ struct settings settingsPrompt(struct settings initsettings){
                 initsettings.winsettings = winconditionsMenu(initsettings.winsettings);
                 break;
             case '2':
-                changeFloatParam(&initsettings.renovationCost, "Enter renovation cost: ");
+                changeIntParam(&initsettings.renovationCost, "Enter renovation cost: ");
                 break;
             case '3':
-                changeFloatParam(&initsettings.railRent, "Enter railroad rent: ");
+                changeIntParam(&initsettings.railRent, "Enter railroad rent: ");
                 break;
             case '4':
-                changeFloatParam(&initsettings.electricMulti, "Enter electric co. multiplier: ");
+                changeIntParam(&initsettings.electricMulti, "Enter electric co. multiplier: ");
                 break;
             case '5':
                 feelingLuckySubMenu(

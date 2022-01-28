@@ -20,17 +20,17 @@ void displayCurrentConfig(struct settings settingsParam){
     displayConditions(settingsParam.winsettings); // display current win conditions set
 
     printf("\n[CONFIG SETTINGS]\n");
-    printf("Renovation cost: %.2f\n",settingsParam.renovationCost);
-    printf("Railroad rent: %.2f\n",settingsParam.railRent);
-    printf("Railroad purchase cost: %.2f\n",settingsParam.railCost);
-    printf("Electric company multiplier: %.1f\n",settingsParam.electricMulti);
-    printf("Electric company purchase cost: %.1f\n",settingsParam.electricCost);
+    printf("Renovation cost: %d\n",settingsParam.renovationCost);
+    printf("Railroad rent: %d\n",settingsParam.railRent);
+    printf("Railroad purchase cost: %d\n",settingsParam.railCost);
+    printf("Electric company multiplier: %d\n",settingsParam.electricMulti);
+    printf("Electric company purchase cost: %d\n",settingsParam.electricCost);
     printf("Feelin' lucky range: bonus: [%d , %d] | penalty: [%d , %d]\n",
     settingsParam.bonusrange.min, settingsParam.bonusrange.max,
     settingsParam.penaltyrange.min, settingsParam.penaltyrange.max
     );
     printf("Dice faces: %d\n",settingsParam.dicerange.max);
-    printf("Go! bonus: %.2f\n",settingsParam.goBonus);
+    printf("Go! bonus: %d\n",settingsParam.goBonus);
 
    printf("\n\n");
 }
@@ -51,8 +51,8 @@ void displayConditions(struct winconditions wincond){
         context[1] = "INACTIVE";
     printf("\n[WIN CONDITIONS]\n");
     printf("Enemy runs out of properties: %s (default)\n", defaultBtn);
-    printf("Enemy reaches losing balance: %s | [VALUE: %.2f]\n",context[0],wincond.losingBalance);
-    printf("Player reaches winning balance: %s | [VALUE: %.2f]\n",context[1],wincond.winningBalance);
+    printf("Enemy reaches losing balance: %s | [VALUE: %d]\n",context[0],wincond.losingBalance);
+    printf("Player reaches winning balance: %s | [VALUE: %d]\n",context[1],wincond.winningBalance);
 
     if(isMulti){
         char* simulStatus = "FALSE";
@@ -94,11 +94,11 @@ void displayWinconditionsMenu(struct winconditions wincond)
     if(strcmp(buttons[0],"Enable")){
         newL
         printf("\n[3] Edit losing balance \n");
-        printf("[LOSING BALANCE: %.2f]\n",wincond.losingBalance);
+        printf("[LOSING BALANCE: %d]\n",wincond.losingBalance);
     }
     if(strcmp(buttons[1],"Enable")){
         printf("\n[4] Edit winning balance\n");
-        printf("[WINNING BALANCE: %.2f]\n",wincond.winningBalance);
+        printf("[WINNING BALANCE: %d]\n",wincond.winningBalance);
         newL
     }
     if(!isSimul)

@@ -17,11 +17,11 @@ int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned in
 
 // returns the cost of the property purchase 
 
-float getPropertyCost(int propIndex, float electricCost, float railCost);
+int getPropertyCost(int propIndex, int electricCost, int railCost);
 
 // returns the cost of rent for the property
 
-float getRent(int propIndex, int roll, float electricMulti, float railRent);
+int getRent(int propIndex, int roll, int electricMulti, int railRent);
 
 // saves the game
 
