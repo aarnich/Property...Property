@@ -1,8 +1,4 @@
-202201261200
 
-Status: #idea
-
-Tags: #programming
 
 # Property...Property is a Monopoly-like game that is written exclusively in C
 Players take turns rolling dice and in doing so, move about a board.
@@ -10,6 +6,10 @@ Each board position is home to a unique property with it's very own interactions
 
 Players win once certain conditions are met. By default the only condition required is
 the bankruptcy of the player's opponent but further customizability is provided.
+
+# Requirements
+1. make
+2. bash
 
 # Installation
 Clone this repo
