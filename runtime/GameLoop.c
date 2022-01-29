@@ -84,11 +84,11 @@ Player updatePlayerPosition(int currentPos, int newPos, int passingGoBonus, Play
         for(int k = currentPos; k < i;k++)
         {
             setYellow
-            if(k% 10 == 4)
+            if(k% 10 == 4) // indicate jail time 
                 setRed
-            if(k % 10 == 6)
+            if(k % 10 == 6) // indicate lucky position
                 setPurple
-            if(k % 10 == 0) // indicate special position
+            if(k % 10 == 0) // indicate go position
                 setCyan
             printf("%d ",k % 10);
             sleep_ms(50);
