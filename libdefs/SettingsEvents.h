@@ -23,7 +23,9 @@
 #define DEFAULT_PASSING_GO 200
 
 // predefined macro that is used to clear the buffer in order to avoid unwanted infinite loops with input processing
-#define clearbuff while((getchar()) != '\n');
+#define clearbuff               \
+    while ((getchar()) != '\n') \
+        ;
 
 #include <stdlib.h>
 #include <stdio.h>
