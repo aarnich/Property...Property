@@ -13,10 +13,11 @@
     @param railRent the cost of rent for the railroad
     @returns the cost of rent for the property at the given index
 */
-int getRent(int propIndex, int roll, int electricMulti, int railRent){
-    if(propIndex == 2)
+int getRent(int propIndex, int roll, int electricMulti, int railRent)
+{
+    if (propIndex == 2)
         return electricMulti * roll;
-    if(propIndex == 7)
+    if (propIndex == 7)
         return railRent;
     return (propIndex % 7 * 20) * 0.2;
 }
@@ -29,10 +30,11 @@ int getRent(int propIndex, int roll, int electricMulti, int railRent){
     @param railCost the cost necessary to purchase the railraod, described in struct settings
     @returns the cost of the property at the index
 */
-int getPropertyCost(int propIndex, int electricCost, int railCost){
-    if(propIndex == 2)
+int getPropertyCost(int propIndex, int electricCost, int railCost)
+{
+    if (propIndex == 2)
         return electricCost;
-    if(propIndex == 7)
+    if (propIndex == 7)
         return railCost;
 
     return (propIndex % 7) * 20;
@@ -47,20 +49,24 @@ int getPropertyCost(int propIndex, int electricCost, int railCost){
     @param OFFSET predefined statekey offset
     @returns new statekey with value inserted at index
 */
-int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned int value, int OFFSET){
+int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned int value, int OFFSET)
+{
 
-    if(STATEKEY/exponentiateNum(10,index-1) == 0 || index < 1){ // if the given index is outside of the statekey's range
+    if (STATEKEY / exponentiateNum(10, index - 1) == 0 || index < 1)
+    { // if the given index is outside of the statekey's range
+
         setRed
-        printf("\ninvalid index");
+            printf("\ninvalid index");
         resetColor
+
         return 0; // standard error value
     }
 
     index -= 1;
-    int normalizedNum = normalizeNumByIndex(STATEKEY, index+1); // set values inclusive of index to zero
-    int insertion = (value - OFFSET) * exponentiateNum(10,index); // insert the mutation by the index's position
-    int trailing = STATEKEY % exponentiateNum(10,index); // add trailing unmutated numbers
-    int mutatedStateKey = normalizedNum + insertion + trailing;
+    int normalizedNum = normalizeNumByIndex(STATEKEY, index + 1);  // set values inclusive of index to zero
+    int insertion = (value - OFFSET) * exponentiateNum(10, index); // insert the mutation by the index's position
+    int trailing = STATEKEY % exponentiateNum(10, index);          // add trailing unmutated numbers
+    int mutatedStateKey = normalizedNum + insertion + trailing;    // final summation
 
     return mutatedStateKey;
 }
@@ -73,14 +79,18 @@ int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned in
     @OFFSET predefined statekey offset
     @returns digit at the index
 */
-int readStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, int OFFSET){
+int readStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, int OFFSET)
+{
 
-    if(STATEKEY/exponentiateNum(10,index-1) == 0 || index < 1){ // if the given index is outside of the statekey's range
+    if (STATEKEY / exponentiateNum(10, index - 1) == 0 || index < 1)
+    { // if the given index is outside of the statekey's range
+
         setRed
-        printf("\ninvalid index");
+            printf("\ninvalid index");
         resetColor
+
         return 0; // standard error value
     }
 
-    return (((STATEKEY / exponentiateNum(10,index-1)) % 10) + OFFSET);
+    return (((STATEKEY / exponentiateNum(10, index - 1)) % 10) + OFFSET);
 }

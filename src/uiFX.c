@@ -64,7 +64,7 @@ char* createDivider(char divSymbol, int divLength){
 void continuePrompt(){
     sleep_ms(500);
     fflush(stdout);
-    printf("\nPress ENTER to continue: ");
+    printf("\nPress [Enter] to continue: ");
     getchar();
 }
 
@@ -301,34 +301,45 @@ void displayContextFlair(enum winContext context, enum winner winningPlayer, cha
 */
 void showEndingStats(Player player){
     char* DIVIDER = createDivider('=',18);
-    printf("%s[ %s's Ending Stats ]%s",DIVIDER,player.name,DIVIDER);
+    printf("\n\n%s[ %s's Ending Stats ]%s",DIVIDER,player.name,DIVIDER);
+
     newL
+
     char* strJail = "Times you were caught by police for not paying taxes: ";
     print1d(strJail, strlen(strJail), 200, 210);
     setRed
-    printf("%d",player.jailedCounter);
+        printf("%d",player.jailedCounter);
     resetColor
+
     newL
+
     char* strRent = "You ceded money over to your enemy on: ";
     print1d(strRent, strlen(strRent), 200, 210);
     setRed
-    printf("%d",player.rentCounter);
+        printf("%d",player.rentCounter);
     resetColor
     print1d(" occassions", strlen(" occassion"),200,210);
+
     newL
+
     char* strWitch = "You got lucky (or unlucky) and met the witch a grand total of: ";
     print1d(strWitch, strlen(strWitch), 200, 210);
     setRed
-    printf("%d",player.luckyCounter);
+        printf("%d",player.luckyCounter);
     resetColor
     print1d(" times",strlen(" times"), 200, 210);
+
     newL
+
     char* strBalance = "How much money you had left: ";
     print1d(strBalance, strlen(strBalance), 200, 210);
     setRed
-    printf("%d",player.balance);
+        printf("%d",player.balance);
     resetColor
+
     newL
+
+    // randomized easter egg message
     char* bonusMsg = "The thing you spent the most money on: ";
     print1d(bonusMsg, strlen(bonusMsg), 200,220);
     char* bonusRand[] = {
@@ -336,11 +347,14 @@ void showEndingStats(Player player){
     "your dog", "knowledge", "suspicious underwear",
     "some white powdered stuff", "your ego", "Donald Trump"
     };
+
     int size = sizeof bonusRand / sizeof bonusRand[0];
     char* randMsg = bonusRand[getRandNum(0,size-1)];
+
     setPurple
-    print1d(randMsg, strlen(randMsg), 290, 300);
+        print1d(randMsg, strlen(randMsg), 290, 300);
     resetColor
+
     newL
 }
 
@@ -398,14 +412,19 @@ void showPropertyMan(){
     int rows = sizeof hat / sizeof hat[0];
     print2d(hat, rows);
     rows = sizeof eyes / sizeof eyes[0];
+
     setYellow
-    print2d(eyes, rows);
+        print2d(eyes, rows);
     resetColor
+
     newL
+
     newL
+
     rows = sizeof moustache / sizeof moustache[0];
+
     setPurple
-    print2d(moustache, rows);
+        print2d(moustache, rows);
     resetColor
 }
 
@@ -417,11 +436,14 @@ void showPropertyMan(){
 */
 void displayEndingScreen(struct winstate win, Player p1, Player p2){
     showPropertyMan();
+
     char* winnerMsg = "\nA winner has been decided.\n";
     print1d(winnerMsg, strlen(winnerMsg), 300, 300);
     fflush(stdout);
     sleep_ms(2000);
+
     clear;
+
     if(win.winner == TIE){ // the players tie
     // show UI flair for tie
         char* tieMsg1 = "\nBy some freak accident";
@@ -431,8 +453,10 @@ void displayEndingScreen(struct winstate win, Player p1, Player p2){
         print1d(dots, strlen(dots), 350,360);
         print1d(tieMsg2, strlen(tieMsg2), 250,270);
     }
+
         char* strMulti = (win.winRationale[0] != NOCONTEXT && win.winRationale[1] != NOCONTEXT) ? "\nfurthermore...\n" : " ";
         // additional UI prompt for when multiple winconditions are satisfied
+
         for (size_t i = 0; i < 2; i++)
         {
             if(win.winRationale[i] != NOCONTEXT)
@@ -443,17 +467,11 @@ void displayEndingScreen(struct winstate win, Player p1, Player p2){
                 print1d(strMulti, strlen(strMulti), 200, 210);  // if multiple conditions are satisfied, print flair statement, otherwise print a space
             }
         }
-    newL
-    newL
     showEndingStats(p1);
-    newL
     newL
     showEndingStats(p2);
 }
-/*
-    Draws an image of where the player is given current position
-    @param pos the player's current position
-*/
+
 void showRail(){
     char* display[] = {
 "                                                                              ▓▓▓▓              ",
@@ -491,7 +509,9 @@ void showRail(){
         rows = sizeof theRail / sizeof theRail[0];
         print2d(theRail, rows);
         char* railMsg = "\nYou hear the sound of trains and the complex machinations of the industrial era!\n\n You are currently at: The Railroad station";
+
         newL
+
         print1d(railMsg, strlen(railMsg),130,130);
 }
 
@@ -544,18 +564,22 @@ void showJail()
     };
     rows = sizeof display2 / sizeof display2[0];
     setRed
-    print2d(display2, rows);
+        print2d(display2, rows);
     resetColor
     rows = sizeof theJail / sizeof display2[0];
-    setRed
+
     newL
-    print2d(theJail, rows);
+
+    setRed
+        print2d(theJail, rows);
     resetColor
+
     sleep_ms(500);
+
     char* jailMsg1 = "\nTHE JUDGE: You got caught by the police for Class A: Tax Evasion\nWhat do you have to say for yourself, criminal scum?\n\n";
-    print1d(jailMsg1,strlen(jailMsg1), 180,180);
-    char* jailMsg2 = "😏INMATE: Don't drop the soap buddy\n\n";
-    print1d(jailMsg2,strlen(jailMsg2), 200,200);
+    print1d(jailMsg1,strlen(jailMsg1), 120,120);
+    char* jailMsg2 = "INMATE: Don't drop the soap buddy\n\n";
+    print1d(jailMsg2,strlen(jailMsg2), 150,150);
     char* jailMsg3 = "👤FORMER PRESIDENT RODRIGO ROA DUTERTE: Welcome";
     print1d(jailMsg3, strlen(jailMsg3), 200, 200);
 }
@@ -599,10 +623,11 @@ void showTree()
         };
         int rows = sizeof(display) / sizeof(display[0]);
         setGreen
-        print2d(display,rows);
+           print2d(display,rows);
         resetColor
+
         char* treeMsg = "PARK RANGER: 🐒 WOAH THERE!\ndon't confuse the monkey for your reflection.\n\nYou're not THAT ugly.\n\n You are in: The Tree House";
-        print1d(treeMsg, strlen(treeMsg), 170, 170);
+        print1d(treeMsg, strlen(treeMsg), 100, 100);
 }
 void showElectric()
 {
@@ -670,13 +695,16 @@ void showElectric()
         };
         int rows = sizeof display / sizeof display[0];
         setYellow
-        print2d(display, rows);
+            print2d(display, rows);
         resetColor
+
         rows = sizeof theElectric / sizeof theElectric[0];
+
         setYellow
-        print2d(theElectric, rows);
+            print2d(theElectric, rows);
         resetColor
-        char* electricMsg = "💡DAZZLING! You walk inside and sparks fly off left and right!\nHumanity has contained the essence of the sun inside meager bottles\n\nThis place can not be cheap...\n\nYou are in: The Electric Company";
+
+        char* electricMsg = "💡DAZZLING! You walk inside and sparks fly off left and right!\n\nYou hold a bottle that seems to contain the very essence of the sun.\n\nThis place can not be cheap...\n\nYou are in: The Electric Company";
         print1d(electricMsg, strlen(electricMsg), 120,120);
         fflush(stdout);
         sleep_ms(1000);
@@ -717,13 +745,16 @@ void showBeach(){
         };
         int rows = sizeof display / sizeof display[0];
         setYellow
-        print2d(display, rows);
+            print2d(display, rows);
         resetColor
-        setCyan
+
         rows = sizeof display2 / sizeof display2[0];
-        print2d(display2, rows);
+        setCyan
+            print2d(display2, rows);
         resetColor
+
         sleep_ms(600);
+
         char* beachMsg = "You take a whiff of the salt ridden air and think to yourself\nthat life could not get any better\n\n You are in: The Beach House";
         print1d(beachMsg, strlen(beachMsg), 75,75);
 }
@@ -774,13 +805,17 @@ void showCastle(){
         };
         int rows = sizeof display / sizeof display[0];
         setWhite
-        print2d(display, rows);
+            print2d(display, rows);
         resetColor
+
         rows = sizeof theCastle / sizeof theCastle[0];
-        setYellow
+
         newL
-        print2d(theCastle, rows);
+
+        setYellow
+            print2d(theCastle, rows);
         resetColor
+
         char* castleMsg = "You walk in streets of ruin and decay\nYou have stumbled upon an ancient stronghold of an old Catholic cult!\n";
         print1d(castleMsg, strlen(castleMsg), 100, 100);
         sleep_ms(700);
@@ -852,8 +887,9 @@ void showCastle(){
         };
         rows = sizeof dragon / sizeof dragon[0];
         setCyan
-        print2d(dragon, rows);
+            print2d(dragon, rows);
         resetColor
+
         char* dragonMsg2 = "HURRY UP AND GET INSIDE!\n\n You are currently in: The Castle";
         print1d(dragonMsg2,strlen(dragonMsg2),75,75);
 }
@@ -898,9 +934,10 @@ void showIgloo(){
         };
         int rows = sizeof display / sizeof display[0];
         setWhite
-        print2d(display, rows);
+            print2d(display, rows);
         resetColor
-        char* iceMsg = "DAVID ATTENBOROUGH: BRRRR 😰 who turned all the ACs on?\n You have landed squarely in the arctic! Good luck surviving out here bruh.\n Oh look, an Igloo!\n\nYou are currently in: The Igloo";
+
+        char* iceMsg = "😰 who turned all the ACs on?\n You have landed squarely in the arctic! Good luck surviving out here bruh.\n Oh look, an Igloo!\n\nYou are currently in: The Igloo";
         print1d(iceMsg, strlen(iceMsg),170,180);
         fflush(stdout);
         sleep_ms(1000);
@@ -940,12 +977,15 @@ void showFarm(){
         };
         int rows = sizeof display / sizeof display[0];
         setWhite
-        print2d(display, rows);
+            print2d(display, rows);
         resetColor
+
         fflush(stdout);
         sleep_ms(600);
         char* farmMsg = "\n🐄You smell the fresh air and get a distinct stench of cow manure\nYou're in the country side! The corn gleans with fresh morning dew\n\nYou are currently in: The Farm house";
+
         newL
+
         print1d(farmMsg, strlen(farmMsg), 100,100);
 }
     
@@ -1062,14 +1102,18 @@ void showGo(){
     };
     int rows = sizeof display / sizeof display[0];
     setRed
-    print2d(display, rows);
-    setWhite
+        print2d(display, rows);
+
     rows = sizeof body / sizeof body[0];
-    print2d(body, rows);
-    setYellow
+    setWhite
+        print2d(body, rows);
+
     rows = sizeof thrust / sizeof thrust[0];
-    print2d(thrust, rows);
+    setYellow
+        print2d(thrust, rows);
+
     resetColor
+
     char* goMsg = "\nHOUSTON: 🏁Go Go Go!' The bank handed you a STIMULUS CHECK!\n\nYou are currently at: Go!";
     fflush(stdout);
     print1d(goMsg, strlen(goMsg), 200,200);
@@ -1112,19 +1156,7 @@ void showWitch(){
 "              ▓▓                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██            ",
 "              ▓▓                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██            ",
 "              ▓▓                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██            ",
-"            ▒▒░░                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██            ",
-"            ▒▒                        ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██            ",
-"            ▒▒                        ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██            ",
-"            ▓▓                          ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██          ",
-"            ░░▒▒                        ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██          ",
-"              ▒▒                        ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██          ",
-"                ▒▒                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██        ",
-"                ▓▓                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██        ",
-"                ▓▓                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓      ",
-"                ▓▓                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██    ",
-"              ▓▓                        ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██  ",
-"              ▒▒                      ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓",
-"              ▓▓                      ██████████████████████████████████████",
+"            ▒▒░░                      ██▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██            "
 
         };
 
@@ -1142,16 +1174,25 @@ void showWitch(){
         };
     int rows = sizeof display / sizeof display[0];
     setPurple
-    print2d(display, rows);
+        print2d(display, rows);
     resetColor
+
     rows = sizeof theWitch / sizeof theWitch[0];
     setRed
-    print2d(theWitch, rows);
+        print2d(theWitch, rows);
     resetColor
+
     char* luckMsg = "\nWITCH: You feelin' lucky, Child? 🦹";
+
     newL
+
     print1d(luckMsg,strlen(luckMsg), 230,240);
 }
+
+/*
+    Draws an image of where the player is given current position
+    @param pos the player's current position
+*/
 void displaySwitch(int pos)
 {
     switch(pos)
@@ -1250,9 +1291,13 @@ void introScene(int scene){
         case 2:
             showMonopolyTitle();
             char* flair = "oh wait...";
+
             newL
+
             print1d(flair, strlen(flair), 150, 150);
+
             clear
+
             return introScene(1);
         default:
             break;    

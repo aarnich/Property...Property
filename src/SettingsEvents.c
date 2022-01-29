@@ -18,6 +18,7 @@ struct winstate initializeWinstate(){
     return initwinstate;
 }
 
+
 /*
     This function returns initial values for struct winconditions
     Preconditions: none
@@ -34,6 +35,7 @@ struct winconditions initializeWinconditions(){
 
     return initwinconds;
 }
+
 
 /*
     This function returns initial values for struct settings
@@ -57,6 +59,7 @@ struct settings initializeSettings(){
     initsettings.passingGo = DEFAULT_PASSING_GO;
     return initsettings;
 }
+
 
 /*
     This function dsplays a menu used to modify initial win conditions
@@ -111,6 +114,7 @@ struct winconditions winconditionsMenu(winconditions wincond){
     return winconditionsMenu(wincond);
 }
 
+
 //primary function for SettingsEvents
 /*
     This function displays a menu used to modify initial game settings
@@ -162,6 +166,7 @@ struct settings settingsPrompt(struct settings initsettings){
 
     return initsettings;
 }
+
 
 /*
     This method shows a menu that enables the user to customize the range of
