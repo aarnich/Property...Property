@@ -48,6 +48,14 @@ int getPropertyCost(int propIndex, int electricCost, int railCost){
     @returns new statekey with value inserted at index
 */
 int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned int value, int OFFSET){
+
+    if(STATEKEY/exponentiateNum(10,index-1) == 0 || index < 1){ // if the given index is outside of the statekey's range
+        setRed
+        printf("\ninvalid index");
+        resetColor
+        return 0; // standard error value
+    }
+
     index -= 1;
     int normalizedNum = normalizeNumByIndex(STATEKEY, index+1); // set values inclusive of index to zero
     int insertion = (value - OFFSET) * exponentiateNum(10,index); // insert the mutation by the index's position
@@ -66,5 +74,13 @@ int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned in
     @returns digit at the index
 */
 int readStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, int OFFSET){
+
+    if(STATEKEY/exponentiateNum(10,index-1) == 0 || index < 1){ // if the given index is outside of the statekey's range
+        setRed
+        printf("\ninvalid index");
+        resetColor
+        return 0; // standard error value
+    }
+
     return (((STATEKEY / exponentiateNum(10,index-1)) % 10) + OFFSET);
 }

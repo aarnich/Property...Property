@@ -68,22 +68,21 @@ range editRange(range varRange, char* type){
     @returns an integer
 */
 int getValidInteger(char* strMsg){
-    int initInteger;
+    float tmp;
     int num;
     printf(strMsg);
     bool cont;
     do{
         cont = 0;
-        if(scanf(" %d",&initInteger)!= 1){
+        if(scanf(" %f",&tmp)!= 1){
             setRed
             printf("\nInvalid entry, try again\n");
             resetColor
             cont = 1;
         }
         clearbuff
-        num = initInteger;
+        num = (int)tmp;
     }while(cont == 1);
-
     return num;
 }  
 
