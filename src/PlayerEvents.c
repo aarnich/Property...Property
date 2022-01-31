@@ -6,7 +6,6 @@
 #include "../libdefs/PlayerEvents.h"
 
 // player roll dice event
-
 /*
     This function rolls the dice with a random visual indicator for the player and returns the corresponding value. 
     There are 4 different dice ascii art pieces to be printed. Choosing is randomized.
@@ -74,6 +73,8 @@ int rollDice(range diceRange)
     return getRandNum(diceRange.min, diceRange.max);
 }
 
+
+
 /*
     Returns a string that contains all the names of the player's properties
     @param STATEKEY the 9 digit integer that tracks all properties on the board
@@ -97,6 +98,7 @@ char* getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigne
     }
     return strPlayerProperties;
 }
+
 
 
 /*
@@ -151,6 +153,7 @@ bool playerOwns(unsigned int playerID, int propIndicator){
     return false; // false by default
 }
 
+
 /*
     displays the winning player's stats after the game has finished
     @param PLAYER the structure containing all of the winning player's information
@@ -163,6 +166,7 @@ void displayPlayerEndingStats(Player PLAYER, unsigned playerID, unsigned int STA
     printf("Remaining Properties: %s\n",getAllPlayerProperties(STATEKEY, -4, playerID));
     printf("Times Jailed: %d\n",PLAYER.jailedCounter);
 }
+
 
 /*
     returns a valid sell choice given the statekey and the current player's ID
@@ -190,6 +194,7 @@ int getPlayerSellChoice(unsigned int STATEKEY, unsigned int OFFSET, unsigned int
     printf("\nYou do not own that property\n");
     return getPlayerSellChoice(STATEKEY, OFFSET, playerID);
 }
+
 
 /*
     Method that changes the player's name given its pointer

@@ -16,8 +16,8 @@
 #include "../typedefs/gameTypes.h"
 #include "../typedefs/evalTypes.h"
 #include "../libdefs/NumTools.h"
-#define clear system("clear");
-#define newL printf("\n");
+#define clear system("clear"); // shorthand for system clear
+#define newL printf("\n"); // short hand for printing newlines
 
 // COLOR TOOLS
 

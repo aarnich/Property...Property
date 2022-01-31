@@ -5,7 +5,9 @@
 #include "../libdefs/NumTools.h"
 
 // clears the buffer in order to avoid unwanted infinite loops
-#define clearbuff while((getchar()) != '\n');
+#define clearbuff               \
+    while ((getchar()) != '\n') \
+        ;
 
 /*
     This function returns true if the given number is within the set range (inclusive) 
@@ -14,8 +16,9 @@
     @param field the range to be evaluated against 
     @returns truthy or falsy value
 */
-bool checkIfInRange(int num, range field){
-    if(num <= field.max && num >= field.min)
+bool checkIfInRange(int num, range field)
+{
+    if (num <= field.max && num >= field.min)
         return 1;
 
     return 0;
@@ -28,34 +31,39 @@ bool checkIfInRange(int num, range field){
     @param type string that determines what to display on the prompt
     @returns a range with user-defined minima and maxima
 */
-range editRange(range varRange, char* type){
+range editRange(range varRange, char *type)
+{
     clear
-    printf("[MIN: %d ----- MAX: %d]\n", varRange.min,varRange.max);
+
+    printf("[MIN: %d ----- MAX: %d]\n", varRange.min, varRange.max);
     printf("[W] Edit %s min\n", type);
     printf("[E] Edit %s max\n", type);
     printf("[S] Save and exit\n");
-    char subMenuInput[3] = {'W','E','S'};
-    char cSettingsSelect = handleInput(subMenuInput,3);
-    switch(cSettingsSelect){
-        case 'W':
-            varRange.min = getValidInteger("Enter minimum: ");
-            break;
-        case 'E':
-            varRange.max = getValidInteger("Enter maximum: ");
-            break;
-        case 'S':
-            if(varRange.min >= varRange.max){
-                printf("\nERROR: INVALID RANGE\n");
-                sleep_ms(1000);
-            }
-            else{
-                return varRange;
-            }
-            break;
-        default:
-            printf("Critical Error, called by: %s",__func__);
-            break;
-    }   
+    char subMenuInput[3] = {'W', 'E', 'S'};
+    char cSettingsSelect = handleInput(subMenuInput, 3);
+    switch (cSettingsSelect)
+    {
+    case 'W':
+        varRange.min = getValidInteger("Enter minimum: ");
+        break;
+    case 'E':
+        varRange.max = getValidInteger("Enter maximum: ");
+        break;
+    case 'S':
+        if (varRange.min >= varRange.max)
+        {
+            printf("\nERROR: INVALID RANGE\n");
+            sleep_ms(1000);
+        }
+        else
+        {
+            return varRange;
+        }
+        break;
+    default:
+        printf("Critical Error, called by: %s", __func__);
+        break;
+    }
     return editRange(varRange, type);
 }
 
@@ -67,25 +75,27 @@ range editRange(range varRange, char* type){
     @param strMsg a string of characters used to contextualize the prompt
     @returns an integer
 */
-int getValidInteger(char* strMsg){
+int getValidInteger(char *strMsg)
+{
     float tmp;
     int num;
-    printf(strMsg);
     bool cont;
-    do{
+    printf(strMsg);
+    do
+    {
         cont = 0;
-        if(scanf(" %f",&tmp)!= 1){
+        if (scanf(" %f", &tmp) != 1)
+        {
             setRed
-            printf("\nInvalid entry, try again\n");
+                printf("\nInvalid entry, try again\n");
             resetColor
             cont = 1;
         }
         clearbuff
-        num = (int)tmp;
-    }while(cont == 1);
+            num = (int)tmp;
+    } while (cont == 1);
     return num;
-}  
-
+}
 
 /*
     This method sets a pointer location to null. This is done to imitate smart 
@@ -93,10 +103,11 @@ int getValidInteger(char* strMsg){
     Preconditions: ptr is a pointer that points to a valid location in memory
     @param ptr the pointer to be nullified
 */
-void freePtr(void** ptr){
+void freePtr(void **ptr)
+{
     free(*ptr);
     *ptr = NULL; // dereference the double pointer in order to set the pointer it points to to null
-} 
+}
 
 /*
     This method changes a the value of a float variable given its parameter 
@@ -106,19 +117,22 @@ void freePtr(void** ptr){
     @param parameterPtr the pointer of the variable to be changed
     @param strMsg the message to be displayed to the user during the prompt
 */
-void changeIntParam(int* parameterPtr, char* strMsg){
+void changeIntParam(int *parameterPtr, char *strMsg)
+{
     setGreen
-    printf("\n[CURRENT VALUE: %d]\n",*parameterPtr);
+        printf("\n[CURRENT VALUE: %d]\n", *parameterPtr);
     resetColor
+
     int tmp;
-    printf("%s", strMsg);
     bool cont;
+    printf("%s", strMsg);
     do
     {
         cont = 0;
-        if(scanf("%d",&tmp) != 1){ // if user input is an invalid float, employ an infinite loop
+        if (scanf("%d", &tmp) != 1)
+        { // if user input is an invalid int, employ an infinite loop
             setRed
-            printf("\nInvalid input, try again\n");
+                printf("\nInvalid input, try again\n");
             resetColor
             cont = 1;
         }
@@ -134,17 +148,20 @@ void changeIntParam(int* parameterPtr, char* strMsg){
     @param parameterPtr the pointer of the variable to be changed
     @param strMsg the message to be displayed to the user during the prompt
 */
-void changeFloatParam(float* parameterPtr, char* strMsg){
+void changeFloatParam(float *parameterPtr, char *strMsg)
+{
     setGreen
-    printf("\n[CURRENT VALUE: %.2f]\n",*parameterPtr);
+        printf("\n[CURRENT VALUE: %.2f]\n", *parameterPtr);
     resetColor
+
     float tmp;
-    printf("%s", strMsg);
     bool cont;
+    printf("%s", strMsg);
     do
     {
         cont = 0;
-        if(scanf("%f",&tmp) != 1){ // if user input is an invalid float, employ an infinite loop
+        if (scanf("%f", &tmp) != 1)
+        { // if user input is an invalid float, employ an infinite loop
             printf("\nInvalid input, try again\n");
             cont = 1;
         }
@@ -159,15 +176,16 @@ void changeFloatParam(float* parameterPtr, char* strMsg){
     @param n2 the second number to be evalated
     @returns the greater value
 */
-float getHigherVal(float n1, float n2){
+float getHigherVal(float n1, float n2)
+{
 
-    if(n1 > n2)
+    if (n1 > n2)
         return n1;
-    else if(n2 > n1)
+    else if (n2 > n1)
         return n2;
 
     printf("values are equal");
-    return 0;
+    return 0; // standard error code
 }
 
 /*
@@ -177,18 +195,19 @@ float getHigherVal(float n1, float n2){
     @param power how much to raise that base
     @returns the integer value equivalent to the base's exponentiation
 */
-int exponentiateNum(int base, int power){
-    int iExponentiatedNum = 1;
+int exponentiateNum(int base, int power)
+{
+    int num = 1; // base case
     if (power == 0)
     {
-        return iExponentiatedNum;
+        return num;
     }
-    
+
     for (size_t i = power; i > 0; i--)
     {
-        iExponentiatedNum *= base;
+        num *= base; // base does not change, num keeps being multiplied
     }
-    return iExponentiatedNum;
+    return num;
 }
 
 /*
@@ -198,10 +217,10 @@ int exponentiateNum(int base, int power){
     @param ceil the maxima of the range
     @returns a random integer within a given range (inclusive)
 */
-int getRandNum(int floor, int ceil) {
+int getRandNum(int floor, int ceil)
+{
     return (
-        floor + ((rand() % ceil) - floor + 1)  
-    );
+        floor + ((rand() % ceil) - floor + 1));
 }
 
 /*
@@ -211,10 +230,11 @@ int getRandNum(int floor, int ceil) {
     @param index the index from which the normalization begins
     @returns an integer that has been normalized
 */
-int normalizeNumByIndex(int num, int index){ //index starts at 0 and is ordered from right to left
+int normalizeNumByIndex(int num, int index)
+{ //index starts at 0 and is ordered from right to left
     return (
-        (num/exponentiateNum(10,index)) // delimit num by index
-         * exponentiateNum(10,index)); // set every value to zero
+        (num / exponentiateNum(10, index)) // delimit num by index
+        * exponentiateNum(10, index));     // set every value to zero
 }
 
 /*
@@ -228,7 +248,6 @@ bool isPrime(int num)
     for (size_t i = 1; i <= num; i++)
         if (num % i == 0)
             flag += 1;
-     // check for this condition first as the amount of non-prime integers far outnumbers the primes
-    return (flag == 2);
-}
 
+    return (flag == 2); // true if 2 divisors, false otherwise
+}

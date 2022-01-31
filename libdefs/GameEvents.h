@@ -15,7 +15,7 @@ int readStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, int OFFSET);
 
 int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned int value, int OFFSET);
 
-// returns the cost of the property purchase 
+// returns the cost of the property purchase
 
 int getPropertyCost(int propIndex, int electricCost, int railCost);
 

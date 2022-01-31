@@ -19,7 +19,7 @@ int rollDice(range dicerange);
 
 // returns a string of all the player's properties
 
-char* getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID);
+char *getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID);
 
 // checks if the player owns any properties
 
@@ -27,7 +27,7 @@ bool playerOwnsProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned i
 
 // a dialogue prompt that decides end turn
 
-bool playerDialogue(char* strDialogueMsg, char* validInputs);
+bool playerDialogue(char *strDialogueMsg, char *validInputs);
 
 // checks whether the player owns the current property or not
 
@@ -43,6 +43,6 @@ int getPlayerSellChoice(unsigned int STATEKEY, unsigned int OFFSET, unsigned int
 
 // changes playername variable
 
-void fetchPlayerName(char** ptrPlayerName);
+void fetchPlayerName(char **ptrPlayerName);
 
 #endif
