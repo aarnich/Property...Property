@@ -352,7 +352,7 @@ void showEndingStats(Player player){
     char* randMsg = bonusRand[getRandNum(0,size-1)];
 
     setPurple
-        print1d(randMsg, strlen(randMsg), 290, 300);
+        print1d(randMsg, strlen(randMsg), 300, 300);
     resetColor
 
     newL
@@ -576,12 +576,46 @@ void showJail()
 
     sleep_ms(500);
 
-    char* jailMsg1 = "\nTHE JUDGE: You got caught by the police for Class A: Tax Evasion\nWhat do you have to say for yourself, criminal scum?\n\n";
-    print1d(jailMsg1,strlen(jailMsg1), 120,120);
-    char* jailMsg2 = "INMATE: Don't drop the soap buddy\n\n";
-    print1d(jailMsg2,strlen(jailMsg2), 150,150);
-    char* jailMsg3 = "👤FORMER PRESIDENT RODRIGO ROA DUTERTE: Welcome";
-    print1d(jailMsg3, strlen(jailMsg3), 200, 200);
+    // a random message that tells the compound why you're here
+    char* jailCard[] = {
+        "collecting rainwater",
+        "being born with the wrong skin color", "for living in the hood", "tax evasion",
+        "adultery", "liking Ex Battalion", "being a Teemo main", "spamming Astra in diamond elo"
+    };
+    // which compound you're to
+    char* jailLocation[] = {
+        "Guantanamo Bay", "Auschwitz", "New Bilibid Prison", "a dysfunctional Filipino household"
+    };
+    char* jailMsg[] = {
+        "\n📚The JUDGE: You're being sent to "," for ", " how do you plead?\n",
+        "💪CELLMATE: Don't drop the soap bar hun :)\n", 
+        "👤FORMER PRESIDENT RODRIGO ROA DUTERTE:...\n"
+    };
+
+    int cardSize = sizeof jailCard / sizeof jailCard[0];
+    int locationSize = sizeof jailLocation / sizeof jailLocation[0];
+
+    print1d(jailMsg[0], strlen(jailMsg[0]), 120, 120);
+    print1d(jailMsg[1], strlen(jailMsg[1]), 120, 120);
+
+    // get jail location
+    char* strLocation = jailLocation[getRandNum(0,locationSize - 1)];
+
+    setRed
+        print1d(strLocation, strlen(strLocation), 150, 150);
+    resetColor
+
+    print1d(jailMsg[2], strlen(jailMsg[2]), 120, 120);
+    // get jail card
+    char* strCard = jailCard[getRandNum(0,cardSize - 1)]; 
+    setRed
+        print1d(strCard, strlen(strCard), 150, 150);
+    resetColor
+
+    print1d(jailMsg[3], strlen(jailMsg[3]), 120, 120);
+    print1d(jailMsg[4], strlen(jailMsg[4]), 120, 120);
+
+
 }
 void showTree()
 {

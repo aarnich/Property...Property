@@ -286,6 +286,7 @@ bash runGame.sh
 
 
 # References
-Youtube.com/Numberphile, Youtube.com/Computerphile
+* Computerphile. YouTube. Retrieved February 4, 2022, from https://www.youtube.com/user/Computerphile/
+* SICP. Structure and interpretation of computer programs. Retrieved February 4, 2022, from https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html 
 
 

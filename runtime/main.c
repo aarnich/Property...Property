@@ -19,7 +19,6 @@ struct gamepkg playGame(struct gamepkg game)
 
     struct gamepkg lgame = game; // localize parameter in order to minimize errors
 
-    fflush(stdout);                                 // flush stdout to clear buffer
     printf("\nRandomizing first player =>> ");
     lgame.state.activePlayer = getRandNum(1, 2);    // randomize the first player
 
@@ -32,7 +31,7 @@ struct gamepkg playGame(struct gamepkg game)
     sleep_ms(500);
 
     printf("%s will go first", strFirstPlayer);     // print opening player's name
-    fflush(stdout);                                 // flush before prompt to avoid unwanted behaviour
+    clearbuff                                       // flush buffer to avoid unwanted behaviour
     continuePrompt();                               // getchar clears buffer beforehand
 
     // check if the game should continue
@@ -85,13 +84,13 @@ int main()
 
     char choice;
 
-    clear // clear the screen
+    clear 
 
-    introScene(getRandNum(1, 2));
+    introScene(getRandNum(1, 2));           // 50% chance of getting the easter egg 😎
 
-    continuePrompt(); // ask the user to press enter to continue with the program
-
-    struct gamepkg game = initializeGame();
+    continuePrompt();               
+ 
+    struct gamepkg game = initializeGame(); // initialize firt gamepkg struct
 
     do
     {
@@ -107,14 +106,11 @@ int main()
         case 'E': // the player exits the game
             break;
         case 'S':
-            game.state.SETTINGS = settingsPrompt(initializeSettings());
+            game.state.SETTINGS = settingsPrompt(game.state.SETTINGS);
             break;
         case 'G':
             do
             {
-                game.arrPlayerContainer[0] = initializePlayer();
-                game.arrPlayerContainer[1] = initializePlayer();
-
                 char **ptrP1Name = &game.arrPlayerContainer[0].name; // change player 1 name
                 fetchPlayerName(ptrP1Name);
                 ptrP1Name = NULL;
@@ -123,7 +119,7 @@ int main()
                 fetchPlayerName(ptrP2Name); 
                 ptrP1Name = NULL;
 
-                game = playGame(game); // begin the primary game loop
+                game = playGame(game);                              // begin the primary game loop
 
                 clear
 

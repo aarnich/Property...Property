@@ -1,5 +1,9 @@
 #include "runtime_headers/Settings.h"
 
+/*
+    Primary settings menu function that enables customization. Calls functions defined in Settings.h
+    @param initsettings settings struct with initialized values
+*/
 struct settings settingsPrompt(struct settings initsettings)
 {
     char cSettingsSelect;
@@ -60,6 +64,7 @@ struct settings settingsPrompt(struct settings initsettings)
         case '7':
             printf("\nHow much you lose/gain when you roll a nonprime/prime number when talking to the witch\n");
             sleep_ms(1000);
+            continuePrompt();
             feelingLuckySubMenu(
                 &initsettings.bonusrange,
                 &initsettings.penaltyrange);
