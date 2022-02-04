@@ -73,7 +73,7 @@ struct settings settingsPrompt(struct settings initsettings)
             changeIntParam(&initsettings.goBonus, "Enter Go! tile bonus amount: ");
             break;
         case '0':
-            printf("\npassing go! amount alludes to the amount of cash the players get each time they pass by Go!\n")
+            printf("\npassing go! amount alludes to the amount of cash the players get each time they pass by Go!\n");
                 changeIntParam(&initsettings.passingGo, "Enter passing Go! bonus amount: ");
             break;
         case 'D':

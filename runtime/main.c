@@ -73,7 +73,7 @@ struct gamepkg initializeGame()
 void displayManual()
 {
     printf("\n\nAt the start of the game, players do not own any property. All properties on the board are owned by the Bank.\nAll properties owned by the Bank are up for sale and are not renovated.\nThe Bank has unlimited cash. The smallest denomination in this game is 1.");
-    printf("\n\nPlayers take turn in rolling the dice to move clockwise around the board.\nAt each turn, the player rolls a dice to determine the number of spaces he moves on the board.\n The player may land on \nGo (position 0),\non Jail Time (position 4), \non Feelin’ Lucky (position 6), or \non a property\n (house properties at positions 1, 3, 5, 8, 9, electric company at position 2, and railroad at position 7). \nBased on the space where the player lands on, different actions may take place."\n\n);
+    printf("\n\nPlayers take turn in rolling the dice to move clockwise around the board.\nAt each turn, the player rolls a dice to determine the number of spaces he moves on the board.\n The player may land on \nGo (position 0),\non Jail Time (position 4), \non Feelin’ Lucky (position 6), or \non a property\n (house properties at positions 1, 3, 5, 8, 9, electric company at position 2, and railroad at position 7). \nBased on the space where the player lands on, different actions may take place.\n\n");
 }
 
 /*
@@ -117,11 +117,11 @@ int main()
 
                 char **ptrP1Name = &game.arrPlayerContainer[0].name; // change player 1 name
                 fetchPlayerName(ptrP1Name);
-                free(ptrP1Name);
+                ptrP1Name = NULL;
 
                 char **ptrP2Name = &game.arrPlayerContainer[1].name; // change player 2 name
                 fetchPlayerName(ptrP2Name); 
-                free(ptrP1Name);
+                ptrP1Name = NULL;
 
                 game = playGame(game); // begin the primary game loop
 
