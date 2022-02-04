@@ -67,7 +67,7 @@ bash runGame.sh
 | 3   | player 1 owns a renovated property                    | propIndicator = 7, playerID = 1 | true            | true          | P   | 
 
 
-### Function Name: getPLayerSellChoice()
+### Function Name: getPlayerSellChoice()
 #### Description: Returns the statekey index of the property the player would like to sell only if the player owns said property
 | #   | Test Description                                  | Sample Input/Arguments                         | Expected Output                | Actual Output                  | P/F |
 | --- | ------------------------------------------------- | ---------------------------------------------- | ------------------------------ | ------------------------------ | --- |
