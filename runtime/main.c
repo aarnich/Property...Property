@@ -4,10 +4,11 @@
     Description: Property...Property is a terminal-based take on Monopoly written entirely in C.
     Programmed by: Aaron Nicholas Lizardo Gumapac
     Last modified: January 30, 2022
-    Version: V7
-    [Acknowledgements: geekhack.org, computerphile, numberphile]
+    Version: V2
+    [Acknowledgements: MITOpencourseware, computerphile, numberphile]
 */
-//    Repo: https://github.com/aarnich/Property...Property
+
+//    Repo link: https://github.com/aarnich/Property...Property
 
 /*
     This function begins the game and calls game functions.

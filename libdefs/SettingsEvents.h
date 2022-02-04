@@ -5,6 +5,12 @@
 
 #ifndef SETTINGSEVENTS_H
 #define SETTINGSEVENTS_H
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../libdefs/SettingsUI.h"
+#include "../libdefs/NumTools.h"
+#include "../libdefs/InputTools.h"
 //DEFAULT SETTINGS//
 #define DEFAULT_ELECTRIC_COST 150
 #define DEFAULT_RAILROAD_COST 100
@@ -26,13 +32,6 @@
 #define clearbuff               \
     while ((getchar()) != '\n') \
         ;
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include "../libdefs/SettingsUI.h"
-#include "../libdefs/NumTools.h"
-#include "../libdefs/InputTools.h"
 
 /* INITIALIZATION FUNCTIONS */
 

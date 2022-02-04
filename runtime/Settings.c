@@ -1,3 +1,7 @@
+/*
+    Description: Contains the function necessary for game configuration
+    Author: Aaron Nicholas Gumapac
+*/
 #include "runtime_headers/Settings.h"
 
 /*

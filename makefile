@@ -30,6 +30,7 @@ runtime/runtime_obj/Settings.o: runtime/Settings.c runtime/runtime_headers/Setti
 
 clean:
 	rm libs/*.so
+	rm obj/*.o
 
 libs/libEvents.so: src/PlayerEvents.c libdefs/PlayerEvents.h src/SettingsEvents.c libdefs/SettingsEvents.h
 	touch libs/libEvents.so

@@ -1,3 +1,7 @@
+/*
+    Description: Header file for functions integral for game event processing.
+    Author: Aaron Nicholas Gumapac
+*/
 
 #pragma once
 #ifndef GAMEEVENTS_H
@@ -6,6 +10,7 @@
 #include "../typedefs/stateTypes.h"
 #include "../typedefs/gameTypes.h"
 #include "../libdefs/NumTools.h"
+
 
 // returns the integer at index
 

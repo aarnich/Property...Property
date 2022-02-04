@@ -1,6 +1,6 @@
 /*
     Description: SettingsUI.h is a header file containing necessary definitions for UI methods used in SettingsUI.c 
-    Author: Aaron Nicholas Lizardo Gumapac
+    Author: Aaron Nicholas Gumapac
 */
 #ifndef SETTINGSUI_H
 #define SETTINGSUI_H
@@ -11,6 +11,7 @@
 #include "../typedefs/stateTypes.h"
 #include "../typedefs/numTypes.h"
 #include "../libdefs/uiFX.h"
+
 
 // displays all parameters defined in settings struct relevant to game events
 

@@ -1,3 +1,7 @@
+/*
+    Description: A collection of functions concerned only with the primary game loop
+    Author: Aaron Nicholas Gumapac
+*/
 #include "runtime_headers/GameLoop.h"
 /*
     Creates a new player

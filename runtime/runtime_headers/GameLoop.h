@@ -1,4 +1,3 @@
-
 #pragma once
 #ifndef GAMELOOP_H
 #define GAMELOOP_H
@@ -8,6 +7,11 @@
 #include "../../libdefs/SettingsEvents.h"
 #include "../../libdefs/PlayerEvents.h"
 #include "../../libdefs/InputTools.h"
+
+/*
+    Description: 
+    Author:
+*/
 #define STARTING_STATEKEY 444949444
 #define STATEKEY_OFFSET -4
 

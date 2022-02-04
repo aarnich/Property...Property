@@ -1,3 +1,7 @@
+/*
+    Description: NumTools.h is the header file for all independent numerical functions used in the program
+    Author: Aaron Nicholas Gumapac
+*/
 #ifndef NUMTOOLS_H
 #define NUMTOOLS_H
 
@@ -7,6 +11,8 @@
 #include "../typedefs/numTypes.h"
 #include "../libdefs/uiFX.h"
 #include "../libdefs/InputTools.h"
+
+
 #define NULL ((void *)0)
 
 // helper function that frees and nullifies pointers

@@ -1,3 +1,8 @@
+/*
+    Description: uiFX.h contains forward definitions for functions that are purely used for UI operations
+    Author: Aaron Nicholas Gumapac
+*/
+
 #ifndef UIFX_H
 #define UIFX_H
 
@@ -16,6 +21,8 @@
 #include "../typedefs/gameTypes.h"
 #include "../typedefs/evalTypes.h"
 #include "../libdefs/NumTools.h"
+
+
 // shorthand for system clear
 #define clear system("clear"); 
 // shorthand for printing newlines, useful for ui

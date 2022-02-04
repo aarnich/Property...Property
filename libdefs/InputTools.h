@@ -1,3 +1,7 @@
+/*
+    Description: InputTools.h is the header file for functions used purely for handling user input
+    Author: Aaron Nicholas Gumapac
+*/
 
 #pragma once
 #ifndef INPUTTOOLS_H
@@ -7,6 +11,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
+
 
 // gives you a valid char given a set of valid inputs
 

@@ -1,6 +1,11 @@
+/*
+    Description: A set of functions used to display the configuration specifications of the settings struct
+    Author: Aaron Nicholas Gumapac
+*/
+
 #include "../libdefs/SettingsUI.h"
 /*
-    This pure function is used to determine whether the game must evaluate multiple wintoggles or not
+    This function is used to determine whether the game must evaluate multiple wintoggles or not
     Preconditions: toggle1 and toggle2 are valid wintoggle enums
     @param toggle1 enum of type wintoggle defined in evalTypes.h
     @param toggle2 enum of type wintoggle defined in evalTypes.h

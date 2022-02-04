@@ -1,7 +1,10 @@
-#include "../libdefs/SettingsEvents.h"
 /*
-    all initializers always output the same data
+    Description: A set of functions that is used only within the settings page
+    Author: Aaron Nicholas Gumapac
 */
+
+#include "../libdefs/SettingsEvents.h"
+// NOTE: all initializers always output the same data
 
 /*
     This function returns initial values for struct winstate
