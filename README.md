@@ -1,6 +1,4 @@
-Written by: Aaron Nicholas Gumapac
-
-Status: #dev
+### Written by: Aaron Nicholas Gumapac
 
 # Property...Property is a Monopoly-like game that is exclusively written in C
 Players take turns rolling dice and in doing so, move about a board.
@@ -25,7 +23,7 @@ bash runGame.sh
 # Function Unit Testing
 
 ### Function Name: getRandNum()
-#### Description: Returns a randon number within a given range
+#### Description: Returns a random number within a given range
 | #   | Test Description                         | Sample Input/Arguments | Expected Output              | Actual Output                | P/F |
 | --- | ---------------------------------------- | ---------------------- | ---------------------------- | ---------------------------- | --- |
 | 1   | default case for dice rolls, static seed | min = 1, max = 6       | 5                            | 5                            | P   |
@@ -160,11 +158,11 @@ bash runGame.sh
 
 
 ### Function Name: getValidInteger()
-#### Description: Error proof funcion that prompts the user for an integer value and only returns if input is valid. Does not accept not numeric types
+#### Description: Error proof funcion that prompts the user for an integer value and only returns if input is valid. Does not accept non numeric types
 | #   | Test Description                  | Sample Input/Arguments | Expected Output            | Actual Output               | P/F |
 | --- | --------------------------------- | ---------------------- | -------------------------- | --------------------------- | --- |
 | 1   | user inputs 2                     | input = 2              | 2                          | 2                           | P   |
-| 2   | user inputs not numeric type      | 'C'                    | "invalid input, try again" | "invalind input, try again" | P   |
+| 2   | user inputs non numeric type      | 'C'                    | "invalid input, try again" | "invalind input, try again" | P   |
 | 3   | user inputs floating point number | 0.9                    | 0                          | 0                           | P   |
 
 
