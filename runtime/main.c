@@ -83,7 +83,6 @@ int main()
 {
     srand((unsigned)time(NULL));
 
-    char choice;
 
     clear 
 
@@ -91,6 +90,7 @@ int main()
 
     continuePrompt();               
  
+    char choice;
     struct gamepkg game = initializeGame(); // initialize firt gamepkg struct
 
     do
