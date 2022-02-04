@@ -106,7 +106,7 @@ int getValidInteger(char *strMsg)
 void freePtr(void **ptr)
 {
     free(*ptr);
-    *ptr = NULL; // dereference the double pointer in order to set the pointer it points to to null
+    *ptr = NULL; // dereference the double pointer in order to set the pointer it points to null
 }
 
 /*

@@ -7,9 +7,6 @@ runtime/runtime_obj/Settings.o runtime/runtime_obj/GameLoop.o
 #	GameLoop
 #	Settings
 
-# runtime/runtimeLib.so: runtime/runtime_obj/main.o runtime/runtime_obj/GameLoop.o runtime/runtime/Settings.o
-# 	gcc -Wall -c runtime/*.c 
-
 runtime/runtime_obj/main.o: runtime/main.c runtime/runtime_headers/*.h
 	gcc -Wall -g -c runtime/main.c -o runtime/runtime_obj/main.o
 
@@ -31,6 +28,7 @@ runtime/runtime_obj/Settings.o: runtime/Settings.c runtime/runtime_headers/Setti
 clean:
 	rm libs/*.so
 	rm obj/*.o
+	rm runtime/runtime_obj/*.o
 
 libs/libEvents.so: src/PlayerEvents.c libdefs/PlayerEvents.h src/SettingsEvents.c libdefs/SettingsEvents.h
 	touch libs/libEvents.so
