@@ -114,12 +114,10 @@ int main()
             {
                 char **ptrP1Name = &game.arrPlayerContainer[0].name; // change player 1 name
                 fetchPlayerName(ptrP1Name);
-                free(ptrP1Name);
                 ptrP1Name = NULL;
 
                 char **ptrP2Name = &game.arrPlayerContainer[1].name; // change player 2 name
                 fetchPlayerName(ptrP2Name); 
-                free(ptrP2Name);
                 ptrP2Name = NULL;
 
                 game = playGame(game);                              // begin the primary game loop

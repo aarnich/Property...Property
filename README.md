@@ -23,7 +23,7 @@ bash runGame.sh
 # Function Unit Testing
 
 ### Function Name: getRandNum()
-#### Description: Returns a random number within a given range
+#### Description: Returns a random number within a given range.
 | #   | Test Description                         | Sample Input/Arguments | Expected Output              | Actual Output                | P/F |
 | --- | ---------------------------------------- | ---------------------- | ---------------------------- | ---------------------------- | --- |
 | 1   | default case for dice rolls, static seed | min = 1, max = 6       | 5                            | 5                            | P   |
@@ -32,7 +32,7 @@ bash runGame.sh
 
 
 ### Function Name: getAllPlayerProperties()
-#### Description: Returns a string that contains every property the player owns 
+#### Description: Returns a string that contains every property the player owns.
 | #   | Test Description                                              | Sample Input/Arguments             | Expected Output                       | Actual Output                         | P/F |
 | --- | ------------------------------------------------------------- | ---------------------------------- | ------------------------------------- | ------------------------------------- | --- |
 | 1   | every property you can own is owned by the bank: default case | statekey = 444949444, playerID = 1 | " "                                   | " "                                   | P   |
@@ -41,7 +41,7 @@ bash runGame.sh
 
 
 ### Function Name: playerOwnsProperties()
-#### Description: Returns true if player owns any properties, false otherwise
+#### Description: Returns true if player owns any properties, false otherwise.
 | #   | Test Description                                                              | Sample Input/Arguments             | Expected Output | Actual Output | P/F |
 | --- | ----------------------------------------------------------------------------- | ---------------------------------- | --------------- | ------------- | --- |
 | 1   | base case, player 1 does not own any properties                               | statekey = 444949444, playerID = 1 | false           | false         | P   |
@@ -50,7 +50,7 @@ bash runGame.sh
 
 
 ### Function Name: playerDialogue()
-#### Description: Prompts the user with a message. Returns true if player selects the first choice in the selection, false otherwise (signalling end turn) 
+#### Description: Prompts the user with a message. Returns true if player selects the first choice in the selection, false otherwise (signalling end turn).
 | #   | Test Description                               | Sample Input/Arguments                                                   | Expected Output | Actual Output | P/F |
 | --- | ---------------------------------------------- | ------------------------------------------------------------------------ | --------------- | ------------- | --- |
 | 1   | prompt for property purchase, player ends turn | dialogueMessage = "Buy\nEnd Turn", validInputs = "BE", choice = 'E'      | false           | false         | P   |
@@ -59,7 +59,7 @@ bash runGame.sh
 
 
 ### Function Name: playerOwns()
-#### Description: Returns true if player owns the current property, false otherwise 
+#### Description: Returns true if player owns the current property, false otherwise.
 | #   | Test Description                                      | Sample Input/Arguments          | Expected Output | Actual Output | P/F |
 | --- | ----------------------------------------------------- | ------------------------------- | --------------- | ------------- | --- |
 | 1   | player 2 owns current property, checking for player 1 | propIndicator = 6, playerID = 1 | false           | false         | P   |
@@ -68,7 +68,7 @@ bash runGame.sh
 
 
 ### Function Name: getPlayerSellChoice()
-#### Description: Returns the statekey index of the property the player would like to sell only if the player owns said property
+#### Description: Returns the statekey index of the property the player would like to sell only if the player owns said property.
 | #   | Test Description                                  | Sample Input/Arguments                         | Expected Output                | Actual Output                  | P/F |
 | --- | ------------------------------------------------- | ---------------------------------------------- | ------------------------------ | ------------------------------ | --- |
 | 1   | player 1 sells the fifth property on the statekey | statekey = 666979666, playerID = 1, choice = 5 | 5                              | 5                              | P   |
@@ -77,7 +77,7 @@ bash runGame.sh
 
 
 ### Function Name: fetchPlayerName()
-#### Description: Changes player.name variable after prompting the user for an input
+#### Description: Changes player.name variable after prompting the user for an input.
 | #   | Test Description                                                     | Sample Input/Arguments   | Expected Output           | Actual Output             | P/F |
 | --- | -------------------------------------------------------------------- | ------------------------ | ------------------------- | ------------------------- | --- |
 | 1   | player sets name as "Trump"                                          | input = "Trump"          | player.name = "Trump"     | player.name = "Trump"     | P   |
@@ -86,7 +86,7 @@ bash runGame.sh
 
 
 ### Function Name: isPrime()
-#### Description: Returns true if given integer is prime, false otherwise. Integer is prime if and only if it is divided by exactly 2 integers with no remainders
+#### Description: Returns true if given integer is prime, false otherwise. Integer is prime if and only if it is divided by exactly 2 integers with no remainders.
 | #   | Test Description                              | Sample Input/Arguments | Expected Output | Actual Output | P/F |
 | --- | --------------------------------------------- | ---------------------- | --------------- | ------------- | --- |
 | 1   | check if 1 is a prime according to definition | num = 1                | false           | false         | P   |
@@ -113,7 +113,7 @@ bash runGame.sh
 
 
 ### Function Name: readStatekeyAtIndex()
-#### Description: Returns integer value + offset at the given statekey index
+#### Description: Returns integer value + offset at the given statekey index.
 | #   | Test Description                     | Sample Input/Arguments                        | Expected Output           | Actual Output             | P/F |
 | --- | ------------------------------------ | --------------------------------------------- | ------------------------- | ------------------------- | --- |
 | 1   | get the first number                 | statekey = 444949444, index = 1, offset = -4  | 0                         | 0                         | P   |
@@ -122,7 +122,7 @@ bash runGame.sh
 
 
 ### Function Name: mutateStatekeyAtIndex()
-#### Description: Replace a statekey digit (value - offset) given the index and returns the mutated statekey
+#### Description: Replace a statekey digit (value - offset) given the index and returns the mutated statekey.
 | #   | Test Description                       | Sample Input/Arguments                     | Expected Output           | Actual Output             | P/F |
 | --- | -------------------------------------- | ------------------------------------------ | ------------------------- | ------------------------- | --- |
 | 1   | set the first digit to 2               | statekey = 444949444, index = 1, value = 2 | 444949446                 | 444949446                 | P   |
@@ -131,7 +131,7 @@ bash runGame.sh
 
 
 ### Function Name: getPropertyCost()
-#### Description: Calculates the purchase cost of a property given its position on the board
+#### Description: Calculates the purchase cost of a property given its position on the board.
 | #   | Test Description             | Sample Input/Arguments | Expected Output              | Actual Output                | P/F |
 | --- | ---------------------------- | ---------------------- | ---------------------------- | ---------------------------- | --- |
 | 1   | cost of the tree house       | propIndex = 1          | 20                           | 20                           | P   |
@@ -140,7 +140,7 @@ bash runGame.sh
 
 
 ### Function Name: getRent()
-#### Description: Returns the cost of rent for the property at index
+#### Description: Returns the cost of rent for the property at index.
 | #   | Test Description    | Sample Input/Arguments | Expected Output                     | Actual Output | P/F |
 | --- | ------------------- | ---------------------- | ----------------------------------- | ------------- | --- |
 | 1   | rent for tree house | propIndex = 1          | 4                                   | 4             | P   |
@@ -149,7 +149,7 @@ bash runGame.sh
 
 
 ### Function Name: exponentiateNum()
-#### Description: raises a base to a power, does not cover fractional outputs
+#### Description: raises a base to a power, does not cover fractional outputs.
 | #   | Test Description | Sample Input/Arguments | Expected Output | Actual Output | P/F |
 | --- | ---------------- | ---------------------- | --------------- | ------------- | --- |
 | 1   | raise 10 to 2    | base = 10, power = 2   | 100             | 100           | P   |
@@ -158,7 +158,7 @@ bash runGame.sh
 
 
 ### Function Name: getValidInteger()
-#### Description: Error proof funcion that prompts the user for an integer value and only returns if input is valid. Does not accept non numeric types
+#### Description: Error proof funcion that prompts the user for an integer value and only returns if input is valid. Does not accept non numeric types.
 | #   | Test Description                  | Sample Input/Arguments | Expected Output            | Actual Output               | P/F |
 | --- | --------------------------------- | ---------------------- | -------------------------- | --------------------------- | --- |
 | 1   | user inputs 2                     | input = 2              | 2                          | 2                           | P   |
@@ -167,7 +167,7 @@ bash runGame.sh
 
 
 ### Function Name: checkIfInRange()
-#### Description: Returns true if a given integer is within a given range, false otherwise
+#### Description: Returns true if a given integer is within a given range, false otherwise.
 | #   | Test Description          | Sample Input/Arguments       | Expected Output | Actual Output | P/F |
 | --- | ------------------------- | ---------------------------- | --------------- | ------------- | --- |
 | 1   | check if 1 is inside 1,10 | min = 1, max = 10, input = 1 | true            | true          | P   |
@@ -176,7 +176,7 @@ bash runGame.sh
 
 
 ### Function Name: editRange()
-#### Description: Returns a new range with user-modified min and max vals
+#### Description: Returns a new range with user-modified min and max vals.
 | #   | Test Description              | Sample Input/Arguments        | Expected Output               | Actual Output                 | P/F     |
 | --- | ----------------------------- | ----------------------------- | ----------------------------- | ----------------------------- | ------- |
 | 1   | range.min = 5, range.max = 10 | input.min = 6                 | range.min = 6, range.max = 10 | range.min = 6, range.max = 10 | P       |
@@ -185,7 +185,7 @@ bash runGame.sh
 
 
 ### Function Name: continueGame()
-#### Description: Returns true if winner == NONE, false otherwise
+#### Description: Returns true if winner == NONE, false otherwise.
 | #   | Test Description | Sample Input/Arguments | Expected Output | Actual Output | P/F |
 | --- | ---------------- | ---------------------- | --------------- | ------------- | --- |
 | 1   | players tie      | winner = TIE           | false           | false         | P   |
@@ -203,7 +203,7 @@ bash runGame.sh
 
 
 ### Function Name: initializeSettings()
-#### Description: Returns a settings struct with initial values, defaults are defined in header
+#### Description: Returns a settings struct with initial values, defaults are defined in header.
 | #   | Test Description                     | Sample Input/Arguments      | Expected Output                 | Actual Output                  | P/F |
 | --- | ------------------------------------ | --------------------------- | ------------------------------- | ------------------------------ | --- |
 | 1   | base case                            |                             | initSettings                    | initSettings                   | P   |
@@ -239,16 +239,16 @@ bash runGame.sh
 
 
 ### Function Name: populateContext()
-#### Description: Populates the wincontext list in order to fill indexes equal to NOCONTEXT
+#### Description: Populates the wincontext list in order to fill indexes equal to NOCONTEXT.
 | #   | Test Description                                                          | Sample Input/Arguments            | Expected Output                  | Actual Output                    | P/F |
 | --- | ------------------------------------------------------------------------- | --------------------------------- | -------------------------------- | -------------------------------- | --- |
 | 1   | insert ENEMY_BANKRUPTCY to empty list                                     | context = ENEMY_BANKRUPTCY        | arrContext[0] = ENEMY_BANKRUPTCY | arrContext[0] = ENEMY_BANKRUPTCY | P   |
 | 2   | insert WINNING_BALANCE_REACHED to list with index 0 filled                | context = WINNING_BALANCE_REACHED | arrContext[1] = ENEMY_BANKRUPTCY | arrContext[1] = ENEMY_BANKRUPTCY | P   |
-| 3   | attempt to inserts LOSING_BALANCE_REACHED to list with all indexes filled | context = LOSING_BALANE REACHED   | (no change) arrContext           | (no change) arrContext           | P   | 
+| 3   | attempt to insert LOSING_BALANCE_REACHED to list with all indexes filled | context = LOSING_BALANE REACHED   | (no change) arrContext           | (no change) arrContext           | P   | 
 
 
 ### Function Name: updatePlayer()
-#### Description: Updates activePlayer and player jail statuses given their memory locations
+#### Description: Updates activePlayer and player jail statuses given their memory locations.
 | #   | Test Description                                    | Sample Input/Arguments                                   | Expected Output                                            | Actual Output                                              | P/F |
 | --- | --------------------------------------------------- | -------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | --- |
 | 1   | base case, player 1's turn is done                  | activePlayer = 1                                         | activePlayer = 2                                           | activePlayer = 2                                           | P   |
@@ -257,7 +257,7 @@ bash runGame.sh
 
 
 ### Function Name: updateWinstate()
-#### Description: Returns a new winstate struct given win settings and new player values
+#### Description: Returns a new winstate struct given win settings and new player values.
 | #   | Test Description                                                  | Sample Input/Arguments   | Expected Output           | Actual Output             | P/F |
 | --- | ----------------------------------------------------------------- | ------------------------ | ------------------------- | ------------------------- | --- |
 | 1   | player 2 satifies both winconditions, player 1 only satisfies one | p1Flags = 1, p2Flags = 2 | winstate.winner = PLAYER2 | winstate.winner = PLAYER2 | P   |
@@ -266,7 +266,7 @@ bash runGame.sh
 
 
 ### Function Name: saveGame()
-#### Description: Returns a new gamepkg struct that stores new player values and updated winstate values
+#### Description: Returns a new gamepkg struct that stores new player values and updated winstate values.
 | #   | Test Description    | Sample Input/Arguments                  | Expected Output                     | Actual Output                       | P/F |
 | --- | ------------------- | --------------------------------------- | ----------------------------------- | ----------------------------------- | --- |
 | 1   | base case           | player1, player2, playerkeys, gamestate | updatedGame                         | updatedGame                         | P   |
@@ -275,7 +275,7 @@ bash runGame.sh
 
 
 ### Function Name: updatedPlayerPosition()
-#### Description: Returns a player struct with new position values and balance changes if player crosses the 0th position
+#### Description: Returns a player struct with new position values and balance changes if player crosses the 0th position.
 | #   | Test Description            | Sample Input/Arguments   | Expected Output                           | Actual Output                             | P/F |
 | --- | --------------------------- | ------------------------ | ----------------------------------------- | ----------------------------------------- | --- |
 | 1   | PLayer 1 at pos 1 rolls a 5 | player.pos = 1, roll = 5 | player.pos = 6                            | player.pos = 6                            | P   |

@@ -850,11 +850,11 @@ void showCastle(){
             print2d(theCastle, rows);
         resetColor
 
-        char* castleMsg = "You walk in streets of ruin and decay\nYou have stumbled upon an ancient stronghold of an old Catholic cult!\n";
+        char* castleMsg = "You walk in streets of ruin and decay\nYou have stumbled upon an edifice whose age is clearly unfathomable.\n";
         print1d(castleMsg, strlen(castleMsg), 100, 100);
         sleep_ms(700);
         char* dragonMsg1 = "\n...\nIS THAT A ****ING DRAGON?!?\n";
-        print1d(dragonMsg1, strlen(dragonMsg1), 300,300);
+        print1d(dragonMsg1, strlen(dragonMsg1), 180,180);
         char* dragon[] = {
 "                                                                                  ▒▒   ",
 "                                                                ▒▒▒▒▒▒                 ",
