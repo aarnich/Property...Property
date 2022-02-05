@@ -24,40 +24,28 @@ bool checkIfMulti(enum wintoggles toggle1, enum wintoggles toggle2)
 void displayCurrentConfig(settings settingsParam)
 {
 
-    displayConditions(settingsParam.winsettings); // display current win conditions set
-
-    printf("\n[CONFIG SETTINGS]\n");
-
-    char* settingsDiv = createDivider('=',34);
     setYellow
-    printf("%s\n",settingsDiv);
+      displayConditions(settingsParam.winsettings); // display current win conditions set
     setCyan
-    printf("Renovation cost: %d\n", settingsParam.renovationCost);
-    printf("Railroad rent: %d\n", settingsParam.railRent);
-    printf("Railroad purchase cost: %d\n", settingsParam.railCost);
-    printf("Electric company multiplier: %d\n", settingsParam.electricMulti);
-    printf("Electric company purchase cost: %d\n", settingsParam.electricCost);
-    setYellow
-    printf("%s\n",settingsDiv);
-    setGreen
-    printf("Feelin' lucky range\n>>bonus: [%d , %d]\n>>penalty: [%d , %d]\n",
+    printf("\n[CURRENT SETTINGS]\n");
+      printf(">Renovation cost: %d\n", settingsParam.renovationCost);
+      printf(">Railroad rent: %d\n", settingsParam.railRent);
+      printf(">Railroad purchase cost: %d\n", settingsParam.railCost);
+      printf(">Electric company multiplier: %d\n", settingsParam.electricMulti);
+      printf(">Electric company purchase cost: %d\n", settingsParam.electricCost);
+    
+    newL
+      printf(">Feelin' lucky range\n>>bonus: [%d , %d]\n>>penalty: [%d , %d]\n",
            settingsParam.bonusrange.min, settingsParam.bonusrange.max,
            settingsParam.penaltyrange.min, settingsParam.penaltyrange.max);
-    setYellow
-    printf("%s\n",settingsDiv);
-    setRed
-    printf("Dice faces: %d\n", settingsParam.dicerange.max);
-    printf("Go! Tile bonus: %d\n", settingsParam.goBonus);
-    printf("Go! Passing bonus: %d\n", settingsParam.passingGo);
-    setYellow
-    printf("%s\n",settingsDiv);
-    setPurple
-        printf("Starting balance: %d\n", settingsParam.startingBalance);
-        printf("Starting position: %d\n", settingsParam.startingPos);
-    resetColor
-
-    setYellow
-        printf("%s\n",settingsDiv);
+    newL
+      printf(">Dice faces: %d\n", settingsParam.dicerange.max);
+      printf(">Go! Tile bonus: %d\n", settingsParam.goBonus);
+      printf(">Go! Passing bonus: %d\n", settingsParam.passingGo);
+    
+    newL
+        printf(">Starting balance: %d\n", settingsParam.startingBalance);
+        printf(">Starting position: %d\n", settingsParam.startingPos);
     resetColor
     printf("\n");
 }

@@ -14,16 +14,26 @@ settings settingsPrompt(settings initsettings)
     do
     { // while the player has yet to press 'G', continue displaying the settings screen
         clear
-        
         displayCurrentConfig(initsettings); // defined in SettingsUI.c, used to display current settings
         
+        char* div = createDivider('=',23);
+        printf("%s[SETTINGS MENU]%s\n\n",div,div);
         printf("[1] Edit win conditions\n");    
+        
+        newL
+          
         printf("[2] Edit renovation cost\n");   
         printf("[3] Edit railroad rent\n");     
         printf("[4] Edit railroad purchase cost\n");                
         printf("[5] Edit the electric company's multiplier\n");
         printf("[6] Edit the electric company's purchase cost\n");
+        
+        newL
+          
         printf("[7] Edit feeling lucky range\n");
+        
+        newL
+          
         printf("[8] Edit dice faces\n");
         printf("[9] Edit Go! tile bonus amount\n");
         printf("[0] Edit Go! passing bonus amount\n");
