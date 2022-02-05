@@ -29,43 +29,37 @@ void displayCurrentConfig(settings settingsParam)
     printf("\n[CONFIG SETTINGS]\n");
 
     char* settingsDiv = createDivider('=',34);
+    setYellow
     printf("%s\n",settingsDiv);
-    newL
+    setCyan
     printf("Renovation cost: %d\n", settingsParam.renovationCost);
     printf("Railroad rent: %d\n", settingsParam.railRent);
     printf("Railroad purchase cost: %d\n", settingsParam.railCost);
     printf("Electric company multiplier: %d\n", settingsParam.electricMulti);
     printf("Electric company purchase cost: %d\n", settingsParam.electricCost);
-    newL
+    setYellow
     printf("%s\n",settingsDiv);
-
-    newL
-    printf("Feelin' lucky range\n    bonus: [%d , %d]\n    penalty: [%d , %d]\n",
+    setGreen
+    printf("Feelin' lucky range\n>>bonus: [%d , %d]\n>>penalty: [%d , %d]\n",
            settingsParam.bonusrange.min, settingsParam.bonusrange.max,
            settingsParam.penaltyrange.min, settingsParam.penaltyrange.max);
-    newL
+    setYellow
     printf("%s\n",settingsDiv);
-    printf("\nDice faces: %d\n", settingsParam.dicerange.max);
+    setRed
+    printf("Dice faces: %d\n", settingsParam.dicerange.max);
     printf("Go! Tile bonus: %d\n", settingsParam.goBonus);
     printf("Go! Passing bonus: %d\n", settingsParam.passingGo);
-    newL
-
+    setYellow
     printf("%s\n",settingsDiv);
-
-    newL
-
-    setGreen
-        printf("Starting balance: %d\n", settingsParam.startingBalance);
-    resetColor
     setPurple
+        printf("Starting balance: %d\n", settingsParam.startingBalance);
         printf("Starting position: %d\n", settingsParam.startingPos);
     resetColor
 
-    newL
-
-    printf("%s\n",settingsDiv);
-
-    printf("\n\n");
+    setYellow
+        printf("%s\n",settingsDiv);
+    resetColor
+    printf("\n");
 }
 
 /*
