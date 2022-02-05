@@ -108,12 +108,12 @@ int main()
             break;
         case 'S':
             game.state.SETTINGS = settingsPrompt(game.state.SETTINGS);
-            game.arrPlayerContainer[0] = initializePlayer(game.state.SETTINGS);// update player settings
-            game.arrPlayerContainer[1] = initializePlayer(game.state.SETTINGS);// update player settings
             break;
         case 'G':
             do
             {
+                game.arrPlayerContainer[1] = initializePlayer(game.state.SETTINGS);// update player settings
+                game.arrPlayerContainer[0] = initializePlayer(game.state.SETTINGS);// update player settings
                 char **ptrP1Name = &game.arrPlayerContainer[0].name; // change player 1 name
                 fetchPlayerName(ptrP1Name);
                 ptrP1Name = NULL;
