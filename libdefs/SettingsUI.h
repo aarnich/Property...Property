@@ -15,7 +15,7 @@
 
 // displays all parameters defined in settings struct relevant to game events
 
-void displayCurrentConfig(struct settings settingsParam);
+void displayCurrentConfig(settings settingsParam);
 
 // displays all active winconditions
 

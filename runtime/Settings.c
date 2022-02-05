@@ -8,7 +8,7 @@
     Primary settings menu function that enables customization. Calls functions defined in Settings.h
     @param initsettings settings struct with initialized values
 */
-struct settings settingsPrompt(struct settings initsettings)
+settings settingsPrompt(settings initsettings)
 {
     char cSettingsSelect;
     do
@@ -26,7 +26,13 @@ struct settings settingsPrompt(struct settings initsettings)
         printf("[7] Edit feeling lucky range\n");
         printf("[8] Edit dice faces\n");
         printf("[9] Edit Go! tile bonus amount\n");
-        printf("[0] Edit passing Go! bonus amount\n");
+        printf("[0] Edit Go! passing bonus amount\n");
+
+        newL
+
+        printf("[X] Edit starting balance\n");
+        printf("[F] Edit starting position\n");
+
         newL
 
         setRed
@@ -37,8 +43,8 @@ struct settings settingsPrompt(struct settings initsettings)
             printf("[S] Save and Exit \n\n"); // select to exit the settings prompt and store modifications made
         resetColor
 
-        char validSettingsInput[12] = "1234567890DS";
-        cSettingsSelect = handleInput(validSettingsInput, 12);
+        char validSettingsInput[] = "1234567890DSXF";
+        cSettingsSelect = handleInput(validSettingsInput, strlen(validSettingsInput));
 
         switch (cSettingsSelect)
         {
@@ -74,7 +80,7 @@ struct settings settingsPrompt(struct settings initsettings)
                 &initsettings.penaltyrange);
             break;
         case '8':
-            printf("\nThis defines up to how many faces the dice can have.\n");
+            printf("\nThis defines the die's maximum value\n");
             changeIntParam(&initsettings.dicerange.max, "How many faces should the dice have (6 default) ?: ");
             break;
         case '9':
@@ -83,7 +89,15 @@ struct settings settingsPrompt(struct settings initsettings)
             break;
         case '0':
             printf("\npassing go! amount alludes to the amount of cash the players get each time they pass by Go!\n");
-                changeIntParam(&initsettings.passingGo, "Enter passing Go! bonus amount: ");
+            changeIntParam(&initsettings.passingGo, "Enter passing Go! bonus amount: ");
+            break;
+        case 'X':
+            printf("\nHow much money the two players start with\n");
+            changeIntParam(&initsettings.startingBalance, "Enter starting balance: ");
+            break;
+        case 'F':
+            printf("\nWhere you begin on the board\n");
+            changeIntParam(&initsettings.startingPos, "Enter starting position: ");
             break;
         case 'D':
             initsettings = initializeSettings();

@@ -61,13 +61,24 @@ char* createDivider(char divSymbol, int divLength){
 /*
     A simple method that helps with code readability. Asks the user to press enter in order to continue with game events
 */
-void continuePrompt(){
+void continuePrompt()
+{
     sleep_ms(500);
-    fflush(stdout);
-    printf("\nPress [Enter] to continue: ");
+    setGreen
+        printf("\nPress [Enter] to continue: ");
+    resetColor
     getchar();
 }
 
+/*
+    Small UI method that only displays the player's balance
+*/
+void showPendingBalance(int pendingBalance) 
+{
+    setGreen
+        printf("\n\nPENDING BALANCE: [%d 💸]",pendingBalance);
+    resetColor
+}
 /*
     Prints a string by printing each individual character sequentially within a randomized time interval 
     in order to mimic human typing
@@ -151,7 +162,10 @@ void showPersonalBalanceUpdate(int currentBalance, int newBalance)
         setGreen
     else
         setWhite
-    printf("\nYour pending balance: %d ➡️ %d\n", currentBalance, newBalance);
+
+    printf("\n>>Changes: 💲%d\n", newBalance - currentBalance);
+    printf(">>Your pending balance: 💲%d ➡️ 💲%d\n", currentBalance, newBalance);
+
     resetColor
 }
 
@@ -174,7 +188,7 @@ void showBalanceUpdate(
                     )
 {
     // char* DIVIDER = createDivider(' ', 24); optional divider to center balance update elements
-    char* DIVIDER2 = createDivider('=', 18);
+    char* DIVIDER2 = createDivider(' ', 21);
     char* p1Indicator = malloc(128);
     char* p2Indicator = malloc(128);
 
@@ -184,25 +198,25 @@ void showBalanceUpdate(
 "               └┼┘  ╚═╝┴ ┴┴─┘┴ ┴┘└┘└─┘└─┘  ╚═╝┴  ─┴┘┴ ┴ ┴ └─┘  └┼┘"
     };
     int rows = sizeof balanceUpdateImg / sizeof balanceUpdateImg[0];
+    newL
+    newL
     setYellow
-    newL
-    newL
-    print2d(balanceUpdateImg, rows);
+      print2d(balanceUpdateImg, rows);
     resetColor
     if(p1CurrentBalance < p1NewBalance){
-        p1Indicator = "🔺";
+        p1Indicator = "💹";
         setGreen;
     }
     else if(p1CurrentBalance > p1NewBalance){
-        p1Indicator = "🔻";
+        p1Indicator = "📉";
         setRed
     }
     else{
-        p1Indicator = " ✒";
+        p1Indicator = "🟡";
         setYellow 
     } 
-    sleep_ms(1000);
-    printf("\n%29s %s %s's balance: \n%40s %d ➡️ %d\n\n",
+    sleep_ms(200);
+    printf("\n%29s %s %s's balance: \n%40s 💲%d ➡️ 💲%d\n\n",
                     " ",
                     p1Indicator,
                     p1Name,
@@ -212,18 +226,19 @@ void showBalanceUpdate(
     );
     resetColor
     if(p2CurrentBalance < p2NewBalance){
-        p2Indicator = "🔺";
+        p2Indicator = "💹";
         setGreen
     }
     else if(p2CurrentBalance > p2NewBalance){
-        p2Indicator = "🔻";
+        p2Indicator = "📉";
         setRed
     }  
     else{
-        p2Indicator = " ✒";
+        p2Indicator = "🟡";
         setYellow
     }
-    printf("\n%29s %s %s's balance: \n%40s %d ➡️ %d\n\n",
+    sleep_ms(200);
+    printf("\n%29s %s %s's balance: \n%40s 💲%d ➡️ 💲%d\n\n",
                     " ",
                     p2Indicator,
                     p2Name,
@@ -231,9 +246,9 @@ void showBalanceUpdate(
                     p2CurrentBalance,
                     p2NewBalance 
     );
-    sleep_ms(700);
+    sleep_ms(200);
     setYellow
-    printf("\n%s[ STATEMENT ISSUED BY: Wayland Corporation ]%s\n",DIVIDER2,DIVIDER2);
+      printf("\n%s>>STATEMENT ISSUED BY: WAYLAND BANKING<<%s  \n",DIVIDER2,DIVIDER2);
     resetColor
 }
 
@@ -508,7 +523,7 @@ void showRail(){
         };
         rows = sizeof theRail / sizeof theRail[0];
         print2d(theRail, rows);
-        char* railMsg = "\nYou hear the sound of trains and the complex machinations of the industrial era!\n\n You are currently at: The Railroad station";
+        char* railMsg = "You hear the sound of trains and the complex machinations of the industrial era!\n\n You are currently at: The Railroad station";
 
         newL
 
@@ -579,38 +594,37 @@ void showJail()
     // a random message that tells the compound why you're here
     char* jailCard[] = {
         "collecting rainwater",
-        "being born with the wrong skin color", "for living in the hood", "tax evasion",
-        "adultery", "liking Ex Battalion", "being a Teemo main", "spamming Astra in diamond elo"
+        "being born with the wrong skin color", "living in the hood", "tax evasion",
+        "adultery", "suspiciously lurking on Discord", "being a Teemo main", "abusing Astra in dia elo"
     };
     // which compound you're to
     char* jailLocation[] = {
         "Guantanamo Bay", "Auschwitz", "New Bilibid Prison", "a dysfunctional Filipino household"
     };
     char* jailMsg[] = {
-        "\n📚The JUDGE: You're being sent to "," for ", " how do you plead?\n",
+        "📚The JUDGE: You're being sent to "," for ", " how do you plead?\n",
         "💪CELLMATE: Don't drop the soap bar hun :)\n", 
-        "👤FORMER PRESIDENT RODRIGO ROA DUTERTE:...\n"
+        "👤FORMER PRESIDENT RODRIGO ROA DUTERTE:........Hi\n"
     };
 
     int cardSize = sizeof jailCard / sizeof jailCard[0];
     int locationSize = sizeof jailLocation / sizeof jailLocation[0];
-
+    char* strLocation = jailLocation[getRandNum(0,locationSize - 1)];
+    char* strCard = jailCard[getRandNum(0,cardSize - 1)]; 
+    
     print1d(jailMsg[0], strlen(jailMsg[0]), 120, 120);
+    
+    setRed
+        print1d(strLocation, strlen(strLocation), 120, 120);
+    resetColor
+    
     print1d(jailMsg[1], strlen(jailMsg[1]), 120, 120);
 
-    // get jail location
-    char* strLocation = jailLocation[getRandNum(0,locationSize - 1)];
-
     setRed
-        print1d(strLocation, strlen(strLocation), 150, 150);
+        print1d(strCard, strlen(strCard), 120, 120);
     resetColor
 
     print1d(jailMsg[2], strlen(jailMsg[2]), 120, 120);
-    // get jail card
-    char* strCard = jailCard[getRandNum(0,cardSize - 1)]; 
-    setRed
-        print1d(strCard, strlen(strCard), 150, 150);
-    resetColor
 
     print1d(jailMsg[3], strlen(jailMsg[3]), 120, 120);
     print1d(jailMsg[4], strlen(jailMsg[4]), 120, 120);
@@ -660,7 +674,7 @@ void showTree()
            print2d(display,rows);
         resetColor
 
-        char* treeMsg = "PARK RANGER: 🐒 WOAH THERE!\ndon't confuse the monkey for your reflection.\n\nYou're not THAT ugly.\n\n You are in: The Tree House";
+        char* treeMsg = "PARK RANGER: 🐒 WOAH THERE!\ndon't confuse the monkey for your reflection.\nYou're not THAT ugly.\n\n You are in: The Tree House";
         print1d(treeMsg, strlen(treeMsg), 100, 100);
 }
 void showElectric()
@@ -699,24 +713,6 @@ void showElectric()
 "▓▓      ██████▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓██████      ▒▒",
 "▓▓      ░░████████████████████████████████████████████████████████████▒▒      ▒▒",
 "▓▓                                                                            ▒▒",
-"▓▓                                                                            ▒▒",
-"▓▓                                                                            ▒▒",
-"▓▓                                                                            ▒▒",
-"▓▓          ▓▓██░░▒▒░░  ██████░░████▓▓  ▓▓  ██  ████▓▓  ██    ██████          ▒▒",
-"▓▓        ▓▓▓▓  ██░░▒▒░░▒▒██    ██  ▓▓  ▓▓  ██  ░░      ██░░  ██  ░░██        ▒▒",
-"▓▓        ██    ▓▓  ██▒▒░░██▓▓  ██░░██  ██████  ██▓▓▒▒▒▒░░▓▓  ██    ██        ▒▒",
-"▓▓        ██    ▓▓  ████  ██    ██░░██  ██  ██  ░░    ██▓▓██  ██    ██        ▒▒",
-"▓▓        ░░██▓▓██  ▒▒██  ████░░██  ▓▓  ▓▓  ██  ████▓▓▓▓  ▓▓  ██████▓▓        ▒▒",
-"▓▓            ░░                                                              ▒▒",
-"▓▓                                                                            ▒▒",
-"▓▓                                                                            ░░",
-"▓▓  ██████  ░░████░░██  ██  ▓▓████████████░░██    ██  ██  ██  ██████░░▓▓▓▓██  ░░",
-"▓▓  ██  ▓▓░░██    ██▒▒░░▓▓  ░░██░░░░▓▓  ░░▒▒██    ██  ▓▓▒▒██  ██░░▒▒  ██▒▒░░  ░░",
-"▓▓  ██░░░░  ██    ██  ██░░▓▓  ██    ▓▓░░▒▒░░██    ██  ▒▒▓▓██  ██      ▒▒  ▒▒▓▓░░",
-"▓▓  ██      ░░████░░  ██  ██  ██████▓▓  ░░▒▒████▒▒██  ▒▒  ██  ██████▒▒██████░░░░",
-"▓▓  ░░        ░░░░    ░░  ░░  ░░░░░░░░    ░░░░░░░░░░  ░░  ░░  ░░░░░░░░  ▒▒░░  ▒▒",
-"▓▓                                                                            ▒▒",
-"░░                                                                              ",
 "▒▒                                ░░░░░░░░░░                          ░░░░    ▒▒"
 
         };
@@ -738,7 +734,7 @@ void showElectric()
             print2d(theElectric, rows);
         resetColor
 
-        char* electricMsg = "💡DAZZLING! You walk inside and sparks fly off left and right!\n\nYou hold a bottle that seems to contain the very essence of the sun.\n\nThis place can not be cheap...\n\nYou are in: The Electric Company";
+        char* electricMsg = "💡DAZZLING! You walk inside and sparks fly off left and right!\nYou hold a bottle that seems to contain the very essence of the sun.\nThis place can not be cheap...\n\n You are in: The Electric Company";
         print1d(electricMsg, strlen(electricMsg), 120,120);
         fflush(stdout);
         sleep_ms(1000);
@@ -854,7 +850,7 @@ void showCastle(){
         print1d(castleMsg, strlen(castleMsg), 100, 100);
         sleep_ms(700);
         char* dragonMsg1 = "\n...\nIS THAT A ****ING DRAGON?!?\n";
-        print1d(dragonMsg1, strlen(dragonMsg1), 180,180);
+        print1d(dragonMsg1, strlen(dragonMsg1), 200,200);
         char* dragon[] = {
 "                                                                                  ▒▒   ",
 "                                                                ▒▒▒▒▒▒                 ",
@@ -971,8 +967,8 @@ void showIgloo(){
             print2d(display, rows);
         resetColor
 
-        char* iceMsg = "😰 who turned all the ACs on?\n You have landed squarely in the arctic! Good luck surviving out here bruh.\n Oh look, an Igloo!\n\nYou are currently in: The Igloo";
-        print1d(iceMsg, strlen(iceMsg),170,180);
+        char* iceMsg = "😰 who turned all the ACs on?\nYou have landed squarely in the arctic! Good luck surviving out here bruh.\nOh look, an Igloo!\n\nYou are currently in: The Igloo";
+        print1d(iceMsg, strlen(iceMsg),120,120);
         fflush(stdout);
         sleep_ms(1000);
 }
@@ -1016,7 +1012,7 @@ void showFarm(){
 
         fflush(stdout);
         sleep_ms(600);
-        char* farmMsg = "\n🐄You smell the fresh air and get a distinct stench of cow manure\nYou're in the country side! The corn gleans with fresh morning dew\n\nYou are currently in: The Farm house";
+        char* farmMsg = "🐄You smell the fresh air and get a distinct stench of cow manure\nYou're in the country side! The corn gleans with fresh morning dew\n\n You are currently in: The Farm house";
 
         newL
 
@@ -1148,7 +1144,7 @@ void showGo(){
 
     resetColor
 
-    char* goMsg = "\nHOUSTON: 🏁Go Go Go!' The bank handed you a STIMULUS CHECK!\n\nYou are currently at: Go!";
+    char* goMsg = "\nHOUSTON: 🏁Go Go Go! The bank handed you a STIMULUS CHECK!\n\nYou are currently at: Go!";
     fflush(stdout);
     print1d(goMsg, strlen(goMsg), 200,200);
 }
@@ -1201,10 +1197,7 @@ void showWitch(){
 "        ░ ▓██▓ ░ ░▓█ ░██ ▒▓█  ▄    ░█░ █ ░█ ░██░░ ▓██▓ ░ ▒▓▓▄ ▄██▒░▓█ ░██ ",
 "          ▒██▒ ░ ░▓█▒░██▓░▒████▒   ░░██▒██▓ ░██░  ▒██▒ ░ ▒ ▓███▀ ░░▓█▒░██▓",
 "          ▒ ░░    ▒ ░░▒░▒░░ ▒░ ░   ░ ▓░▒ ▒  ░▓    ▒ ░░   ░ ░▒ ▒  ░ ▒ ░░▒░▒",
-"            ░     ▒ ░▒░ ░ ░ ░  ░     ▒ ░ ░   ▒ ░    ░      ░  ▒    ▒ ░▒░ ░",
-"          ░       ░  ░░ ░   ░        ░   ░   ▒ ░  ░      ░         ░  ░░ ░",
-"                  ░  ░  ░   ░  ░       ░     ░           ░ ░       ░  ░  ░",
-"                                                         ░                "
+"            ░     ▒ ░▒░ ░ ░ ░  ░     ▒ ░ ░   ▒ ░    ░      ░  ▒    ▒ ░▒░ ░"
         };
     int rows = sizeof display / sizeof display[0];
     setPurple
@@ -1216,11 +1209,11 @@ void showWitch(){
         print2d(theWitch, rows);
     resetColor
 
-    char* luckMsg = "\nWITCH: You feelin' lucky, Child? 🦹";
+    char* luckMsg = "WITCH: You feelin' lucky, Child?🍀\n";
 
     newL
 
-    print1d(luckMsg,strlen(luckMsg), 230,240);
+    print1d(luckMsg,strlen(luckMsg), 180,180);
 }
 
 /*

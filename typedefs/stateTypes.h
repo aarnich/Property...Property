@@ -28,6 +28,8 @@ typedef struct settings {
     int renovationCost;
     int goBonus;
     int passingGo;
+    int startingBalance;
+    int startingPos;
     range penaltyrange;
     range bonusrange; 
     range dicerange; 
@@ -42,7 +44,7 @@ typedef struct settings {
 extern struct gamestate {
     unsigned int STATEKEY;
     unsigned int activePlayer;
-    struct settings SETTINGS; 
+    settings SETTINGS; 
 }gamestate;
 
 #endif

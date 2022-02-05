@@ -126,6 +126,7 @@ bool playerOwnsProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned i
     @returns boolean value that tells you whether the player proceeded with the game event
 */
 bool playerDialogue(char* strDialogueMsg, char* validInputs){
+    sleep_ms(200);
     printf(strDialogueMsg);
     char c = handleInput(validInputs, strlen(validInputs));
     if(c == validInputs[0])

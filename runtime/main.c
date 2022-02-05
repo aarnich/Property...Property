@@ -30,8 +30,8 @@ struct gamepkg playGame(struct gamepkg game)
     char *strFirstPlayer = lgame.arrPlayerContainer[firstkey].name; 
 
     sleep_ms(500);
-
     printf("%s will go first", strFirstPlayer);     // print opening player's name
+    sleep_ms(500);
     clearbuff                                       // flush buffer to avoid unwanted behaviour
     continuePrompt();                               // getchar clears buffer beforehand
 
@@ -58,8 +58,8 @@ struct gamepkg initializeGame()
 
     struct gamestate initstate = initializeGamestate(); // initialize a gamestate variable with basic values
     struct Player *arrPlayers = malloc(512);            // initialize a player array with size 512
-    arrPlayers[0] = initializePlayer();                 // create player 1 with initial values and store in arrPlayers[0]
-    arrPlayers[1] = initializePlayer();                 // create player 2 with initial values and store in arrPlayers[1]
+    arrPlayers[0] = initializePlayer(initstate.SETTINGS);                 // create player 1 with initial values and store in arrPlayers[0]
+    arrPlayers[1] = initializePlayer(initstate.SETTINGS);                 // create player 2 with initial values and store in arrPlayers[1]
 
     // create game variable that contains players and settings
     struct gamepkg game;
@@ -108,6 +108,8 @@ int main()
             break;
         case 'S':
             game.state.SETTINGS = settingsPrompt(game.state.SETTINGS);
+            game.arrPlayerContainer[0] = initializePlayer(game.state.SETTINGS);// update player settings
+            game.arrPlayerContainer[1] = initializePlayer(game.state.SETTINGS);// update player settings
             break;
         case 'G':
             do

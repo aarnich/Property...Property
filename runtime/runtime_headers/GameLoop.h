@@ -32,7 +32,7 @@ extern struct gamestate initializeGamestate();
 
 // initialize Player
 
-extern Player initializePlayer();
+extern Player initializePlayer(settings config);
 
 // calls game events and updates game values
 

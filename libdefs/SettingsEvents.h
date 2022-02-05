@@ -27,6 +27,8 @@
 #define DEFAULT_LOSING_BALANCE 0
 #define DEFAULT_GO_BONUS 200
 #define DEFAULT_PASSING_GO 200
+#define DEFAULT_STARTINGBALANCE 200
+#define DEFAULT_STARTINGPOS 0
 
 // predefined macro that is used to clear the buffer in order to avoid unwanted infinite loops with input processing
 #define clearbuff               \
@@ -35,7 +37,7 @@
 
 /* INITIALIZATION FUNCTIONS */
 
-struct settings initializeSettings();
+settings initializeSettings();
 struct winconditions initializeWinconditions();
 struct winstate initializeWinstate();
 

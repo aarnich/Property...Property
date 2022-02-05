@@ -21,23 +21,49 @@ bool checkIfMulti(enum wintoggles toggle1, enum wintoggles toggle2)
     Preconditions: settingsParam is a valid settings variable with values set
     @param settingsParam settings variable that contains game configurations
 */
-void displayCurrentConfig(struct settings settingsParam)
+void displayCurrentConfig(settings settingsParam)
 {
 
     displayConditions(settingsParam.winsettings); // display current win conditions set
 
     printf("\n[CONFIG SETTINGS]\n");
 
+    char* settingsDiv = createDivider('=',34);
+    printf("%s\n",settingsDiv);
+    newL
     printf("Renovation cost: %d\n", settingsParam.renovationCost);
     printf("Railroad rent: %d\n", settingsParam.railRent);
     printf("Railroad purchase cost: %d\n", settingsParam.railCost);
     printf("Electric company multiplier: %d\n", settingsParam.electricMulti);
     printf("Electric company purchase cost: %d\n", settingsParam.electricCost);
-    printf("Feelin' lucky range: bonus: [%d , %d] | penalty: [%d , %d]\n",
+    newL
+    printf("%s\n",settingsDiv);
+
+    newL
+    printf("Feelin' lucky range\n    bonus: [%d , %d]\n    penalty: [%d , %d]\n",
            settingsParam.bonusrange.min, settingsParam.bonusrange.max,
            settingsParam.penaltyrange.min, settingsParam.penaltyrange.max);
-    printf("Dice faces: %d\n", settingsParam.dicerange.max);
-    printf("Go! bonus: %d\n", settingsParam.goBonus);
+    newL
+    printf("%s\n",settingsDiv);
+    printf("\nDice faces: %d\n", settingsParam.dicerange.max);
+    printf("Go! Tile bonus: %d\n", settingsParam.goBonus);
+    printf("Go! Passing bonus: %d\n", settingsParam.passingGo);
+    newL
+
+    printf("%s\n",settingsDiv);
+
+    newL
+
+    setGreen
+        printf("Starting balance: %d\n", settingsParam.startingBalance);
+    resetColor
+    setPurple
+        printf("Starting position: %d\n", settingsParam.startingPos);
+    resetColor
+
+    newL
+
+    printf("%s\n",settingsDiv);
 
     printf("\n\n");
 }

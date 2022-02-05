@@ -13,5 +13,5 @@
 
 // Primary settings screen function
 
-struct settings settingsPrompt(struct settings initsettings);
+settings settingsPrompt(settings initsettings);
 #endif

@@ -44,8 +44,8 @@ struct winconditions initializeWinconditions(){
     This function returns initial values for struct settings
     @return the initial values for settings (initsettings)
 */
-struct settings initializeSettings(){
-    struct settings initsettings;
+settings initializeSettings(){
+    settings initsettings;
     initsettings.bonusrange.max = DEFAULT_BONUS_MAX;
     initsettings.bonusrange.min = DEFAULT_BONUS_MIN;
     initsettings.penaltyrange.max = DEFAULT_PENALTY_MAX;
@@ -60,6 +60,8 @@ struct settings initializeSettings(){
     initsettings.renovationCost = DEFAULT_RENOVATION_COST;
     initsettings.goBonus = DEFAULT_GO_BONUS;
     initsettings.passingGo = DEFAULT_PASSING_GO;
+    initsettings.startingBalance = DEFAULT_STARTINGBALANCE;
+    initsettings.startingPos = DEFAULT_STARTINGPOS;
     return initsettings;
 }
 

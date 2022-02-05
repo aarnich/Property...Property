@@ -93,4 +93,8 @@ void introScene(int scene);
 
 void displaySwitch(int pos);
 
+// displays player's pending balance
+
+void showPendingBalance(int pendingBalance);
+
 #endif
