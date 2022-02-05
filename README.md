@@ -16,6 +16,10 @@ Run the makefile
 ```
 cd Property...Property/ && make
 ```
+To reset the build, clean the directory
+```
+make clean
+```
 Run the bash script which sets correct environment variables
 ```
 bash runGame.sh
