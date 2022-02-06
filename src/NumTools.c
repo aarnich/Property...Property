@@ -267,3 +267,19 @@ bool isPrime(int num)
 
     return (flag == 2); // true if 2 divisors, false otherwise
 }
+
+/*
+    Simple function that counts how many digits a number has
+    @param num the number whose digits must be counted
+    @returns the number of digits within num
+*/
+int getDigits(int num)
+{
+    int counter = 0;
+    while(num > 0)
+    {
+        num /= 10;
+        counter++;
+    }
+    returun counter;
+}

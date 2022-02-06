@@ -21,7 +21,7 @@ int getRent(int propIndex, int roll, int electricMulti, int railRent)
     if (propIndex == 7)
         return railRent;
 
-    return (propIndex % 7 * 20) * 0.2;
+    return propIndex % 7 * 20 * 0.2;
 }
 
 /*
@@ -39,7 +39,7 @@ int getPropertyCost(int propIndex, int electricCost, int railCost)
     if (propIndex == 7)
         return railCost;
 
-    return (propIndex % 7) * 20;
+    return propIndex % 7 * 20;
 }
 
 /*
@@ -64,6 +64,7 @@ int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned in
     }
 
     index -= 1;
+    value %= 10;                                                   // normalize value to prevent inputs > 1 digit
     int normalizedNum = normalizeNumByIndex(STATEKEY, index + 1);  // set values inclusive of index to zero
     int insertion = (value - OFFSET) * exponentiateNum(10, index); // insert the mutation by the index's position
     int trailing = STATEKEY % exponentiateNum(10, index);          // add trailing unmutated numbers
