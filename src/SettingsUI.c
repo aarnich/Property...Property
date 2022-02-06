@@ -4,6 +4,7 @@
 */
 
 #include "../libdefs/SettingsUI.h"
+
 /*
     This function is used to determine whether the game must evaluate multiple wintoggles or not
     Preconditions: toggle1 and toggle2 are valid wintoggle enums
@@ -25,28 +26,27 @@ void displayCurrentConfig(settings settingsParam)
 {
 
     setYellow
-      displayConditions(settingsParam.winsettings); // display current win conditions set
+        displayConditions(settingsParam.winsettings); // display current win conditions set
     setCyan
-    printf("\n[CURRENT SETTINGS]\n");
-      printf(">Renovation cost: %d\n", settingsParam.renovationCost);
-      printf(">Railroad rent: %d\n", settingsParam.railRent);
-      printf(">Railroad purchase cost: %d\n", settingsParam.railCost);
-      printf(">Electric company multiplier: %d\n", settingsParam.electricMulti);
-      printf(">Electric company purchase cost: %d\n", settingsParam.electricCost);
-    
+        printf("\n[CURRENT SETTINGS]\n");
+        printf(">Renovation cost: %d\n", settingsParam.renovationCost);
+        printf(">Railroad rent: %d\n", settingsParam.railRent);
+        printf(">Railroad purchase cost: %d\n", settingsParam.railCost);
+        printf(">Electric company multiplier: %d\n", settingsParam.electricMulti);
+        printf(">Electric company purchase cost: %d\n", settingsParam.electricCost);
     newL
-      printf(">Feelin' lucky range\n>>bonus: [%d , %d]\n>>penalty: [%d , %d]\n",
+        printf(">Feelin' lucky range\n>>bonus: [%d , %d]\n>>penalty: [%d , %d]\n",
            settingsParam.bonusrange.min, settingsParam.bonusrange.max,
            settingsParam.penaltyrange.min, settingsParam.penaltyrange.max);
     newL
-      printf(">Dice faces: %d\n", settingsParam.dicerange.max);
-      printf(">Go! Tile bonus: %d\n", settingsParam.goBonus);
-      printf(">Go! Passing bonus: %d\n", settingsParam.passingGo);
-    
+        printf(">Dice faces: %d\n", settingsParam.dicerange.max);
+        printf(">Go! Tile bonus: %d\n", settingsParam.goBonus);
+        printf(">Go! Passing bonus: %d\n", settingsParam.passingGo);
     newL
         printf(">Starting balance: %d\n", settingsParam.startingBalance);
         printf(">Starting position: %d\n", settingsParam.startingPos);
     resetColor
+
     printf("\n");
 }
 
@@ -57,7 +57,6 @@ void displayCurrentConfig(settings settingsParam)
 */
 void displayConditions(struct winconditions wincond)
 {
-
     bool isMulti = checkIfMulti(wincond.arrWintoggles[0], wincond.arrWintoggles[1]);
 
     char *defaultBtn = "ACTIVE";                 // default state of default win conditions
@@ -76,8 +75,10 @@ void displayConditions(struct winconditions wincond)
     if (isMulti)
     {
         char *simulStatus = "FALSE";
+
         if (wincond.isSimul)
             simulStatus = "TRUE";
+
         printf("\nAll conditions must be satisfied: %s\n", simulStatus);
     }
 }
@@ -107,8 +108,8 @@ void displayWinconditionsMenu(struct winconditions wincond)
         buttons[0] = "Disable";
     if (wincond.arrWintoggles[1] == WINNING_BALANCE_REACHED)
         buttons[1] = "Disable";
+    
     newL
-
     printf("[1] %s losing balance \n", buttons[0]);
     printf("[2] %s winning balance \n", buttons[1]);
 
@@ -116,7 +117,7 @@ void displayWinconditionsMenu(struct winconditions wincond)
     if (strcmp(buttons[0], "Enable"))
     {
         newL
-            printf("\n[3] Edit losing balance \n");
+        printf("\n[3] Edit losing balance \n");
         printf("[LOSING BALANCE: %d]\n", wincond.losingBalance);
     }
     if (strcmp(buttons[1], "Enable"))

@@ -2,13 +2,17 @@
     Description: A collection of functions concerned only with the primary game loop
     Author: Aaron Nicholas Gumapac
 */
+
 #include "runtime_headers/GameLoop.h"
+
 /*
     Creates a new player based on configuration settings
     @returns player with initial values
 */
-Player initializePlayer(settings config){
+Player initializePlayer(settings config)
+{
     Player initPlayer;
+
     initPlayer.pos = config.startingPos;
     initPlayer.balance = config.startingBalance;
     initPlayer.jailedCounter = 0;
@@ -17,11 +21,12 @@ Player initializePlayer(settings config){
     initPlayer.name = malloc (256);
     initPlayer.isBankrupt = false;
     initPlayer.isJailed = false;
+
     return initPlayer;
 }
 
 /*
-    initializes gamestate with default values 
+    Initializes gamestate with default values 
     @returns initial gamestate
 */
 struct gamestate initializeGamestate()
@@ -39,9 +44,11 @@ struct gamestate initializeGamestate()
     @param WINNER enum that tells the game whether a winner has been decided
     @returns boolean value that dictates the continuation of the game
 */
-bool continueGame(enum winner WINNER){
+bool continueGame(enum winner WINNER)
+{
     if(WINNER != NONE)
         return false;
+
     return true;
 }
 
@@ -51,28 +58,36 @@ bool continueGame(enum winner WINNER){
     @param ptrP1Jail pointer to jail status of player 1
     @param ptrP2Jail pointer to jail status of player 2
 */
-void updatePlayer(unsigned int* ptrActivePlayer, bool* ptrP1Jail, bool* ptrP2Jail){
+void updatePlayer(unsigned int* ptrActivePlayer, bool* ptrP1Jail, bool* ptrP2Jail)
+{
     int activePlayer = *ptrActivePlayer; // dereference activePlayer pointer
-     if(activePlayer == 1){
-        if(*ptrP2Jail){
+    
+    if(activePlayer == 1)
+    {
+        if(*ptrP2Jail)
+        {
             *ptrP2Jail = false;
+
             if(*ptrP1Jail)
                 *ptrActivePlayer = 3;
         }
         else if(!*ptrP2Jail)
             *ptrActivePlayer = 2;
     }
-    if(activePlayer == 2){
-        if(*ptrP1Jail){
+    if(activePlayer == 2)
+    {
+        if(*ptrP1Jail)
+        {
             *ptrP1Jail = false;
+
             if(*ptrP2Jail)
                 *ptrActivePlayer = 4;
         }
-        else if(!*ptrP1Jail){
+        else if(!*ptrP1Jail)
             *ptrActivePlayer = 1;
-        }
     }
 }
+
 /*
     Updates player position and dynamically draws a route
     @param player the player's whose position is being updated
@@ -83,24 +98,29 @@ void updatePlayer(unsigned int* ptrActivePlayer, bool* ptrP1Jail, bool* ptrP2Jai
 Player updatePlayerPosition(int currentPos, int newPos, int passingGoBonus, Player player)
 {
     int i = currentPos;
+
     for(;i <= newPos; i++)
     {
         for(int k = currentPos; k < i;k++)
         {
             setYellow
+
             if(k% 10 == 4) // indicate jail time 
                 setRed
             if(k % 10 == 6) // indicate lucky position
-                setPurple
+                setPurple  
             if(k % 10 == 0) // indicate go position
                 setCyan
+            
             printf("%d ",k % 10);
             sleep_ms(50);
             fflush(stdout);
         }
+
         setGreen
-        printf("%d",i % 10);
+            printf("%d",i % 10);
         resetColor
+
         fflush(stdout);
 
         if(i != newPos)
@@ -108,30 +128,34 @@ Player updatePlayerPosition(int currentPos, int newPos, int passingGoBonus, Play
 
         fflush(stdout);
         sleep_ms(500);
-
     }
+    
     sleep_ms(300);
+
     if(newPos > 10 && newPos % 10 != 0)
     {
         setGreen
-        printf("\nYou passed by Go! Here's %d\n",passingGoBonus);
+            printf("\nYou passed by Go! Here's %d\n",passingGoBonus);
         resetColor
+
         player.balance += passingGoBonus;
     }
+
     player.pos = newPos%10;
     return player;
 }
 
 /*
-    This function returns a gamepkg with with updated winsettings values;
+    This function returns a gamepkg with updated winsettings values
     @param currentPlayer the player whose turn it is
     @param currentPlayerKey currentPlayer's location (index) in the player array
     @param opposingPlayer currentPlayer's enemy
-    @param enemyPlayeyKey opposingPlayer's location (index) in  the player array
-    @param lstate the state evaluated during updateGame();
+    @param enemyPlayeryKey opposingPlayer's location (index) in  the player array
+    @param lstate the state evaluated during updateGame()
     @returns updated gamepkg struct with new winsettings values
 */
-struct gamepkg saveGame(Player currentPlayer, int currentPlayerKey, Player opposingPlayer, int enemyPlayerKey, struct gamestate lstate){
+struct gamepkg saveGame(Player currentPlayer, int currentPlayerKey, Player opposingPlayer, int enemyPlayerKey, struct gamestate lstate)
+{
     Player* playerContainer = malloc (512);
     playerContainer[currentPlayerKey - 1] = currentPlayer;
     playerContainer[enemyPlayerKey - 1] = opposingPlayer;
@@ -150,24 +174,26 @@ struct gamepkg saveGame(Player currentPlayer, int currentPlayerKey, Player oppos
     @param game game package containing all game data
     @returns updated game after 1 game turn
 */
-struct gamepkg updateGame(struct gamepkg game){
+struct gamepkg updateGame(struct gamepkg game)
+{
     fflush(stdout);
+
     if(game.state.activePlayer == 3 || game.state.activePlayer == 4)
     {
         setRed
-        printf("\nBOTH PLAYERS HAVE BEEN IMPRISONED\n");
+            printf("\nBOTH PLAYERS HAVE BEEN IMPRISONED\n");
         resetColor
+
         game.state.activePlayer -= 2;
         return game;
     }
+
     showGameStatus(game);
     
-    
-    struct gamepkg updatedGame = game;              // localize game package
-    struct gamestate lstate = game.state;           // localize gamestate
+    struct gamepkg updatedGame = game;       // localize game package
+    struct gamestate lstate = game.state;    // localize gamestate
     settings config = game.state.SETTINGS;   // localize settings and create shorthand for code readability
 
-    
     Player* playerContainer = game.arrPlayerContainer;              // localize player container
 
     unsigned int currentPlayerKey = lstate.activePlayer;            // integer value used to index currentPlayer
@@ -191,7 +217,7 @@ struct gamepkg updateGame(struct gamepkg game){
     updatedGame.arrPlayerContainer[currentPlayerKey - 1] = currentPlayer;
     continuePrompt();
 
-    int pendingOpponentBalance = opposingPlayer.balance;    // player 2 balnace to be sent after updateGame() events
+    int pendingOpponentBalance = opposingPlayer.balance;    // player 2 balance to be sent after updateGame() events
     int pendingPlayerBalance = currentPlayer.balance;       // player 1 balance to be sent after updateGame() events
 
     // store player position for easier syntax
@@ -203,27 +229,24 @@ struct gamepkg updateGame(struct gamepkg game){
     bool isHouse = true;            // default property type
 
     displaySwitch(pos);             // display appropriate game dialogue for the current position
+    
     switch(pos)
     {
-        // player lands on Go!
-        case 0: 
+        case 0:         // player lands on Go!
         {
             showPersonalBalanceUpdate(pendingPlayerBalance, pendingPlayerBalance + config.goBonus);
             pendingPlayerBalance += config.goBonus;
             continuePrompt();
             break;
         }
-        // player is Jailed :(
-        case 4:
+        case 4:         // player is Jailed :(
         {
             currentPlayer.isJailed = true;
             currentPlayer.jailedCounter += 1;
             continuePrompt();
             break;  
         }
-
-        // player lands on feelin' lucky plot
-        case 6:
+        case 6:         // player lands on feelin' lucky plot
         {
             currentPlayer.luckyCounter += 1;
             printf("\n[PRESS ENTER to roll the dice]\n");
@@ -231,7 +254,9 @@ struct gamepkg updateGame(struct gamepkg game){
             printf("Divining your luck...\n");
             int num = rollDice(config.dicerange);
             sleep_ms(1000);
-            if(num == 1){
+
+            if(num == 1)
+            {
                 char* witchJailMsg = "\nYOU ROLLED A 1! Oh how you anger me...\n I'm teleporting you to prison for getting such an awful number >:(\n";
                 print1d(witchJailMsg, strlen(witchJailMsg), 120, 120);
                 currentPlayer.isJailed = true;
@@ -254,7 +279,7 @@ struct gamepkg updateGame(struct gamepkg game){
             }
             else
             {
-                printf("\nLady luck frowns upon you and hans you a pitiful %d\n",num);
+                printf("\nLady luck frowns upon you and hands you a pitiful %d\n",num);
                 sleep_ms(500);
                 printf("I loathe composite numbers..\n");
                 sleep_ms(500);
@@ -266,27 +291,27 @@ struct gamepkg updateGame(struct gamepkg game){
                 pendingPlayerBalance -= unluckyNum;
                 sleep_ms(500);
             }
+
             continuePrompt();
-           break;
+            break;
         }
-        case 2: // player lands on the electric company
-        case 7: // player lands on the railroad
+        case 2:         // player lands on the electric company
+        case 7:         // player lands on the railroad
         {
             isHouse = false;
             // 2 and 7 are non house types and cannot be renovated
         }
-        case 1: // player lands on the tree house
-        case 3: // player lands on the beach house
-        case 5: // player lands on the castle 
-        case 8: // player lands on the igloo 
-        case 9: // player lands on the farm house
+        case 1:         // player lands on the tree house
+        case 3:         // player lands on the beach house
+        case 5:         // player lands on the castle 
+        case 8:         // player lands on the igloo 
+        case 9:         // player lands on the farm house
         {
             // instantiate localized statekey
             unsigned int STATEKEY = lstate.STATEKEY;
 
             // get the property index for the current position
             int propIndex = readStatekeyAtIndex(STATEKEY,pos,STATEKEY_OFFSET);
-
             
             bool isOwnedByOpponent = playerOwns(enemyPlayerKey, propIndex);     // flag for enemy property ownership
             bool isOwnedByPlayer = playerOwns(currentPlayerKey, propIndex);     // flag for current player property ownership
@@ -295,17 +320,19 @@ struct gamepkg updateGame(struct gamepkg game){
             // get the current property's cost
             int propertyCost = getPropertyCost(pos,config.electricCost,config.railCost);
 
-            // if the property is owned the bank and the player has enough capital, give the player the choice to purchase the property
+            // if the property is owned by the bank and the player has enough capital, give the player the choice to purchase the property
             if((propIndex == 0) && pendingPlayerBalance >= propertyCost)
             {
                 sleep_ms(200);
                 showPendingBalance(pendingPlayerBalance);
                 sleep_ms(200);
+
                 setYellow
                     printf("\nPROPERTY COST: [%d 💰]\n",propertyCost);
                 resetColor
 
-                if(playerDialogue("\n[B]uy property\n[E]nd turn","BE")){ // if the player buys the property
+                if(playerDialogue("\n[B]uy property\n[E]nd turn","BE"))
+                { // if the player buys the property
                     pendingPlayerBalance -= propertyCost; // subtract from balance
                     lstate.STATEKEY = mutateStatekeyAtIndex(
                         lstate.STATEKEY, pos,
@@ -326,8 +353,9 @@ struct gamepkg updateGame(struct gamepkg game){
             else if((propIndex == 0) && pendingPlayerBalance < propertyCost)
             {
                 setRed
-                printf("\nYou do not have enough money to purchase this property❗");
+                    printf("\nYou do not have enough money to purchase this property❗");
                 resetColor
+
                 sleep_ms(1500);
             }
             else if(isOwnedByPlayer)
@@ -357,6 +385,7 @@ struct gamepkg updateGame(struct gamepkg game){
                         sleep_ms(200);
                         showPendingBalance(pendingPlayerBalance);
                         sleep_ms(200);
+
                         setYellow
                             printf("\nRENOVATION COST: [%d 💸]\n",renovationCost); 
                         resetColor
@@ -390,6 +419,7 @@ struct gamepkg updateGame(struct gamepkg game){
                     }
                 }
             }
+
             if(isOwnedByOpponent) // if the property belongs to the opposing player
             {
                 setRed
@@ -406,14 +436,15 @@ struct gamepkg updateGame(struct gamepkg game){
                 rent = isRenovated ? rent * 2 + 1 : rent;   // if the property is renovated rent is *2 + 1
 
                 sleep_ms(200);
+
                 setGreen
                     printf("RENT: [%d 🤑]\n",rent);
                 resetColor
 
                 sleep_ms(500);
+
                 if(pendingPlayerBalance < rent)             // check if the player has enough capital to pay rent
-                {
-                    
+                { 
                     print1d("\n...",strlen("\n..."),300,300);
 
                     setRed
@@ -437,12 +468,14 @@ struct gamepkg updateGame(struct gamepkg game){
                                 int propID = readStatekeyAtIndex(
                                     lstate.STATEKEY, i,
                                     STATEKEY_OFFSET);
+                        
                                 if(playerOwns(currentPlayerKey,propID))
                                 {
                                     char* strPropName = getPropertyName(i);
                                     printf("[%d]: %s\n",(int)i,strPropName);
                                 }
                             }
+
                             // which properties the player would like to sell
                             int toBeSold = getPlayerSellChoice(lstate.STATEKEY, STATEKEY_OFFSET, currentPlayerKey);
 
@@ -488,7 +521,6 @@ struct gamepkg updateGame(struct gamepkg game){
                             continuePrompt();
                             return updatedGame;
                         }
-
                     }
                 }
                 sleep_ms(700);
@@ -501,11 +533,8 @@ struct gamepkg updateGame(struct gamepkg game){
                 pendingPlayerBalance -= rent;
                 pendingOpponentBalance += rent;
             }
-
         }
     }
-
-
     // show UI flair for balance update and game status
     clear
     showGameStatus(updatedGame);
@@ -530,7 +559,8 @@ struct gamepkg updateGame(struct gamepkg game){
     A dynamic game UI component that displays the current status of the game
     @param game the game package containing all game data
 */
-void showGameStatus(struct gamepkg game){
+void showGameStatus(struct gamepkg game)
+{
     clear
     char* p1Properties = getAllPlayerProperties(game.state.STATEKEY,
                                                 STATEKEY_OFFSET, 1);
@@ -539,6 +569,7 @@ void showGameStatus(struct gamepkg game){
 
     if(strlen(p1Properties) < 1)
         p1Properties = " broke-status";
+
     if(strlen(p2Properties) < 1)
         p2Properties = " broke-status";
 
@@ -548,7 +579,9 @@ void showGameStatus(struct gamepkg game){
     
     printf("\nPlayer 1: %s's Statistics\n",p1.name);
     printf("properties:%s\n", p1Properties);
-    switch(p1.pos){
+
+    switch(p1.pos)
+    {
         case 6:
             setPurple
             break;
@@ -563,14 +596,18 @@ void showGameStatus(struct gamepkg game){
             setCyan
             break;
     }
-    printf("position: %d ",p1.pos); 
+
+    printf("position: %d ",p1.pos);
+
     setGreen
         printf("balance: 💲%d\n",p1.balance);
     resetColor
 
     printf("\nPlayer 2: %s's Statistics\n",p2.name);
     printf("properties:%s\n", p2Properties);
-    switch(p2.pos){
+
+    switch(p2.pos)
+    {
         case 6:
             setPurple
             break;
@@ -585,28 +622,34 @@ void showGameStatus(struct gamepkg game){
             setCyan
             break;
     }
+
     printf("position: %d ",p2.pos);
+
     setGreen
-    printf("balance: 💲%d\n",p2.balance);
+        printf("balance: 💲%d\n",p2.balance);
     resetColor
 
-    if(p1.isJailed){
+    if(p1.isJailed)
+    {
         setRed
-        printf("\nIMPRISONED: [%s]\n",p1.name);
+            printf("\nIMPRISONED: [%s]\n",p1.name);
         resetColor
     }
-    if(p2.isJailed){
+    if(p2.isJailed)
+    {
         setRed
-        printf("\nIMPRISONED: [%s]\n",p2.name);
+            printf("\nIMPRISONED: [%s]\n",p2.name);
         resetColor
     }
+
     char* DIVIDER = createDivider(' ',1);
+
     setGreen
-    printf("\n%s%s's TURN%s\n",
-    DIVIDER,
-    game.arrPlayerContainer[currentPlayerIndex].name,
-    DIVIDER 
-    );
+        printf("\n%s%s's TURN%s\n",
+        DIVIDER,
+        game.arrPlayerContainer[currentPlayerIndex].name,
+        DIVIDER 
+        );
     resetColor
 }
 
@@ -614,20 +657,20 @@ void showGameStatus(struct gamepkg game){
     Populates the wincontext list given the context type
     @param arrContext[] a list of contexts that tell the game how a winner was decided
     @param context the wincontext type to use
-    @returns arrContext that is populated with the given cwincontext
+    @returns arrContext that is populated with the given wincontext
 */
-enum winContext* populateContext(enum winContext arrContext[], enum winContext context){
-    if(arrContext[0] != NOCONTEXT && arrContext[1] == NOCONTEXT){
+enum winContext* populateContext(enum winContext arrContext[], enum winContext context)
+{
+    if(arrContext[0] != NOCONTEXT && arrContext[1] == NOCONTEXT)
         arrContext[1] = context;
-    }
-    else{
+    else
         arrContext[0] = context;
-    }
+
     return arrContext;
 }
 
 /*
-    Updates the winstate variable in contained in state and decides who to crown as the winner
+    Updates the winstate variable contained in state and decides who to crown as the winner
     @param winsettings a struct of type winconditions that contains winner determinants
     @param p1 player1's data
     @param p2 player2's data
@@ -636,13 +679,13 @@ enum winContext* populateContext(enum winContext arrContext[], enum winContext c
 struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
 {
     struct winstate localWinstate = winsettings.winstate;
+
     if(p1.isBankrupt)
     {
         localWinstate.winRationale = populateContext(localWinstate.winRationale, ENEMY_BANKRUPTY);
         localWinstate.winner = PLAYER2;
         return localWinstate;
     }
-    
     if(p2.isBankrupt)
     {
         localWinstate.winRationale = populateContext(localWinstate.winRationale, ENEMY_BANKRUPTY);
@@ -667,14 +710,12 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
             p2Flags += 1;
             populateContext(localWinstate.winRationale, ENEMY_LOSING_BALANCE);
         }
-
         if(p2.balance <= floor)
         {
             p1Flags += 1;
             populateContext(localWinstate.winRationale, ENEMY_LOSING_BALANCE);
         }
     }
-    
     if(checkWinningBalance)
     {
         if(p1.balance >= ceil)
@@ -688,7 +729,6 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
             populateContext(localWinstate.winRationale, REACHED_WINNING_BALANCE);
         }
     }
-
     if(requiredFlags == p2Flags || requiredFlags == p1Flags)
     {
         if(p2Flags == p1Flags)
@@ -698,5 +738,6 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
         else if(p1Flags == requiredFlags)
             localWinstate.winner = PLAYER1;
     }
+
     return localWinstate;
 }

@@ -1,5 +1,6 @@
 #include "runtime_headers/GameLoop.h"
 #include "runtime_headers/Settings.h"
+
 /*
     Description: Property...Property is a terminal-based take on Monopoly written entirely in C.
     Programmed by: Aaron Nicholas Lizardo Gumapac
@@ -11,14 +12,13 @@
 //    Repo link: https://github.com/aarnich/Property...Property
 
 /*
-    This function begins the game and calls game functions.
+    This function begins the game and calls game functions
     @param game the game package that contains all game information
     @returns a game package after the game is finished
 */
 struct gamepkg playGame(struct gamepkg game)
 {
-
-    struct gamepkg lgame = game; // localize parameter in order to minimize errors
+    struct gamepkg lgame = game;                    // localize parameter in order to minimize errors
 
     printf("\nRandomizing first player =>> ");
     lgame.state.activePlayer = getRandNum(1, 2);    // randomize the first player
@@ -49,27 +49,30 @@ struct gamepkg playGame(struct gamepkg game)
 }
 
 /*
-    creates a struct gamepkg with initial game values and asks the users to configure
+    Creates a struct gamepkg with initial game values and asks the users to configure
     settings and enter their names 
     @returns a game with intitial values
 */
 struct gamepkg initializeGame()
 {
 
-    struct gamestate initstate = initializeGamestate(); // initialize a gamestate variable with basic values
-    struct Player *arrPlayers = malloc(512);            // initialize a player array with size 512
-    arrPlayers[0] = initializePlayer(initstate.SETTINGS);                 // create player 1 with initial values and store in arrPlayers[0]
-    arrPlayers[1] = initializePlayer(initstate.SETTINGS);                 // create player 2 with initial values and store in arrPlayers[1]
+    struct gamestate initstate = initializeGamestate();     // initialize a gamestate variable with basic values
+    struct Player *arrPlayers = malloc(512);                // initialize a player array with size 512
+    arrPlayers[0] = initializePlayer(initstate.SETTINGS);   // create player 1 with initial values and store in arrPlayers[0]
+    arrPlayers[1] = initializePlayer(initstate.SETTINGS);   // create player 2 with initial values and store in arrPlayers[1]
 
     // create game variable that contains players and settings
     struct gamepkg game;
-    game.state = initstate;               // store initialstate into game.state
+    game.state = initstate;               // store initial state into game.state
     game.arrPlayerContainer = arrPlayers; // store player array into arrPlayerContainer
 
     // return a game variable with initial values that has been through player customization
     return game;
 }
 
+/*
+    Displays a game manual
+*/
 void displayManual()
 {
     printf("\n\nAt the start of the game, players do not own any property. All properties on the board are owned by the Bank.\nAll properties owned by the Bank are up for sale and are not renovated.\nThe Bank has unlimited cash. The smallest denomination in this game is 1.");
@@ -82,7 +85,6 @@ void displayManual()
 int main()
 {
     srand((unsigned)time(NULL));
-
 
     clear 
 
@@ -104,52 +106,54 @@ int main()
         choice = handleInput(startingInputs, strlen(startingInputs));
         switch (choice)
         {
-        case 'E': // the player exits the game
-            break;
-        case 'S':
-            game.state.SETTINGS = settingsPrompt(game.state.SETTINGS);
-            break;
-        case 'G':
-            do
-            {
-                game.arrPlayerContainer[1] = initializePlayer(game.state.SETTINGS);// update player settings
-                game.arrPlayerContainer[0] = initializePlayer(game.state.SETTINGS);// update player settings
-                char **ptrP1Name = &game.arrPlayerContainer[0].name; // change player 1 name
-                fetchPlayerName(ptrP1Name);
-                ptrP1Name = NULL;
+            case 'E': // the player exits the game
+                break;
+            case 'S':
+                game.state.SETTINGS = settingsPrompt(game.state.SETTINGS);
+                break;
+            case 'G':
+                do
+                {
+                    game.arrPlayerContainer[1] = initializePlayer(game.state.SETTINGS);// update player settings
+                    game.arrPlayerContainer[0] = initializePlayer(game.state.SETTINGS);// update player settings
+                    char **ptrP1Name = &game.arrPlayerContainer[0].name; // change player 1 name
+                    fetchPlayerName(ptrP1Name);
+                    ptrP1Name = NULL;
 
-                char **ptrP2Name = &game.arrPlayerContainer[1].name; // change player 2 name
-                fetchPlayerName(ptrP2Name); 
-                ptrP2Name = NULL;
+                    char **ptrP2Name = &game.arrPlayerContainer[1].name; // change player 2 name
+                    fetchPlayerName(ptrP2Name); 
+                    ptrP2Name = NULL;
 
-                game = playGame(game);                              // begin the primary game loop
+                    game = playGame(game);                              // begin the primary game loop
 
-                clear
+                    clear
 
-                // display ending screen after the game ends
-                displayEndingScreen(game.state.SETTINGS.winsettings.winstate,
+                    // display ending screen after the game ends
+                    displayEndingScreen(game.state.SETTINGS.winsettings.winstate,
                                         game.arrPlayerContainer[0], game.arrPlayerContainer[1]);
+                    continuePrompt();
+
+                    // prompt for a replay
+                    printf("Press [G] to play again\n");
+                    printf("Press [E] to exit\n");
+                    char exitInputs[2] = "GE";
+                    choice = handleInput(exitInputs, strlen(exitInputs));
+                    if(choice == 'G') // reset win settings but preserve settngs
+                        game.state.SETTINGS.winsettings.winstate = initializeWinstate();
+
+                } 
+                while (choice == 'G');
+
+                break;
+            case 'I':
+                displayManual();
                 continuePrompt();
+                newL
 
-                // prompt for a replay
-                printf("Press [G] to play again\n");
-                printf("Press [E] to exit\n");
-                char exitInputs[2] = "GE";
-                choice = handleInput(exitInputs, strlen(exitInputs));
-                if(choice == 'G') // reset win settings but preserve settngs
-                    game.state.SETTINGS.winsettings.winstate = initializeWinstate();
-
-            } while (choice == 'G');
-            break;
-        case 'I':
-
-            displayManual();
-            continuePrompt();
-            newL
-
-            break;
+                break;
         }
-    } while (choice != 'E');
+    } 
+    while (choice != 'E');
 
     char exitMsg[] = "\nNext time come back with better players.\n";
     print1d(exitMsg, strlen(exitMsg), 200, 200);

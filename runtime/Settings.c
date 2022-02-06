@@ -2,15 +2,17 @@
     Description: Contains the function necessary for game configuration
     Author: Aaron Nicholas Gumapac
 */
+
 #include "runtime_headers/Settings.h"
 
 /*
-    Primary settings menu function that enables customization. Calls functions defined in Settings.h
+    Primary settings menu function that enables customization. Calls functions defined in "Settings.h".
     @param initsettings settings struct with initialized values
 */
 settings settingsPrompt(settings initsettings)
 {
     char cSettingsSelect;
+
     do
     { // while the player has yet to press 'G', continue displaying the settings screen
         clear
@@ -58,63 +60,64 @@ settings settingsPrompt(settings initsettings)
 
         switch (cSettingsSelect)
         {
-        case '1':
-            initsettings.winsettings = winconditionsMenu(initsettings.winsettings);
-            break;
-        case '2':
-            printf("\nHow much money it would cost to renovate a property\n");
-            changeIntParam(&initsettings.renovationCost, "Enter renovation cost: ");
-            break;
-        case '3':
-            printf("\nHow much money you would have to fork over when you're paying rent for the RailRoad\n");
-            changeIntParam(&initsettings.railRent, "Enter railroad rent: ");
-            break;
-        case '4':
-            printf("\nSelf explanatory.\n");
-            changeIntParam(&initsettings.railCost, "Enter railroad purchase cost: ");
-            break;
-        case '5':
-            printf("\nBy how much should your roll be multiplied when paying rent in the Electric Company.\n");
-            changeIntParam(&initsettings.electricMulti, "Enter electric co. multiplier: ");
-            break;
-        case '6':
-            printf("\nDuh.\n");
-            changeIntParam(&initsettings.electricCost, "Enter electric co. purchase cost: ");
-            break;
-        case '7':
-            printf("\nHow much you lose/gain when you roll a nonprime/prime number when talking to the witch\n");
-            sleep_ms(1000);
-            continuePrompt();
-            feelingLuckySubMenu(
-                &initsettings.bonusrange,
-                &initsettings.penaltyrange);
-            break;
-        case '8':
-            printf("\nThis defines the die's maximum value\n");
-            changeIntParam(&initsettings.dicerange.max, "How many faces should the dice have (6 default) ?: ");
-            break;
-        case '9':
-            printf("\nGo! tile bonus is the amount of cash players get for landing on Go! and simply not passing by it.\n");
-            changeIntParam(&initsettings.goBonus, "Enter Go! tile bonus amount: ");
-            break;
-        case '0':
-            printf("\npassing go! amount alludes to the amount of cash the players get each time they pass by Go!\n");
-            changeIntParam(&initsettings.passingGo, "Enter passing Go! bonus amount: ");
-            break;
-        case 'X':
-            printf("\nHow much money the two players start with\n");
-            changeIntParam(&initsettings.startingBalance, "Enter starting balance: ");
-            break;
-        case 'F':
-            printf("\nWhere you begin on the board\n");
-            changeIntParam(&initsettings.startingPos, "Enter starting position: ");
-            break;
-        case 'D':
-            initsettings = initializeSettings();
-        default:
-            break;
+            case '1':
+                initsettings.winsettings = winconditionsMenu(initsettings.winsettings);
+                break;
+            case '2':
+                printf("\nHow much money it would cost to renovate a property\n");
+                changeIntParam(&initsettings.renovationCost, "Enter renovation cost: ");
+                break;
+            case '3':
+                printf("\nHow much money you would have to fork over when you're paying rent for the RailRoad\n");
+                changeIntParam(&initsettings.railRent, "Enter railroad rent: ");
+                break;
+            case '4':
+                printf("\nSelf explanatory.\n");
+                changeIntParam(&initsettings.railCost, "Enter railroad purchase cost: ");
+                break;
+            case '5':
+                printf("\nBy how much should your roll be multiplied when paying rent in the Electric Company.\n");
+                changeIntParam(&initsettings.electricMulti, "Enter electric co. multiplier: ");
+                break;
+            case '6':
+                printf("\nDuh.\n");
+                changeIntParam(&initsettings.electricCost, "Enter electric co. purchase cost: ");
+                break;
+            case '7':
+                printf("\nHow much you lose/gain when you roll a nonprime/prime number when talking to the witch\n");
+                sleep_ms(1000);
+                continuePrompt();
+                feelingLuckySubMenu(
+                    &initsettings.bonusrange,
+                    &initsettings.penaltyrange);
+                break;
+            case '8':
+                printf("\nThis defines the die's maximum value\n");
+                changeIntParam(&initsettings.dicerange.max, "How many faces should the dice have (6 default) ?: ");
+                break;
+            case '9':
+                printf("\nGo! tile bonus is the amount of cash players get for landing on Go! and simply not passing by it.\n");
+                changeIntParam(&initsettings.goBonus, "Enter Go! tile bonus amount: ");
+                break;
+            case '0':
+                printf("\npassing go! amount alludes to the amount of cash the players get each time they pass by Go!\n");
+                changeIntParam(&initsettings.passingGo, "Enter passing Go! bonus amount: ");
+                break;
+            case 'X':
+                printf("\nHow much money the two players start with\n");
+                changeIntParam(&initsettings.startingBalance, "Enter starting balance: ");
+                break;
+            case 'F':
+                printf("\nWhere you begin on the board\n");
+                changeIntParam(&initsettings.startingPos, "Enter starting position: ");
+                break;
+            case 'D':
+                initsettings = initializeSettings();
+            default:
+                break;
         }
-    } while (cSettingsSelect != 'S');
+    } 
+    while (cSettingsSelect != 'S');
 
     setGreen
         printf("\nConfig Saved!\n\n");

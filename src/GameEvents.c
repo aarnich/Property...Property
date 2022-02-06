@@ -2,6 +2,7 @@
     Description: GameEvents.c is a collection of functions that are required to "play" the game
     Author: Aaron Nicholas Lizardo Gumapac
 */
+
 #include "../libdefs/GameEvents.h"
 
 /*
@@ -19,6 +20,7 @@ int getRent(int propIndex, int roll, int electricMulti, int railRent)
         return electricMulti * roll;
     if (propIndex == 7)
         return railRent;
+
     return (propIndex % 7 * 20) * 0.2;
 }
 
@@ -41,7 +43,7 @@ int getPropertyCost(int propIndex, int electricCost, int railCost)
 }
 
 /*
-    This pure function creates and returns a new mutated stateky. The mutation occurs at the given index for one digit
+    This pure function creates and returns a new mutated statekey. The mutation occurs at the given index for one digit.
     Preconditions: STATEKEY is a 9 digit integer
     @param STATEKEY 9 digit integer used to track property statuses
     @param index the position of the digit to be changed
@@ -51,7 +53,6 @@ int getPropertyCost(int propIndex, int electricCost, int railCost)
 */
 int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned int value, int OFFSET)
 {
-
     if (STATEKEY / exponentiateNum(10, index - 1) == 0 || index < 1)
     { // if the given index is outside of the statekey's range
 
