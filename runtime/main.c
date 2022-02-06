@@ -136,6 +136,9 @@ int main()
                 printf("Press [E] to exit\n");
                 char exitInputs[2] = "GE";
                 choice = handleInput(exitInputs, strlen(exitInputs));
+                if(choice == 'G') // reset win settings but preserve settngs
+                    game.state.SETTINGS.winsettings.winstate = initializeWinstate();
+
             } while (choice == 'G');
             break;
         case 'I':

@@ -69,7 +69,7 @@ void displayConditions(struct winconditions wincond)
         context[1] = "INACTIVE";
 
     printf("\n[WIN CONDITIONS]\n");
-    printf("Enemy runs out of properties: %s (default)\n", defaultBtn);
+    printf("Enemy runs out of properties and falls into bankruptcy: %s (default)\n", defaultBtn);
     printf("Enemy reaches losing balance: %s | [VALUE: %d]\n", context[0], wincond.losingBalance);
     printf("Player reaches winning balance: %s | [VALUE: %d]\n", context[1], wincond.winningBalance);
 

@@ -668,7 +668,7 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
             populateContext(localWinstate.winRationale, ENEMY_LOSING_BALANCE);
         }
 
-        else if(p2.balance <= floor)
+        if(p2.balance <= floor)
         {
             p1Flags += 1;
             populateContext(localWinstate.winRationale, ENEMY_LOSING_BALANCE);
@@ -682,7 +682,7 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
             p1Flags += 1;
             populateContext(localWinstate.winRationale, REACHED_WINNING_BALANCE);
         }
-        else if(p2.balance >= ceil)
+        if(p2.balance >= ceil)
         {
             p2Flags += 1;
             populateContext(localWinstate.winRationale, REACHED_WINNING_BALANCE);
@@ -691,12 +691,12 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2)
 
     if(requiredFlags == p2Flags || requiredFlags == p1Flags)
     {
-        if(p2Flags == requiredFlags)
+        if(p2Flags == p1Flags)
+            localWinstate.winner = TIE;
+        else if(p2Flags == requiredFlags)
             localWinstate.winner = PLAYER2;
         else if(p1Flags == requiredFlags)
             localWinstate.winner = PLAYER1;
-        else
-            localWinstate.winner = TIE;
     }
     return localWinstate;
 }

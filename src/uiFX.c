@@ -305,7 +305,7 @@ void displayContextFlair(enum winContext context, enum winner winningPlayer, cha
         char strFlair2[] = " and reached the winning balance!\n";
         print1d(strFlair2, strlen(strFlair2),190,200); // animated print for winning balance flair
         sleep_ms(1000);
-        char strFlair3[] = " I could not find a better capitalist dog if I tried!";
+        char strFlair3[] = "I could not find a better capitalist dog if I tried!";
         print1d(strFlair3, strlen(strFlair3),200,210); // animated print for winning balance flair
     }
     newL
@@ -316,7 +316,7 @@ void displayContextFlair(enum winContext context, enum winner winningPlayer, cha
 */
 void showEndingStats(Player player){
     char* DIVIDER = createDivider('=',18);
-    printf("\n\n%s[ %s's Ending Stats ]%s",DIVIDER,player.name,DIVIDER);
+    printf("\n%s[ %s's Ending Stats ]%s\n",DIVIDER,player.name,DIVIDER);
 
     newL
 
@@ -333,7 +333,7 @@ void showEndingStats(Player player){
     setRed
         printf("%d",player.rentCounter);
     resetColor
-    print1d(" occassions", strlen(" occassion"),200,210);
+    print1d(" occassions", strlen(" occassions"),200,210);
 
     newL
 
@@ -405,7 +405,7 @@ void showPropertyMan(){
 "                         \"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\"\","
     };
     char* eyes[] ={
-"              |========|----------/$/----------------|========|",
+"              |========|----------/$/---------------|========|",
 "              |PROPERTY|          $                 |PROPERTY|",
 "              |========|         $$$$               |========|"
     };
@@ -479,7 +479,8 @@ void displayEndingScreen(struct winstate win, Player p1, Player p2){
                 displayContextFlair(win.winRationale[i], win.winner, p1.name, p2.name); // display ui flair for the specific wincondition
                 fflush(stdout);
                 sleep_ms(700);
-                print1d(strMulti, strlen(strMulti), 200, 210);  // if multiple conditions are satisfied, print flair statement, otherwise print a space
+                print1d(strMulti, strlen(strMulti), 200, 200);  // if multiple conditions are satisfied, print flair statement, otherwise print a space
+                fflush(stdout);
             }
         }
     showEndingStats(p1);
