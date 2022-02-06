@@ -480,14 +480,14 @@ struct gamepkg updateGame(struct gamepkg game)
                     print1d("\n...",strlen("\n..."),300,300);
 
                     char* bankruptcyStatement = "Uh oh.. It seems as though you don't have enough money to pay rent\n";
-                    char* bankruptcyStatement2 = "You're going to Wumpus Compound...\n";
+                    char* bankruptcyStatement2 = "You're going to the Wumpus Compound...\n";
                     setRed
                         print1d(bankruptcyStatement, strlen(bankruptcyStatement),100,100);
                         print1d(bankruptcyStatement2, strlen(bankruptcyStatement2),100,100);
                     resetColor
 
                     sleep_ms(500);
-                    STATEKEY = sellPropertyEvent(&currentPlayer.isBankrupt,config, STATEKEY,
+                    STATEKEY = sellPropertyEvent(&currentPlayer.isBankrupt, config, STATEKEY,
                                                 STATEKEY_OFFSET, currentPlayerKey, rent, 
                                                 &pendingPlayerBalance);
 
