@@ -44,6 +44,15 @@ bash runGame.sh
 | 3   | player 2 owns the last 3 properties                           | statekey = 666949444, playerID = 2 | "Railroad Igloo Farm house"           | "Railroad Igloo Farm house"           | P   |
 
 
+### Function Name: getDigits()
+#### Description: Returns the number of digits in a number
+| #   | Test Description                           | Sample Input/Arguments | Expected Output | Actual Output | P/F |
+| --- | ------------------------------------------ | ---------------------- | --------------- | ------------- | --- |
+| 1   | count how many digits in a 3 digit integer | 333                    | 3               | 3             | P   |
+| 2   | 0 digits                                   | 0                      | 0               | 0             | P   |
+| 3   | statekey                                   | 444949444              | 9               | 9             | P   | 
+
+
 ### Function Name: playerOwnsProperties()
 #### Description: Returns true if player owns any properties, false otherwise.
 | #   | Test Description                                                              | Sample Input/Arguments             | Expected Output | Actual Output | P/F |
