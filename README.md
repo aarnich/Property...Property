@@ -1,4 +1,5 @@
-### Written by: Aaron Nicholas Gumapac
+#### Written by: Aaron Nicholas Gumapac
+#### Section: S15B
 
 # Property...Property is a Monopoly-like game that is exclusively written in C
 Players take turns rolling dice and in doing so, move about a board.
