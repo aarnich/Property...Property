@@ -2,7 +2,7 @@
 
 # Property...Property is a Monopoly-like game that is exclusively written in C
 Players take turns rolling dice and in doing so, move about a board.
-Each board position is home to a unique property with it's very own interactions and UI elements.
+Each board position is home to a unique property with its very own interactions and UI elements.
 
 Players win once certain conditions are met. By default the only condition required is
 the bankruptcy of the player's opponent but further customizability is provided.

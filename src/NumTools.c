@@ -257,7 +257,7 @@ int normalizeNumByIndex(int num, int index)
 */
 bool isPrime(int num)
 {
-    unsigned int flag = 0; // used to track how many times the number has been divided without a remainder
+    unsigned int flag = 0;   // used to track how many times the number has been divided without a remainder
 
     for (size_t i = 1; i <= num; i++)
     {
@@ -265,7 +265,7 @@ bool isPrime(int num)
             flag += 1;
     }
 
-    return (flag == 2); // true if 2 divisors, false otherwise
+    return (flag == 2);     // true if 2 divisors, false otherwise
 }
 
 /*

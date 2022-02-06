@@ -1,3 +1,8 @@
+/*
+    Description: A set of type definitions necessary for evaluating win conditions
+    Author: Aaron Nicholas Gumapac
+*/
+
 #pragma once
 #ifndef EVALTYPES_H
 #define EVALTYPES_H
@@ -10,7 +15,7 @@ enum wintoggles{ WINNING_BALANCE_REACHED, LOSING_BALANCE_REACHED, DISABLED };
 enum winner{ NONE, TIE, PLAYER1, PLAYER2 };
 
 // tells the game how exactly the player won
-enum winContext{ ENEMY_BANKRUPTY, REACHED_WINNING_BALANCE, ENEMY_LOSING_BALANCE, NOCONTEXT };
+enum winContext{ ENEMY_BANKRUPTCY, REACHED_WINNING_BALANCE, ENEMY_LOSING_BALANCE, NOCONTEXT };
 
 /*
     tells the game who won and how

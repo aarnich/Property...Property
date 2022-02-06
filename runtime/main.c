@@ -1,13 +1,29 @@
-#include "runtime_headers/GameLoop.h"
-#include "runtime_headers/Settings.h"
+/*
+    This is to certify that this project is my own work, based on my personal efforts in studying and applying the concepts
+    learned. I have constructed the functions and their respective algorithms and corresponding code all by myself. The
+    program was run, tested, and debugged by my own efforts. I further certify that I have not copied in part or whole
+    or otherwise plagiarized the work of other students and/or persons.
+    Aaron NIcholas Lizardo Gumapac 
+    ID: 12113495 
+
+*/
+
 
 /*
     Description: Property...Property is a terminal-based take on Monopoly written entirely in C.
     Programmed by: Aaron Nicholas Lizardo Gumapac
-    Last modified: January 30, 2022
-    Version: V2
-    [Acknowledgements: MITOpencourseware, computerphile, numberphile]
+    Last modified: Feb 6, 2022
+    Version: v8
+    Acknowledgements: 
+        Program Architecture: SICP. Structure and interpretation of computer programs. Retrieved February 4, 2022, from
+        https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html 
+        C language Specifics: Computerphile. YouTube. Retrieved February 4, 2022, from
+        https://www.youtube.com/user/Computerphile/
+        Problem Solving Techniques: Ms. Shirley Chu, DLSU CCPROG1 Instructor
 */
+
+#include "runtime_headers/GameLoop.h"
+#include "runtime_headers/Settings.h"
 
 //    Repo link: https://github.com/aarnich/Property...Property
 
@@ -42,7 +58,9 @@ struct gamepkg playGame(struct gamepkg game)
         lgame = updateGame(lgame);
 
         // update player values and change active player to the next
-        updatePlayer(&lgame.state.activePlayer, &lgame.arrPlayerContainer[0].isJailed, &lgame.arrPlayerContainer[1].isJailed);
+        updatePlayer(&lgame.state.activePlayer,
+                     &lgame.arrPlayerContainer[0].isJailed, 
+                     &lgame.arrPlayerContainer[1].isJailed);
     }
 
     return lgame;
@@ -76,7 +94,7 @@ struct gamepkg initializeGame()
 void displayManual()
 {
     printf("\n\nAt the start of the game, players do not own any property. All properties on the board are owned by the Bank.\nAll properties owned by the Bank are up for sale and are not renovated.\nThe Bank has unlimited cash. The smallest denomination in this game is 1.");
-    printf("\n\nPlayers take turn in rolling the dice to move clockwise around the board.\nAt each turn, the player rolls a dice to determine the number of spaces he moves on the board.\nThe player may land on:\n    Go (position 0),\n  on Jail Time (position 4), \n   on Feelin’ Lucky (position 6), or \n    on a property\n     (house properties at positions 1, 3, 5, 8, 9, electric company at position 2, and railroad at position 7). \nBased on the space where the player lands on, different actions may take place.\n\n");
+    printf("\n\nPlayers take turn in rolling the dice to move clockwise around the board.\nAt each turn, the player rolls a dice to determine the number of spaces he moves on the board.\nThe player may land on:\n->Go (position 0),\n->on Jail Time (position 4), \n->on Feelin’ Lucky (position 6), or \n->on a property\n->(house properties at positions 1, 3, 5, 8, 9, electric company at position 2, and railroad at position 7). \nBased on the space where the player lands on, different actions may take place.\n\n");
 }
 
 /*
@@ -130,7 +148,8 @@ int main()
 
                     // display ending screen after the game ends
                     displayEndingScreen(game.state.SETTINGS.winsettings.winstate,
-                                        game.arrPlayerContainer[0], game.arrPlayerContainer[1]);
+                                        game.arrPlayerContainer[0],
+                                        game.arrPlayerContainer[1]);
                     continuePrompt();
 
                     // prompt for a replay
@@ -138,9 +157,11 @@ int main()
                     printf("Press [E] to exit\n");
                     char exitInputs[2] = "GE";
                     choice = handleInput(exitInputs, strlen(exitInputs));
-                    if(choice == 'G') // reset win settings but preserve settngs
+                    if(choice == 'G') // reset relevant settings
+                    {
                         game.state.SETTINGS.winsettings.winstate = initializeWinstate();
-
+                        game.state.STATEKEY = STARTING_STATEKEY;
+                    }
                 } 
                 while (choice == 'G');
 
@@ -155,7 +176,7 @@ int main()
     } 
     while (choice != 'E');
 
-    char exitMsg[] = "\nNext time come back with better players.\n";
+    char exitMsg[] = "\nCome back with better players.\n";
     print1d(exitMsg, strlen(exitMsg), 200, 200);
 
     return 0;

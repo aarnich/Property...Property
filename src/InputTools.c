@@ -24,21 +24,21 @@ char handleInput(char validInputs[], int elements)
     while ((getchar()) != '\n');
     
     if(isalpha(cInitInput))
-    { // check if input requires capitalization
-        cInitInput = toupper(cInitInput); // capitalize
+    {                                        // check if input requires capitalization
+        cInitInput = toupper(cInitInput);    // capitalize
     }
 
     for (int i = 0; i < elements; i++)
     {
-        if(cInitInput != validInputs[i]) // check if input is a member of valid inputs
-            continue; // continue with loop
+        if(cInitInput != validInputs[i])    // check if input is a member of valid inputs
+            continue;                       // continue with loop
         else
-            return cInitInput; // if input is a member of valid inputs, return the input
+            return cInitInput;              // if input is a member of valid inputs, return the input
     }
 
     setRed
         printf("\ninvalid input, try again\n"); // if input is not a member of valid inputs, prompt a retry
     resetColor
 
-    return handleInput(validInputs,elements); // recurse 
+    return handleInput(validInputs,elements);   // recurse 
 }

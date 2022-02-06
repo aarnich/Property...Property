@@ -1,3 +1,7 @@
+/*
+    Description: Header file for functions required in the primary game loop
+    Author: Aaron Nicholas Gumapac
+*/
 #pragma once
 #ifndef GAMELOOP_H
 #define GAMELOOP_H
@@ -8,10 +12,6 @@
 #include "../../libdefs/PlayerEvents.h"
 #include "../../libdefs/InputTools.h"
 
-/*
-    Description: 
-    Author:
-*/
 #define STARTING_STATEKEY 444949444
 #define STATEKEY_OFFSET -4
 
@@ -53,4 +53,7 @@ struct winstate updateWinState(winconditions winsettings, Player p1, Player p2);
 // checks whether the game should continue or not
 
 bool continueGame(enum winner winState);
+
+// event for when player balance is less than a required payment
+
 #endif

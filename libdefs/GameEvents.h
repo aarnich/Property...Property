@@ -10,6 +10,7 @@
 #include "../typedefs/stateTypes.h"
 #include "../typedefs/gameTypes.h"
 #include "../libdefs/NumTools.h"
+#include "../libdefs/PlayerEvents.h"
 
 
 // returns the integer at index
@@ -28,8 +29,15 @@ int getPropertyCost(int propIndex, int electricCost, int railCost);
 
 int getRent(int propIndex, int roll, int electricMulti, int railRent);
 
-// saves the game
+// function for when the player goes into debt 
 
-struct gamepkg saveGame(Player currentPlayer, int currentPlayerKey, Player opposingPlayer, int enemyPlayerKey, struct gamestate containedstate);
+unsigned int sellPropertyEvent(bool* ptrIsBankrupt, settings config, int STATEKEY,
+                                int STATEKEY_OFFSET, int currentPlayerKey, 
+                                int requiredPayment, int* currentBalance);
+
+// saves the game
+struct gamepkg saveGame(Player currentPlayer, int currentPlayerKey,
+                        Player opposingPlayer, int enemyPlayerKey, 
+                        struct gamestate containedstate);
 
 #endif

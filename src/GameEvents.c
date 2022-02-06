@@ -96,3 +96,88 @@ int readStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, int OFFSET)
 
     return (((STATEKEY / exponentiateNum(10, index - 1)) % 10) + OFFSET);
 }
+
+/*
+    This function changes player bankruptcy status depending on the player's ability to pay their payment
+    @param ptrIsBankrupt pointer variable for player's bankruptcy status
+    @param STATEKEY the game's current STATEKEY (property tracker)
+    @param STATEKEY_OFFSET offest or hashing key required to read the statekey
+    @param requiredPayment the balance the player has to settle
+    @param ptrPlayerBalance pointer variable for the player's current balance
+    @param config settings variable necessary for calculating the cost of properties
+*/
+unsigned int sellPropertyEvent(bool* ptrIsBankrupt, settings config, int STATEKEY,
+                                int STATEKEY_OFFSET, int currentPlayerKey, 
+                                int requiredPayment, int* ptrPlayerBalance)
+{
+
+    // continue displaying the prompt while the player does not have enough money to pay rent
+    bool playerCanSell = playerOwnsProperties(STATEKEY,STATEKEY_OFFSET,currentPlayerKey); 
+
+    if(playerCanSell)
+    {
+        char* wumpus = "\n🐋Wumpus: HELLOW IM WUMPUS THE WHALE AND YOU'RE WATCHING\n";
+        char* showTitle = "\n---->\"How to Sell Your Assets for A Massive Loss!\"<----\n";
+        char* sucker = "\nWatch this sucker squander his houses away in a spree of panic sellling!\n";
+        print1d(wumpus, strlen(wumpus), 100, 100);
+        print1d(showTitle, strlen(showTitle), 200, 200);
+        print1d(sucker, strlen(sucker), 120, 120);
+        sleep_ms(500);
+    }
+    while(*ptrIsBankrupt && playerCanSell) // check if player still has remaining properties to sell    
+    {
+    
+
+        if(playerCanSell) // if you can sell enough of your properties, the bank might rethink 😏  
+        {
+            printf("[DEBTS: 💲%d]\n",requiredPayment);  // display requiredpayment
+            for (size_t i = 1; i <= 9; i++)             // loop and read all properties on the statekey
+            {
+                int propID = readStatekeyAtIndex(STATEKEY, i, STATEKEY_OFFSET);
+                        
+                if(playerOwns(currentPlayerKey,propID)) // display the property name and cost if player owns 
+                {
+                    char* strPropName = getPropertyName(i);
+                    int propertyCost = getPropertyCost(i, config.electricCost,
+                                                        config.railCost) * 0.5;
+
+                    printf("[%d]: %s %d$\n",(int)i, strPropName, propertyCost);
+                }
+            }
+            printf("[WALLET: 💲%d\n",*ptrPlayerBalance);
+            
+            // which properties the player would like to sell
+            int toBeSold = getPlayerSellChoice(STATEKEY, STATEKEY_OFFSET,
+                                               currentPlayerKey);
+            STATEKEY = mutateStatekeyAtIndex(
+                        STATEKEY, toBeSold,
+                        0, STATEKEY_OFFSET);                                // reset the value of the property at 0, relinquishing it to the bank
+
+            int sellPrice = getPropertyCost(toBeSold, config.electricCost, // sell cost is half of the original cost
+                                            config.railCost) * 0.5; 
+
+            setCyan
+                printf("\n%s 🐳 SOLD FOR: %d\n",getPropertyName(toBeSold),sellPrice);
+            resetColor
+
+            showPersonalBalanceUpdate(*ptrPlayerBalance, *ptrPlayerBalance + sellPrice);
+            *ptrPlayerBalance += sellPrice;                                   // reimburse the player
+            continuePrompt();
+
+            if(*ptrPlayerBalance >= requiredPayment)                         // check if player is able to pay required amount
+            {
+                *ptrIsBankrupt = false;
+
+                setGreen
+                    printf("\n🐋Wumpus: You now have enough capital to escape your quarry!\n");
+                resetColor
+
+                sleep_ms(500);
+                printf("\n[Press ENTER to pay your debts]");
+                getchar();
+            }
+        }
+        playerCanSell = playerOwnsProperties(STATEKEY,STATEKEY_OFFSET,currentPlayerKey); 
+    }
+    return STATEKEY;
+}

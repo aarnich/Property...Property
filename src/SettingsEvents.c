@@ -18,7 +18,7 @@ struct winstate initializeWinstate()
     initwinstate.winRationale = malloc (256);
     initwinstate.winRationale[0] = NOCONTEXT; // no context needed 
     initwinstate.winRationale[1] = NOCONTEXT; // no context needed 
-    initwinstate.winner = NONE; // no winners decided
+    initwinstate.winner = NONE;              // no winners decided
 
     return initwinstate;
 }
@@ -26,17 +26,16 @@ struct winstate initializeWinstate()
 
 /*
     This function returns initial values for struct winconditions
-    Preconditions: none
     @return the initial winconditions (initwinconds) 
 */
 struct winconditions initializeWinconditions()
 {
-    struct winconditions initwinconds; // tells the game how to decide the winner and which parameters to check
+    struct winconditions initwinconds;          // tells the game how to decide the winner and which parameters to check
     
     initwinconds.arrWintoggles[0] = DISABLED; 
-    initwinconds.arrWintoggles[1] = DISABLED; // the game is initialized at 1 winning condition only
-    initwinconds.isSimul = false; // only one condition must be satisfied
-    initwinconds.losingBalance = DEFAULT_LOSING_BALANCE; // 
+    initwinconds.arrWintoggles[1] = DISABLED;   // the game is initialized at 1 winning condition only
+    initwinconds.isSimul = false;               // only one condition must be satisfied by default
+    initwinconds.losingBalance = DEFAULT_LOSING_BALANCE;  
     initwinconds.winningBalance = DEFAULT_WINNING_BALANCE;
     initwinconds.winstate = initializeWinstate();
 

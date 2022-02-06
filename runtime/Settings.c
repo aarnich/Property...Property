@@ -21,9 +21,6 @@ settings settingsPrompt(settings initsettings)
         char* div = createDivider('=',23);
         printf("%s[SETTINGS MENU]%s\n\n",div,div);
         printf("[1] Edit win conditions\n");    
-        
-        newL
-          
         printf("[2] Edit renovation cost\n");   
         printf("[3] Edit railroad rent\n");     
         printf("[4] Edit railroad purchase cost\n");                
@@ -33,9 +30,6 @@ settings settingsPrompt(settings initsettings)
         newL
           
         printf("[7] Edit feeling lucky range\n");
-        
-        newL
-          
         printf("[8] Edit dice faces\n");
         printf("[9] Edit Go! tile bonus amount\n");
         printf("[0] Edit Go! passing bonus amount\n");
@@ -85,7 +79,7 @@ settings settingsPrompt(settings initsettings)
                 break;
             case '7':
                 printf("\nHow much you lose/gain when you roll a nonprime/prime number when talking to the witch\n");
-                sleep_ms(1000);
+                sleep_ms(500);
                 continuePrompt();
                 feelingLuckySubMenu(
                     &initsettings.bonusrange,
@@ -100,7 +94,7 @@ settings settingsPrompt(settings initsettings)
                 changeIntParam(&initsettings.goBonus, "Enter Go! tile bonus amount: ");
                 break;
             case '0':
-                printf("\npassing go! amount alludes to the amount of cash the players get each time they pass by Go!\n");
+                printf("\nPassing go! amount alludes to the amount of cash the players get each time they pass by Go!\n");
                 changeIntParam(&initsettings.passingGo, "Enter passing Go! bonus amount: ");
                 break;
             case 'X':
