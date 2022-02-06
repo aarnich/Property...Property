@@ -175,14 +175,14 @@ void displayPlayerEndingStats(Player PLAYER, unsigned playerID, unsigned int STA
     @param STATEKEY 9 digit integer holding ownership statuses
     @returns which property the player would like to sell
 */
-int getPlayerSellChoice(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID){
+int getPlayerSellChoice(unsigned int STATEKEY, int OFFSET, unsigned int playerID){
     int sellChoice = getValidInteger("\nEnter property to be sold\n");
     bool bInRange = true;
     do
     {
         range stateindexes;
         stateindexes.min = 1;
-        stateindexes.max = 9;
+        stateindexes.max = getDigits(STATEKEY);
         bool isInRange = checkIfInRange(sellChoice,stateindexes);
         if(!isInRange){
             printf("\ninvalid input");

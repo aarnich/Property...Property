@@ -73,7 +73,7 @@ struct gamepkg initializeGame()
 void displayManual()
 {
     printf("\n\nAt the start of the game, players do not own any property. All properties on the board are owned by the Bank.\nAll properties owned by the Bank are up for sale and are not renovated.\nThe Bank has unlimited cash. The smallest denomination in this game is 1.");
-    printf("\n\nPlayers take turn in rolling the dice to move clockwise around the board.\nAt each turn, the player rolls a dice to determine the number of spaces he moves on the board.\n The player may land on \nGo (position 0),\non Jail Time (position 4), \non Feelin’ Lucky (position 6), or \non a property\n (house properties at positions 1, 3, 5, 8, 9, electric company at position 2, and railroad at position 7). \nBased on the space where the player lands on, different actions may take place.\n\n");
+    printf("\n\nPlayers take turn in rolling the dice to move clockwise around the board.\nAt each turn, the player rolls a dice to determine the number of spaces he moves on the board.\nThe player may land on:\n    Go (position 0),\n  on Jail Time (position 4), \n   on Feelin’ Lucky (position 6), or \n    on a property\n     (house properties at positions 1, 3, 5, 8, 9, electric company at position 2, and railroad at position 7). \nBased on the space where the player lands on, different actions may take place.\n\n");
 }
 
 /*
@@ -136,6 +136,7 @@ int main()
                 printf("Press [E] to exit\n");
                 char exitInputs[2] = "GE";
                 choice = handleInput(exitInputs, strlen(exitInputs));
+
                 if(choice == 'G') // reset win settings but preserve settngs
                     game.state.SETTINGS.winsettings.winstate = initializeWinstate();
 
