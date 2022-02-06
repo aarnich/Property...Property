@@ -9,6 +9,7 @@
     while ((getchar()) != '\n') \
         ;
 
+
 /*
     This function returns true if the given number is within the set range (inclusive) 
     Precondition: num, field.min, and field.max are integers within -2,147,483,648 and 2,147,483,647
@@ -41,37 +42,38 @@ range editRange(range varRange, char *type)
     printf("[S] Save and exit\n");
     char subMenuInput[3] = {'W', 'E', 'S'};
     char cSettingsSelect = handleInput(subMenuInput, 3);
+
     switch (cSettingsSelect)
     {
-    case 'W':
-        varRange.min = getValidInteger("Enter minimum: ");
-        break;
-    case 'E':
-        varRange.max = getValidInteger("Enter maximum: ");
-        break;
-    case 'S':
-        if (varRange.min >= varRange.max)
-        {
-            printf("\nERROR: INVALID RANGE\n");
-            sleep_ms(1000);
-        }
-        else
-        {
-            return varRange;
-        }
-        break;
-    default:
-        printf("Critical Error, called by: %s", __func__);
-        break;
+        case 'W':
+            varRange.min = getValidInteger("Enter minimum: ");
+            break;
+        case 'E':
+            varRange.max = getValidInteger("Enter maximum: ");
+            break;
+        case 'S':
+            if (varRange.min >= varRange.max)
+            {
+                printf("\nERROR: INVALID RANGE\n");
+                sleep_ms(1000);
+            }
+            else
+                return varRange;
+            
+            break;
+        default:
+            printf("Critical Error, called by: %s", __func__);
+            break;
     }
+
     return editRange(varRange, type);
 }
 
 /*
     After prompting the user for an input, this function returns an integer.
     If user input is invalid, it continues to prompt the user for an input
-    ad infinatum
-    @Preconditions: strMsg is a string of length > 0
+    ad infinitum.
+    Preconditions: strMsg is a string of length > 0
     @param strMsg a string of characters used to contextualize the prompt
     @returns an integer
 */
@@ -81,6 +83,7 @@ int getValidInteger(char *strMsg)
     int num;
     bool cont;
     printf(strMsg);
+
     do
     {
         cont = 0;
@@ -91,9 +94,12 @@ int getValidInteger(char *strMsg)
             resetColor
             cont = 1;
         }
+
         clearbuff
             num = (int)tmp;
-    } while (cont == 1);
+    } 
+    while (cont == 1);
+
     return num;
 }
 
@@ -110,10 +116,10 @@ void freePtr(void **ptr)
 }
 
 /*
-    This method changes a the value of a float variable given its parameter 
+    This method changes a the value of an integer variable given its parameter 
     Preconditions:
-        parameterPtr points to a valid float variable 
-        strMsg is an array of chars with length > 0;
+        parameterPtr points to a valid integer variable 
+        strMsg is an array of chars with length > 0
     @param parameterPtr the pointer of the variable to be changed
     @param strMsg the message to be displayed to the user during the prompt
 */
@@ -137,7 +143,9 @@ void changeIntParam(int *parameterPtr, char *strMsg)
             resetColor
             cont = 1;
         }
-    } while (cont == 1);
+    } 
+    while (cont == 1);
+
     *parameterPtr = (int)tmp;
 }
 
@@ -145,7 +153,7 @@ void changeIntParam(int *parameterPtr, char *strMsg)
     This method changes a the value of a float variable given its parameter 
     Preconditions:
         parameterPtr points to a valid float variable 
-        strMsg is an array of chars with length > 0;
+        strMsg is an array of chars with length > 0
     @param parameterPtr the pointer of the variable to be changed
     @param strMsg the message to be displayed to the user during the prompt
 */
@@ -161,12 +169,15 @@ void changeFloatParam(float *parameterPtr, char *strMsg)
     do
     {
         cont = 0;
+
         if (scanf("%f", &tmp) != 1)
         { // if user input is an invalid float, employ an infinite loop
             printf("\nInvalid input, try again\n");
             cont = 1;
         }
-    } while (cont == 1);
+    } 
+    while (cont == 1);
+
     *parameterPtr = tmp;
 }
 
@@ -179,7 +190,6 @@ void changeFloatParam(float *parameterPtr, char *strMsg)
 */
 float getHigherVal(float n1, float n2)
 {
-
     if (n1 > n2)
         return n1;
     else if (n2 > n1)
@@ -190,7 +200,7 @@ float getHigherVal(float n1, float n2)
 }
 
 /*
-    A rudimentary function raises a base to a power, does not cover negative bases/powers
+    A rudimentary function that raises a base to a power, does not cover negative bases/powers
     Preconditions: base is nonnegative, power is nonnegative
     @param base the number to be raised
     @param power how much to raise that base
@@ -199,6 +209,7 @@ float getHigherVal(float n1, float n2)
 int exponentiateNum(int base, int power)
 {
     int num = 1; // base case
+
     if (power == 0)
     {
         return num;
@@ -208,6 +219,7 @@ int exponentiateNum(int base, int power)
     {
         num *= base; // base does not change, num keeps being multiplied
     }
+
     return num;
 }
 
@@ -246,9 +258,12 @@ int normalizeNumByIndex(int num, int index)
 bool isPrime(int num)
 {
     unsigned int flag = 0; // used to track how many times the number has been divided without a remainder
+
     for (size_t i = 1; i <= num; i++)
+    {
         if (num % i == 0)
             flag += 1;
+    }
 
     return (flag == 2); // true if 2 divisors, false otherwise
 }
