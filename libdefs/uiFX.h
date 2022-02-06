@@ -23,6 +23,10 @@
 #include "../libdefs/NumTools.h"
 
 
+// predefined macro that is used to clear the buffer in order to avoid unwanted infinite loops with input processing
+#define clearbuff               \
+    while ((getchar()) != '\n') \
+        ;
 // shorthand for system clear
 #define clear system("clear"); 
 // shorthand for printing newlines, useful for ui

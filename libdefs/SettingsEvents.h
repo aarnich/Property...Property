@@ -30,10 +30,6 @@
 #define DEFAULT_STARTINGBALANCE 200
 #define DEFAULT_STARTINGPOS 0
 
-// predefined macro that is used to clear the buffer in order to avoid unwanted infinite loops with input processing
-#define clearbuff               \
-    while ((getchar()) != '\n') \
-        ;
 
 /* INITIALIZATION FUNCTIONS */
 

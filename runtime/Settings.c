@@ -16,7 +16,7 @@ settings settingsPrompt(settings initsettings)
     do
     { // while the player has yet to press 'G', continue displaying the settings screen
         clear
-        displayCurrentConfig(initsettings); // defined in SettingsUI.c, used to display current settings
+        displayCurrentConfig(initsettings);        // defined in SettingsUI.c, used to display current settings
         
         char* div = createDivider('=',23);
         printf("%s[SETTINGS MENU]%s\n\n",div,div);
@@ -42,11 +42,11 @@ settings settingsPrompt(settings initsettings)
         newL
 
         setRed
-            printf("[D] Reset settings\n"); // select to call initializeSettings() again
+            printf("[D] Reset settings\n");     // select to call initializeSettings() again
         resetColor
 
         setGreen
-            printf("[S] Save and Exit \n\n"); // select to exit the settings prompt and store modifications made
+            printf("[S] Save and Exit \n\n");   // select to exit the settings prompt and store modifications made
         resetColor
 
         char validSettingsInput[] = "1234567890DSXF";

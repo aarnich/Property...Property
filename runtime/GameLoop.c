@@ -227,7 +227,6 @@ struct gamepkg updateGame(struct gamepkg game)
 
     showGameStatus(updatedGame);    // show updated game status after clearing the screen
     bool isHouse = true;            // default property type
-
     displaySwitch(pos);             // display appropriate game dialogue for the current position
     
     // instantiate localized statekey
@@ -454,7 +453,7 @@ struct gamepkg updateGame(struct gamepkg game)
             {
 
                 setRed
-                    printf("\n\nYou heve landed on a property that is owned by %s! The owner loudly demands his alms 👺!\n",opposingPlayer.name);
+                    printf("\n\nYou heve landed on a property that is owned by %s.\nThe owner loudly demands their alms 👺!\n",opposingPlayer.name);
                 resetColor
 
                 printf("\n[Press ENTER to pay rent]\n");
@@ -560,7 +559,7 @@ void showGameStatus(struct gamepkg game)
     if(strlen(p1Properties) < 1)
     {
         setRed
-        p1Properties = " broke-status";
+        p1Properties = " NONE";
     }
     else
         setYellow
@@ -597,7 +596,7 @@ void showGameStatus(struct gamepkg game)
     if(strlen(p2Properties) < 1)
     {
         setRed
-        p2Properties = " broke-status";
+        p2Properties = " NONE";
     }
     else
         setYellow
