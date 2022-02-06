@@ -61,6 +61,6 @@ int getRandNum(int floor, int ceil);
 
 // counts how many digits a number has
 
-int getDigits(int num)
+int getDigits(int num);
 
 #endif

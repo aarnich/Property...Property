@@ -281,5 +281,5 @@ int getDigits(int num)
         num /= 10;
         counter++;
     }
-    returun counter;
+    return counter;
 }

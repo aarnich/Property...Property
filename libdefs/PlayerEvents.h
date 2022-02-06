@@ -19,7 +19,7 @@ int rollDice(range dicerange);
 
 // returns a string of all the player's properties
 
-char *getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID);
+char* getAllPlayerProperties(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID);
 
 // checks if the player owns any properties
 
@@ -39,7 +39,7 @@ void displayPlayerEndingStats(Player PLAYER, unsigned playerID, unsigned int STA
 
 // returns a valid sell choice given the statekey and the current player's ID
 
-int getPlayerSellChoice(unsigned int STATEKEY, unsigned int OFFSET, unsigned int playerID);
+int getPlayerSellChoice(unsigned int STATEKEY, int OFFSET, unsigned int playerID);
 
 // changes playername variable
 
