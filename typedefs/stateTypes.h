@@ -39,6 +39,7 @@ typedef struct settings {
     A structure that tracks the state of the game
     //ATTRIBUTES
     STATEKEY: is a 9 digit integer that tracks all ownerships
+    activePlayer: possible values (1 or 2) keeps track of who is currently playing
     settings: is a structure of type settings that is used to determine whether the game should continue or not
 */
 extern struct gamestate {
