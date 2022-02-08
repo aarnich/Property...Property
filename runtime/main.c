@@ -21,11 +21,15 @@
         https://www.youtube.com/user/Computerphile/
         Problem Solving Techniques: Ms. Shirley Chu, DLSU CCPROG1 Instructor
 */
+//    Repo link: https://github.com/aarnich/Property...Property
 
 #include "runtime_headers/GameLoop.h"
 #include "runtime_headers/Settings.h"
 
-//    Repo link: https://github.com/aarnich/Property...Property
+/*
+    Style guide:
+    -- Colored print statements are indented between a setter and a resetter
+*/
 
 /*
     This function begins the game and calls game functions

@@ -70,6 +70,7 @@ int mutateStatekeyAtIndex(unsigned int STATEKEY, unsigned int index, unsigned in
     int trailing = STATEKEY % exponentiateNum(10, index);          // add trailing unmutated numbers
     int mutatedStateKey = normalizedNum + insertion + trailing;    // final summation
 
+    free(STATEKEY);
     return mutatedStateKey;
 }
 
