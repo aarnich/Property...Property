@@ -120,7 +120,7 @@ struct winconditions winconditionsMenu(winconditions wincond)
         case 'E':
             if(isMulti)
             {
-                if(wincond.isSimul == false && isMulti)
+                if(wincond.isSimul == false)
                     wincond.isSimul = true;
                 else
                     wincond.isSimul = false;
