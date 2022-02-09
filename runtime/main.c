@@ -19,6 +19,7 @@
         https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book.html 
         C language Specifics: Computerphile. YouTube. Retrieved February 4, 2022, from
         https://www.youtube.com/user/Computerphile/
+        Shared Libraries: https://docencia.ac.upc.edu/FIB/USO/Bibliografia/unix-c-libraries.html
         Problem Solving Techniques: Ms. Shirley Chu, DLSU CCPROG1 Instructor
 */
 //    Repo link: https://github.com/aarnich/Property...Property
