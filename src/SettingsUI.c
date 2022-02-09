@@ -35,7 +35,7 @@ void displayCurrentConfig(settings settingsParam)
         printf(">Electric company multiplier: %d\n", settingsParam.electricMulti);
         printf(">Electric company purchase cost: %d\n", settingsParam.electricCost);
     newL
-        printf(">Feelin' lucky range\n>>bonus: [%d , %d]\n>>penalty: [%d , %d]\n",
+        printf(">Feelin' lucky range\n>>bonus: [%d,%d]\n>>penalty: [%d,%d]\n",
            settingsParam.bonusrange.min, settingsParam.bonusrange.max,
            settingsParam.penaltyrange.min, settingsParam.penaltyrange.max);
     newL

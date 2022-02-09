@@ -1048,8 +1048,8 @@ void showCastle()
     };
     rows = sizeof dragon / sizeof dragon[0];
     
-    int randchnce = getRandNum(0,1); // 50% chance of getting the dragon event
-    if(randchnce)
+    int randchance = getRandNum(0,1); // 50% chance of getting the dragon event
+    if(randchance)
     {
         setRed
             print2d(dragon, rows);
