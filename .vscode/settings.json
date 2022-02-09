@@ -34,7 +34,9 @@
         "libui.h": "c",
         "libtools.h": "c",
         "gameevents.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "memory_resource": "c",
+        "ratio": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "typewriterScrollMode.enable": true

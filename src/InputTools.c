@@ -23,10 +23,8 @@ char handleInput(char validInputs[], int elements)
     scanf(" %c",&cInitInput);
     while ((getchar()) != '\n');
     
-    if(isalpha(cInitInput))
-    {                                        // check if input requires capitalization
+    if(isalpha(cInitInput))                  // check if input requires capitalization
         cInitInput = toupper(cInitInput);    // capitalize
-    }
 
     for (int i = 0; i < elements; i++)
     {
