@@ -12,7 +12,7 @@
 #include "../../libdefs/PlayerEvents.h"
 #include "../../libdefs/InputTools.h"
 
-#define STARTING_STATEKEY 444949444
+#define STARTING_STATEKEY 856989865
 #define STATEKEY_OFFSET -4
 
 // PLAYER DEFAULTS

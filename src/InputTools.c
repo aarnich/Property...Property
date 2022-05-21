@@ -28,15 +28,19 @@ char handleInput(char validInputs[], int elements)
 
     for (int i = 0; i < elements; i++)
     {
-        if(cInitInput != validInputs[i])    // check if input is a member of valid inputs
-            continue;                       // continue with loop
-        else
-            return cInitInput;              // if input is a member of valid inputs, return the input
+        if(cInitInput == validInputs[i])    // check if input is a member of valid inputs
+            cInitInput = validInputs[i];
     }
 
-    setRed
-        printf("\ninvalid input, try again\n"); // if input is not a member of valid inputs, prompt a retry
-    resetColor
+    if(cInitInput != ' ')
+        return cInitInput;
 
-    return handleInput(validInputs,elements);   // recurse 
+    else
+    {
+        setRed
+            printf("\ninvalid input, try again\n"); // if input is not a member of valid inputs, prompt a retry
+        resetColor
+
+        return handleInput(validInputs,elements);   // recurse 
+    }
 }

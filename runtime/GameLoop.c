@@ -208,6 +208,7 @@ struct gamepkg updateGame(struct gamepkg game)
     char dots[] = "...";
     print1d(dots, strlen(dots), 80,80);
     unsigned int roll = rollDice(config.dicerange);
+    roll = 6;
     printf("\nThe dice says: %d!\n", roll);
     sleep_ms(1000);
 
@@ -247,7 +248,7 @@ struct gamepkg updateGame(struct gamepkg game)
             continuePrompt();
             break;  
         }
-        case 6:         // player lands on feelin' lucky plot
+        case 6:         // player lands on feelin' lucky plot#1E222A
         {
             currentPlayer.luckyCounter += 1;
             printf("\n[Press ENTER to Test Your Luck]\n");
@@ -256,6 +257,7 @@ struct gamepkg updateGame(struct gamepkg game)
             print1d(strDivining, strlen(strDivining), 150, 150);
             int num = rollDice(config.dicerange);
             sleep_ms(500);
+            num = 4;
 
             if(num == 1)
             {
